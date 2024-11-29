@@ -1,0 +1,6 @@
+{
+    "exec": "ts-node --esm",
+    "ext": "ts",
+    "watch": ["src"]
+  }
+  
