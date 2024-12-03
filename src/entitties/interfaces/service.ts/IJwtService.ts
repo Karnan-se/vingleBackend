@@ -1,8 +1,8 @@
 import { ObjectId } from "mongoose"
 
-interface JwtService {
+interface IJwtService {
     generateAccesSToken(userId:ObjectId | undefined):string 
     generateRefreshToken(userId:ObjectId | undefined):string
 }
 
-export default JwtService
+export default IJwtService                              

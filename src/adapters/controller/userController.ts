@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import UserUseCase from "../../usecases/userServices"
-import { Iuser } from "../../entitties/interfaces/user/user";
+
+import { attachTokenCookie } from "../middleware/cookie.ts";
 
 
 
@@ -18,9 +19,11 @@ export class UserController {
         const user = req.body.user;
         console.log(user)
         const createdUser = await this.userUseCase.signup(user)
-        return res.status(201).json({ success: true, data: createdUser });
+         res.status(201).json({ success: true, data: createdUser });
       } catch (error: any) {
-        return res.status(400).json({ success: false, message: error.message });
+       
+        
+        next(error)
       }
     }
 
@@ -29,9 +32,12 @@ export class UserController {
       const user = req.body.user;
       console.log(user)
       try {
-        const uservalidated = await this.userUseCase.signIn(user);
-        
-         res.status(200).json({success:true, data:uservalidated})
+        const {existingUser, accessToken, refreshToken} = await this.userUseCase.signIn(user);
+        console.log(accessToken, "accessToken \n") 
+        console.log(refreshToken, "RefreshToken") 
+        attachTokenCookie("AccessToken", accessToken, res)
+        attachTokenCookie("RefreshToken", refreshToken, res)
+         res.status(200).json({success:true, data:existingUser})
     
       } catch (error:any) {
         next(error)

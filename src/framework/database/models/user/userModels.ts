@@ -1,5 +1,5 @@
 import mongoose, {Schema, Types} from "mongoose";
-import { Iuser } from "../../../entitties/interfaces/user/user";
+import { Iuser } from "../../../../entitties/interfaces/user/user";
 
 
 
@@ -11,7 +11,7 @@ const useSchema: Schema = new Schema({
     lastName:{type:String, required:true},
     country:{type:String, required:true}, 
     photo:{type:String, required:false},
-    isBlocked:{type:String, required:false, default:false}
+    isBlocked:{type:Boolean, required:false, default:false}
     // socialmedia:{
     //     linkedIN:{type:String},
     //     twitter:{type:String},
