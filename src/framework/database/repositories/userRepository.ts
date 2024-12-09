@@ -24,12 +24,28 @@ export class MongoUserRepository implements IuserRepository{
         try {
             
             const userDetail= await userModel.findOne({emailAddress:email}) 
-            return userDetail;  
+            return userDetail as any;  
             
         } catch (error:any) {
             console.log(error.message)
             
-        }
+        }      
         
 }
+    async UpdateUser(user:Iuser){
+        try {
+           let userDetails  =  await this.findUserByEmail(user.emailAddress);
+           if(!userDetails){
+            throw AppError.conflict("user Details not found")
+           }
+           Object.assign(userDetails, user);
+           const saved =await userDetails.save()
+           return saved;
+     
+        } catch (error) {
+            console.log(error)
+            throw error
+            
+        }
+    }
 }

@@ -21,8 +21,7 @@ export class UserController {
         const createdUser = await this.userUseCase.signup(user)
          res.status(201).json({ success: true, data: createdUser });
       } catch (error: any) {
-       
-        
+        console.log(error)
         next(error)
       }
     }
