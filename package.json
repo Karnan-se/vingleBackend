@@ -21,7 +21,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.2",
     "node": "^20.18.1",
-    "nodemailer": "^6.9.16"
+    "nodemailer": "^6.9.16",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
@@ -30,6 +32,8 @@
     "@types/express": "^4.17.17",
     "@types/node": "^22.10.0",
     "@types/nodemailer": "^6.4.17",
+    "@types/passport": "^1.0.17",
+    "@types/passport-google-oauth20": "^2.0.16",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
   }

@@ -1,8 +1,8 @@
-import { attachTokenCookie } from "../adapters/middleware/cookie"
-import IJwtService from "../entitties/interfaces/service.ts/IJwtService"
+import { attachTokenCookie } from "../adapters/middleware/cookie.ts"
+import IJwtService from "../entitties/interfaces/service.ts/IJwtService.ts"
 import IpasswordService from "../entitties/interfaces/service.ts/passwordService"
-import Itutor from "../entitties/interfaces/tutor.ts/Itutor"
-import { ItutorRepository } from "../entitties/interfaces/tutor.ts/tutorrepository"
+import Itutor from "../entitties/interfaces/tutor.ts/Itutor.ts"
+import { ItutorRepository } from "../entitties/interfaces/tutor.ts/tutorrepository.ts"
 import AppError from "../framework/web/utils/appError.ts"
 
 
@@ -16,11 +16,6 @@ interface Dependency {
     }
 
 }
-type SignUpResponse = {
-    TutorCreate: Itutor | null
-    accessToken: string 
-    refreshToken: string 
-  };
 
 
 export default  class TutorUseCase{

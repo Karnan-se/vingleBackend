@@ -5,6 +5,7 @@ interface Itutor {
     lastName? :string;
     country:string;
     isBlocked?:boolean
+    isVerified?:boolean
     photo?: string;
     about?:string;
     qualification?:string,

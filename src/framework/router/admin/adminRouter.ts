@@ -1,4 +1,4 @@
-import { adminController } from "../../dependencies/admindependency.ts";
+import { adminController } from "../../dependencies/admin/admindependency.ts";
 import express from "express"
 
 const router = express.Router();

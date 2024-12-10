@@ -1,15 +1,19 @@
+
 import { IOTP } from "../entitties/interfaces/admin/Iotp.ts"
 import IOTPRepository from "../entitties/interfaces/common/IOTPRepository.ts"
 import AppError from "../framework/web/utils/appError.ts"
 import IEmailService from "../entitties/interfaces/common/emailservice.ts"
 import IGenerateOtp from "../entitties/interfaces/admin/IGenerateOtp.ts"
 import { Iuser } from "../entitties/interfaces/user/user.ts"
-import { IuserRepository } from "../entitties/interfaces/user/userrepository.ts"
+import Itutor from "../entitties/interfaces/tutor.ts/Itutor.ts"
+import { ItutorRepository } from "../entitties/interfaces/tutor.ts/tutorrepository.ts"
+
 
 interface Dependency{
     repository :{
         otprepository:IOTPRepository
-        userRepository :IuserRepository
+        tutorRepository:ItutorRepository
+        
         
     }
     service :{
@@ -20,16 +24,16 @@ interface Dependency{
 
 
 
-export default class VerificationService{
+export default class TutorVerifivationService{
     private  OTP 
     private EmailService
     private generateOTP 
-    private userRepository
+    private tutorRepository
     constructor(dependency:Dependency) {
         this.OTP = dependency.repository.otprepository  
         this.EmailService = dependency.service.EmailService
         this.generateOTP = dependency.service.generateOtp.generate
-        this.userRepository = dependency.repository.userRepository
+        this.tutorRepository = dependency.repository.tutorRepository
     }
     async resendOTP(email:string,){
     const generateOTP =  this.generateOTP();
@@ -52,17 +56,17 @@ export default class VerificationService{
     
 }
 
-    async VerifyOTP(userDetail:Iuser , otp:string){
+    async VerifyOTP(userDetail:Itutor , otp:string){
         const savedOTP = await this.OTP.findOTPbyEmail(userDetail.emailAddress, otp)
         if(!savedOTP){
             throw AppError.conflict("ERROR OTP NOT FOUND")
         }
-        const userDetails = await this.userRepository.findUserByEmail(userDetail.emailAddress);
+        const userDetails = await this.tutorRepository.findByEmail(userDetail.emailAddress);
         if(!userDetails){
             throw AppError.conflict("REGISTRATION FAILED")
         }
-        userDetail.isVerfied = true;
-        const updateUser = await this.userRepository.UpdateUser(userDetail)
+        userDetail.isVerified = true;
+        const updateUser = await this.tutorRepository.UpdateUser(userDetail)
         if(!updateUser) throw AppError.conflict("Error updating the useDetails")
             return userDetail;
     }
