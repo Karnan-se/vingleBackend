@@ -44,4 +44,16 @@ export class UserController {
       }
 
     }
+    async updatedUser(req:Request, res:Response, next:NextFunction){
+      const user = req.body.user;
+      console.log(user);
+      try {
+        const updatedUser = await  this.userUseCase.UpdateUser(user)
+        console.log(updatedUser, "updated User")
+        res.status(200).json({message:"success", data:updatedUser}) 
+      } catch (error) {
+        next(error)
+        
+      }
+    }
   }

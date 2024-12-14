@@ -11,12 +11,13 @@ const useSchema: Schema = new Schema({
     lastName:{type:String, required:true},
     country:{type:String, required:true}, 
     photo:{type:String, required:false},
+    phoneNumber:{type:String, required:false},
     isBlocked:{type:Boolean, required:false, default:false},
-    isVerfied:{type:Boolean, required:false, default:false}
-    // socialmedia:{
-    //     linkedIN:{type:String},
-    //     twitter:{type:String},
-    // },
+    isVerfied:{type:Boolean, required:false, default:false},
+    socialmedia:{
+        linkedin:{type:String, required:false},
+        twitter:{type:String , required: false},
+    },
 
 })
 

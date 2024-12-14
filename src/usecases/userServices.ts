@@ -7,6 +7,7 @@ import IGenerateOtp from "../entitties/interfaces/admin/IGenerateOtp.ts";
 import OTPRepository from "../entitties/interfaces/common/IOTPRepository.ts";
 import EmailService from "../entitties/interfaces/common/emailservice.ts";
 import { IOTP } from "../entitties/interfaces/admin/Iotp.ts";
+import { use } from "passport";
 
 
 interface Dependencies {
@@ -102,5 +103,13 @@ export default class userUseCase {
       accessToken,
       refreshToken
     }
+  }
+  async UpdateUser(user:Iuser) {
+    const existingUser = await this.userRepository.findUserByEmail(user.emailAddress);
+    if(!existingUser) throw AppError.conflict("email_id is not registered")
+      const updatedUser = await this.userRepository.UpdateUser(user)
+    
+     return updatedUser
+
   }
 }

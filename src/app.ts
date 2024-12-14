@@ -3,7 +3,7 @@ import connectDB from "./framework/database/connection.ts"
 import cookieparser from "cookie-parser"
 import cors from "cors"
 import userRouter from "./framework/router/user/userRouter.ts"
-import { GoogleStrategy } from "./framework/web/utils/googleAuth.ts"
+
 
 import errorHandler from "./framework/web/middlware/errorHandler.ts"
 import adminRouter from "./framework/router/admin/adminRouter.ts"
@@ -33,8 +33,6 @@ app.get("/", (req, res, next)=>{
     next()
    
 })
-app.use(passport.initialize())
-passport.use(GoogleStrategy)
 
 
   

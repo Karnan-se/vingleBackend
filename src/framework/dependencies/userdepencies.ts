@@ -31,4 +31,6 @@ const userUseCase ={
 const userController = new UserController(userUseCase.userUseCase)
 
 export {userController}
+const userUseCaseInstance = userUseCase.userUseCase;
+export {userUseCaseInstance}
 
