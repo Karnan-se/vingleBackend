@@ -40,7 +40,7 @@ export class UserController {
     
       } catch (error:any) {
         next(error)
-        // return res.status(400).json({success:false, message: error.message})
+        
       }
 
     }
@@ -55,5 +55,33 @@ export class UserController {
         next(error)
         
       }
+    }
+    async SendOTP(req:Request, res:Response, next :NextFunction){
+      const {email} = req.body.user;
+      try {
+        const sendOTP = await this.userUseCase.sendOTP(email);
+        console.log(sendOTP);
+        
+        res.status(200).json({message:"success" ,data:sendOTP})
+         
+      } catch (error) {
+        next(error)
+        
+      }
+    }
+    async ChangePassword(req:Request, res:Response, next: NextFunction){
+      const {emailAddress, password} = req.body.user;
+      try {
+        const userDetails = await this.userUseCase.changePassword(emailAddress, password);
+        if(userDetails){
+          return res.status(200).json({data:userDetails})
+        }
+        
+      } catch (error) {
+        next(error)
+        
+      }
+
+      
     }
   }

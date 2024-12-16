@@ -72,7 +72,7 @@ export default class userUseCase {
 
     const createOtp = await this.MongoOTPRepository.createOTP(otpData)
     if(!createOtp){
-      throw AppError.conflict("Error creating the")
+      throw AppError.conflict("Error creating the Otp")
     }
     try {
       const sendOtp =await this.EmailService.sendVerificationEmail(email, otp)
@@ -112,4 +112,45 @@ export default class userUseCase {
      return updatedUser
 
   }
+
+  async sendOTP(email:string | undefined){
+    try {
+      const existinguser = await this.userRepository.findUserByEmail(email)
+      if(!existinguser) throw AppError.conflict("email_id is not registered");
+      const OTP:string =  this.generateOtp.generate();
+      if(!OTP)throw AppError.conflict("Errro creating the OTP");
+      const saveOTP = await this.MongoOTPRepository.createOTP({email:email, otp:OTP})
+      if(!saveOTP) throw AppError.conflict("Error savving in Database");
+      const sendOTP = await this.EmailService.sendVerificationEmail(email, OTP).catch((error)=> {throw AppError.conflict("Error sending")})
+      return existinguser;
+  
+    } catch (error:any) {
+      throw AppError.conflict(error.message)
+      
+    }
+
+  }
+
+ 
+
+  async changePassword(email:string, password:string){
+    try {
+      console.log(email, password,  "email and password from userService")
+      const userDetail = await this.userRepository.findUserByEmail(email);
+      if(!userDetail) throw AppError.conflict("Error finding The User");
+      const hashedPassword = await this.passwordService.passwordHash(password)
+      userDetail.password = hashedPassword;
+      const updateUser = this.userRepository.UpdateUser(userDetail);
+      if(!updateUser) throw AppError.conflict("Error updating The UserDetails")
+          return updateUser
+      
+    } catch (error) {
+      console.log(error)
+      throw AppError.conflict("Error changing the password")
+      
+    }
+  
+}
+
+
 }

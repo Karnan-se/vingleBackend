@@ -33,6 +33,8 @@ export  default class VerificationController {
                 res.status(200).json({data: verifyUser})
             } catch (error) {
                 
+                next(error)
+                
             }
         }
 }

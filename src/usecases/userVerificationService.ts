@@ -53,7 +53,8 @@ export default class VerificationService{
 }
 
     async VerifyOTP(userDetail:Iuser , otp:string){
-        const savedOTP = await this.OTP.findOTPbyEmail(userDetail.emailAddress, otp)
+        const savedOTP = await this.OTP.findOTPbyEmail(userDetail.emailAddress, otp);
+        console.log(savedOTP, "SavedOTP")
         if(!savedOTP){
             throw AppError.conflict("ERROR OTP NOT FOUND")
         }
@@ -66,4 +67,7 @@ export default class VerificationService{
         if(!updateUser) throw AppError.conflict("Error updating the useDetails")
             return userDetail;
     }
+
+
+
 }

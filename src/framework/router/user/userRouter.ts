@@ -15,6 +15,8 @@ userRouter.post("/resendOTP",(req, res, next)=>verificationController.resendOTP(
 userRouter.post("/verifyUser",(req, res, next)=> verificationController.verifyUser(req, res, next))
 userRouter.post("/auth/google/verify", (req, res, next)=>googleController.signIn(req, res, next))
 userRouter.post("/update",(req, res, next)=> userController.updatedUser(req, res,next))
+userRouter.post("/sendotp", (req, res, next)=> userController.SendOTP(req, res, next))
+userRouter.put("/changepassword",(req, res, next)=> userController.ChangePassword(req, res, next))
 
 
 
