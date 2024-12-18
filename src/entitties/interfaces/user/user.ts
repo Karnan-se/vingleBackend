@@ -12,6 +12,7 @@ export interface Iuser{
     photo?: string 
     phoneNumber?:string
     socialmedia?:{linkedin:string , twitter:string };
+    isInstructor?:boolean
 
 }
 

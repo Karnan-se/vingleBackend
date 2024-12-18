@@ -8,7 +8,12 @@ const configKeys = {
     Email :process.env.EMAIL,
     Mail_password:process.env.Mail_password,
     GOOGLE_CLIENT_ID :process.env.GOOGLE_CLIENT_ID,
-    GOOGLE_SECRET :process.env.CLIENT_SECRET
+    GOOGLE_SECRET :process.env.CLIENT_SECRET,
+    
+    CLOUDINARY_CLOUD_NAME: process.env.CLOUD_NAME,
+    CLOUDINARY_API_KEY:process.env.CLOUDINARY_API_KEY,
+    CLOUDINARY_API_SECRET:process.env.CLOUDINARY_API_SECRET,
+
 }
 
 export {configKeys}

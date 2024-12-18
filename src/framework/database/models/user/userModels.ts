@@ -18,6 +18,7 @@ const useSchema: Schema = new Schema({
         linkedin:{type:String, required:false},
         twitter:{type:String , required: false},
     },
+    isInstructor:{type:String, required:false}
 
 })
 
