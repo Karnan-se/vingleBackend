@@ -4,7 +4,7 @@ dotenv.config();
 const configKeys = { 
     JWT_SECRET: process.env.JWT_SECRET as string,
     REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET as string,
-    
+
     NODE_ENV : process.env.NODE_ENV as string,
     Email :process.env.EMAIL,
     Mail_password:process.env.Mail_password,
@@ -14,6 +14,9 @@ const configKeys = {
     CLOUDINARY_CLOUD_NAME: process.env.CLOUD_NAME,
     CLOUDINARY_API_KEY:process.env.CLOUDINARY_API_KEY,
     CLOUDINARY_API_SECRET:process.env.CLOUDINARY_API_SECRET,
+
+    ACCESS_TOKEN_EXPIRES_IN :15 * 60 * 1000,
+    REFRESH_TOKEN_EXPIRES_IN : 7 * 24 * 60 * 60 * 1000
 
 }
 
