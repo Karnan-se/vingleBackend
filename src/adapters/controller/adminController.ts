@@ -16,7 +16,7 @@ export  class AdminController {
         try{
         const user = req.body.user;
       const {accesToken, refreshToken, adminDetails} = await this.adiminUseCase.signup(user);
-      attachTokenCookie("AccessToken", accesToken, res)
+      attachTokenCookie("AccessToken", accesToken, res, )
       attachTokenCookie("RefreshToken", refreshToken, res)
       res.status(200).json({message:"succuss", data:adminDetails})
     }catch(error){

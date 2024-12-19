@@ -2,7 +2,7 @@ import { Types } from "mongoose";
 
 export interface IInstructor {
   _id?: Types.ObjectId;
-  user_id?: Types.ObjectId;
+  user_id?: Types.ObjectId | undefined;
   headline?: string;
   skills?: string[];
   degree?: string;

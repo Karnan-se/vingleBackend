@@ -27,15 +27,16 @@ export default  class InstructorService {
     }
     async  CreateApplication(tutor:IInstructor){
         const {resume , certifications, ...otherDetails} = tutor;
-
+        
 
         try {     
         let resumeUrl : string | null = null;
         if(resume){
-            const isPDF = resume.mimetype === "application/pdf";
+            const isPDF = resume?.mimetype === "application/pdf";
             resumeUrl = isPDF ? await this.cloudinaryService.uploadPDF(resume) :
             await this.cloudinaryService.uploadImage(resume)
         }
+     
 
         let updatedCertifications:any = [];
         if(certifications && certifications.length> 0){
@@ -61,7 +62,7 @@ export default  class InstructorService {
             resume:resumeUrl,
             certifications:updatedCertifications,
         }
-        console.log(tutorData)
+        // console.log(tutorData)
 
 
         const saveTutor = await this.instructorRepository.createUser(tutorData)

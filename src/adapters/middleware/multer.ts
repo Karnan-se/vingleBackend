@@ -1,23 +1,18 @@
+import multer from "multer";
+import path from "path";
 
-import multer from "multer"
-import path from  "path"
+const memoryStorage = multer.memoryStorage();
 
-const storage  = multer.diskStorage({
-    destination:(req,file, cb)=>{
-        cb(null, "uploads/")
+const upload = multer({
+    storage: memoryStorage,
+    limits: {
+        fileSize: 10 * 1024 * 1024, 
     },
-    filename :(req, file, cb)=>{
-        const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-       cb(null, `${file.fieldname}-${uniqueSuffix}${path.extname(file.originalname)}`);
+});
 
-    }
-
-})
-console.log("reached here in multer")
-
-
-const upload = multer({storage});
-export  const uploadFile = upload.fields([
-    {name: "resume", maxCount: 1},
+export const uploadFile = upload.fields([
+    { name: "resume", maxCount: 1 },
     { name: "certificateUrl", maxCount: 10 },
-])
+]);
+
+console.log("Multer configured with memory storage");

@@ -35,6 +35,11 @@ app.get("/", (req, res, next)=>{
 })
 
 
+process.env.CLOUD_NAME
+process.env.CLOUDINARY_API_KEY
+process.env.CLOUDINARY_API_SECRET
+
+
   
 
 

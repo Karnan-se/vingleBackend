@@ -1,39 +1,52 @@
 import { v2 as cloudinary } from "cloudinary";
 import { configKeys } from "../../../config.ts";
+import dotenv from 'dotenv';
+dotenv.config(); 
 
 
 
 cloudinary.config({
-    cloud_name:configKeys.CLOUDINARY_CLOUD_NAME,
-    api_key:configKeys.CLOUDINARY_API_KEY,
-    api_secret:configKeys.CLOUDINARY_API_SECRET
+    cloud_name:process.env.CLOUD_NAME,
+    api_key:process.env.CLOUDINARY_API_KEY,
+    api_secret:process.env.CLOUDINARY_API_SECRET
 })
 
 export class CloudinaryService {
     async uploadImage(file: Express.Multer.File): Promise<string> {
-
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve, reject) => {
+            if (!file || !file.buffer) {
+                return reject(new Error("No file or buffer provided"));
+            }
+    
             const uploadStream = cloudinary.uploader.upload_stream(
-                {
-                    folder: "tutor/resume",
-                    use_filename:true,
-                    unique_filename:true,
-                    resource_type:"auto"
+                {   
+                    upload_preset: "securePreset", // Replace with your preset
+                    folder: "tutor/resume", 
+                    resource_type: "auto",
                 },
-                (error, result) =>{
-                    if(error){
-                        return reject(new Error("cloudinary upload Failed"))
+                (error, result) => {
+                    if (error) {
+                        console.error("Cloudinary upload error:", error); // Log error details
+                        return reject(new Error(`Cloudinary upload failed: ${error.message}`));
                     }
-                    if(result){
-                        return resolve(result.secure_url)
+                    if (result) {
+                        console.log("Cloudinary upload result:", result); // Log result
+                        return resolve(result.secure_url);
                     }
                 }
-
-            )
-            uploadStream.end(file.buffer)
+            );
+    
+            try {
+                console.log("Uploading file with buffer size:", file.buffer.length);
+                uploadStream.end(file.buffer);
+            } catch (err) {
+                console.error("Stream error:", err);
+                reject(new Error("File buffer upload failed"));
+            }
         });
-
     }
+    
+    
 
 
 
