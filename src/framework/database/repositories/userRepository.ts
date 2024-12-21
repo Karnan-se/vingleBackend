@@ -2,18 +2,19 @@ import { userModel } from "../models/user/userModels.ts";  //this part is from m
 import { IuserRepository } from "../../../entitties/interfaces/user/userrepository.ts";
 import { Iuser } from "../../../entitties/interfaces/user/user.ts";
 import AppError from "../../web/utils/appError.ts";
+import { ObjectId } from "mongoose";
 
 
 export class MongoUserRepository implements IuserRepository{
 
-    async createUser(user: any): Promise<Iuser | null> {
+    async createUser(user: any): Promise<Iuser> {
         console.log(user, "Received User Data"); 
     
         try {
 
             const createdUser = await userModel.create(user); 
             console.log("User successfully created:", createdUser); 
-            return createdUser as Iuser | any 
+            return createdUser as unknown as Iuser 
         } catch (error) {
             console.error("Error while creating user:", error); 
             throw error
@@ -40,11 +41,41 @@ export class MongoUserRepository implements IuserRepository{
            }
            Object.assign(userDetails, user);
            const saved =await userDetails.save()
-           return saved;
+           return saved as unknown as Iuser
      
         } catch (error) {
             console.log(error)
             throw error
+            
+        }
+    }
+
+    async findUserById(userId:string | ObjectId){
+        try {
+            let userDetails = await userModel.findOne({_id:userId})
+            if(!userDetails){
+                throw AppError.conflict("user Details not Found");
+            }
+            return userDetails as unknown as Iuser
+            
+        } catch (error) {
+            console.log(error);
+            throw error;
+            
+        }
+    }
+    async findAlluser(){
+        try {
+            let userDetails = await userModel.find({}, {password: 0 });
+            // console.log(userDetails)
+            if(!userDetails){
+                throw AppError.conflict("no users")
+            }
+            return userDetails as unknown as Iuser
+            
+        } catch (error) {
+            console.log(error);
+            throw error;
             
         }
     }

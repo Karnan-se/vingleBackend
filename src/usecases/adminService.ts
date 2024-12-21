@@ -1,6 +1,7 @@
 import { Iadmin } from "../entitties/interfaces/admin/Iadmin.ts";
 import { IadminRepository } from "../entitties/interfaces/admin/Iadminrepository.ts";
 import IpasswordService from "../entitties/interfaces/service.ts/passwordService.ts";
+import { IuserRepository } from "../entitties/interfaces/user/userrepository.ts";
 import AppError from "../framework/web/utils/appError.ts";
 import { JwtService } from "../framework/web/utils/JwtService.ts";
 
@@ -8,7 +9,8 @@ import { JwtService } from "../framework/web/utils/JwtService.ts";
 
 interface Dependency {
     Repository :{
-        adminRepository: IadminRepository
+        adminRepository: IadminRepository,
+        userRespository :IuserRepository
     },
     service :{
         passwordService: IpasswordService,
@@ -21,10 +23,12 @@ export  default class adminUseCase {
     private adminRepository
     private passwordService
     private jwtService
+    private userRepository
     constructor(dependency:Dependency){
         this.adminRepository = dependency.Repository.adminRepository
         this.passwordService = dependency.service.passwordService
         this.jwtService = dependency.service.Jwtservice
+        this.userRepository = dependency.Repository.userRespository
 
     }
     async signup(user:Iadmin){
@@ -66,5 +70,14 @@ export  default class adminUseCase {
         throw error;
     }
 }
+ async getAllStudents(){
+    try {
+        const studentDetails = await this.userRepository.findAlluser();
+        return studentDetails;
+        
+    } catch (error) {
+        
+    }
+ }
 
 }

@@ -18,7 +18,11 @@ export class UserController {
       try {
         const user = req.body.user;
         console.log(user)
-        const createdUser = await this.userUseCase.signup(user)
+        const {createdUser , accessToken ,refreshToken}= await this.userUseCase.signup(user)
+        console.log(accessToken, "accessToken \n") 
+        console.log(refreshToken, "RefreshToken") 
+        attachTokenCookie("AccessToken", accessToken, res)
+        attachTokenCookie("RefreshToken", refreshToken, res)
          res.status(201).json({ success: true, data: createdUser });
       } catch (error: any) {
         console.log(error)

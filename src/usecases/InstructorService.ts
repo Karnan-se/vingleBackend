@@ -1,7 +1,9 @@
+import { use } from "passport"
 import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService"
 import { IInstructor } from "../entitties/interfaces/tutor.ts/IInstructor"
 import { IInstructorRepoInterface } from "../entitties/interfaces/tutor.ts/IInstructorRepo"
 import { IuserRepository } from "../entitties/interfaces/user/userrepository"
+import { ObjectId } from "mongoose"
 
 
 interface Dependency {
@@ -26,7 +28,7 @@ export default  class InstructorService {
         this.cloudinaryService = dependency.service.cloudinaryService
     }
     async  CreateApplication(tutor:IInstructor){
-        const {resume , certifications, ...otherDetails} = tutor;
+        const {resume , certifications, user_id, ...otherDetails} = tutor;
         
 
         try {     
@@ -59,14 +61,30 @@ export default  class InstructorService {
         }
         const tutorData = {
             ...otherDetails,
+            user_id,
             resume:resumeUrl,
+            status:"pending",
             certifications:updatedCertifications,
         }
-        // console.log(tutorData)
+  
+        const saveTutor = await this.instructorRepository.createUser(tutorData);
 
+        let updateUserDetail
 
-        const saveTutor = await this.instructorRepository.createUser(tutorData)
-        return saveTutor;
+        console.log("user_id ...........................................................", user_id)
+
+        if(saveTutor){
+           
+            const updateStatus = await this.userRepository.findUserById(user_id as unknown as ObjectId)
+            updateStatus.isInstructor = "pending"
+
+             updateUserDetail = await this.userRepository.UpdateUser(updateStatus)
+            console.log(updateUserDetail.isInstructor)
+        }
+        return {
+            updateUserDetail,
+          
+        }
             
         } catch (error) {
             console.log(error)

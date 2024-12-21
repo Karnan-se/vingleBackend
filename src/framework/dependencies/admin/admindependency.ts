@@ -1,15 +1,15 @@
 import { AdminController } from "../../../adapters/controller/adminController.ts";
-import { Iadmin } from "../../../entitties/interfaces/admin/Iadmin.ts";
-import { IadminRepository } from "../../../entitties/interfaces/admin/Iadminrepository.ts";
 import  AdminUseCase  from "../../../usecases/adminService.ts";
 import AdminRepository from "../../database/repositories/adminRepository.ts";
 import { JwtService } from "../../web/utils/JwtService.ts";
 import { PasswordService } from "../../web/utils/passwordService.ts";
+import { MongoUserRepository } from "../../database/repositories/userRepository.ts";
 
 
 
 const Repository ={
-     adminRepository :  new AdminRepository()
+     adminRepository :  new AdminRepository(),
+     userRespository : new MongoUserRepository()
 }
 const service ={
     passwordService : new PasswordService(),

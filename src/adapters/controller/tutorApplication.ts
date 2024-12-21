@@ -21,18 +21,18 @@ export default class TutorApplicationController {
         console.log(req.user, "UserDEtails form accessToken")
         const token = req.user as string
         let tokenResponse = new mongoose.Types.ObjectId(token) 
-        console.log(tokenResponse)
+        // console.log(tokenResponse)
         
        
         const { headline, degree, qualification, experience , skills} = req.body;
         const parsedcertifications = req.body.certifications || "[]"
-        console.log(parsedcertifications, "parsedCertificate")
+        // console.log(parsedcertifications, "parsedCertificate")
 
       
 
         const resume = files?.["resume"]?.[0] || null;
         const certificationFiles = files?.certificateUrl || [];
-        console.log(resume, "resumeBUffer")
+        // console.log(resume, "resumeBUffer")
 
         let certifications = null
         if(parsedcertifications && parsedcertifications.length>0){
@@ -63,7 +63,7 @@ export default class TutorApplicationController {
 
 
 
-        res.status(200).json({message:payload})
+        res.status(200).json({message:savedInstructor})
 
 
       

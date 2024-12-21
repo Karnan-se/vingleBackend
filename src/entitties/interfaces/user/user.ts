@@ -1,7 +1,7 @@
 import {ObjectId} from "mongoose"
 
 export interface Iuser{
-
+    _id?:ObjectId
     emailAddress: string ;
     password?: string;
     firstName?: string ;
@@ -12,7 +12,7 @@ export interface Iuser{
     photo?: string 
     phoneNumber?:string
     socialmedia?:{linkedin:string , twitter:string };
-    isInstructor?:boolean
+    isInstructor?:string
 
 }
 

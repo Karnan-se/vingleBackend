@@ -39,6 +39,15 @@ async sigIn(req:Request, res:Response, next:NextFunction){
         
     }
 }
+async getAllusers(req:Request, res:Response, next:NextFunction){
+    try {
+        const students = await this.adiminUseCase.getAllStudents()
+        return res.status(200).json({students})
+        
+    } catch (error) {
+        
+    }
+}
     
    
 }

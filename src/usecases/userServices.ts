@@ -7,7 +7,6 @@ import IGenerateOtp from "../entitties/interfaces/admin/IGenerateOtp.ts";
 import OTPRepository from "../entitties/interfaces/common/IOTPRepository.ts";
 import EmailService from "../entitties/interfaces/common/emailservice.ts";
 import { IOTP } from "../entitties/interfaces/admin/Iotp.ts";
-import { use } from "passport";
 
 
 interface Dependencies {
@@ -61,7 +60,19 @@ export default class userUseCase {
     const sendOtp = await this.EmailService.sendVerificationEmail(createOtp.email,createOtp.otp);
     const createdUser = await this.userRepository.createUser(user);
     console.log(createdUser);
-    return createdUser;
+    const accessToken = this.jwtService.generateAccesSToken(createdUser._id)
+    if(!accessToken){
+      console.log("couldnot generate")
+    }
+    const refreshToken = this.jwtService.generateRefreshToken(createdUser._id)
+    if(!refreshToken){
+      console.log("refresg")
+    }
+    return {createdUser, accessToken, refreshToken}
+      
+
+    
+   
   }
 
   async verifyOtp(email:string, otp:string){

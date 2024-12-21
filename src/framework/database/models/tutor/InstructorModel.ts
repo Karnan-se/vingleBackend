@@ -18,6 +18,12 @@ const InstructorSchema: Schema = new Schema(
         certificateUrl: { type: String, required: true },
       },
     ],
+    status:{
+      type:String,
+      enum:["pending", "accepted", "rejected"],
+      default:"pending",
+      required:false,
+    }
   },
   { timestamps: true }
 );
