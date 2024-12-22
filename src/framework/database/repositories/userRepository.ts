@@ -66,7 +66,7 @@ export class MongoUserRepository implements IuserRepository{
     }
     async findAlluser(){
         try {
-            let userDetails = await userModel.find({}, {password: 0 });
+            let userDetails = await userModel.find({}, { password: 0 }).sort({ _id: -1 });
             // console.log(userDetails)
             if(!userDetails){
                 throw AppError.conflict("no users")
