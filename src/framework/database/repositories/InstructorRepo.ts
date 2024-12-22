@@ -1,6 +1,7 @@
 import { InstructorModel } from "../models/tutor/InstructorModel.ts";
 import { IInstructorRepoInterface } from "../../../entitties/interfaces/tutor.ts/IInstructorRepo.ts";
 import { IInstructor } from "../../../entitties/interfaces/tutor.ts/IInstructor.ts";
+import { ObjectId } from "mongoose";
 
 
 export default class InstructorRepository implements IInstructorRepoInterface  {
@@ -17,6 +18,11 @@ export default class InstructorRepository implements IInstructorRepoInterface  {
                 console.error("Error while creating user:", error); 
                 throw error
             }
+        }
+        async  findByUserId(userId: ObjectId | undefined): Promise<IInstructor> {
+            const tutorDetail = await InstructorModel.findOne({user_id : userId})
+            return tutorDetail as unknown as IInstructor
+            
         }
       
     }

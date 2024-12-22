@@ -3,7 +3,7 @@ import { IInstructor } from "./IInstructor";
 
  interface IInstructorRepoInterface {
     createUser(user:IInstructor):Promise<IInstructor | null>
-    // findByUserId(userId:ObjectId | undefined):Promise<IInstructor>
+    findByUserId(userId:ObjectId | undefined):Promise<IInstructor>
     // UpdateUser(user:IInstructor):any
 }
 

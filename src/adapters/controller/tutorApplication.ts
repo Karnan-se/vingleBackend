@@ -3,7 +3,8 @@ import InstructorService from "../../usecases/InstructorService"
 import mongoose, { ObjectId } from "mongoose"
 
 interface useCase {
-    instructorService : InstructorService
+    instructorService : InstructorService,
+    
 }
 
 
@@ -73,8 +74,6 @@ export default class TutorApplicationController {
         next(error)
     
     }
-
-        
-        
+ 
     }
 }

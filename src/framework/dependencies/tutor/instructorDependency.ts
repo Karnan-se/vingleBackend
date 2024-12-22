@@ -6,9 +6,6 @@ import { MongoUserRepository } from "../../database/repositories/userRepository.
 import TutorApplicationController from "../../../adapters/controller/tutorApplication.ts";
 
 
-
-
-
 const repository  = {
     instructorRepository : new InstructorRepository(),
     userRepository : new MongoUserRepository()
