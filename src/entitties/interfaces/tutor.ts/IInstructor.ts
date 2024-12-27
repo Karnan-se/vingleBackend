@@ -1,5 +1,7 @@
 import { Types } from "mongoose";
 
+
+
 export interface IInstructor {
   _id?: Types.ObjectId;
   user_id?: Types.ObjectId | undefined;
@@ -17,4 +19,7 @@ export interface IInstructor {
   }[];
   createdAt?: Date;
   updatedAt?: Date;
+  status?:string
+  
 }
+// if error occurs it could be due to status

@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { Types } from "mongoose";
-import Itutor from "../../../../entitties/interfaces/tutor.ts/Itutor";
+
 
 const tutorSchema : Schema =  new Schema ({
     id: { type: Types.ObjectId, default: () => new Types.ObjectId() },
@@ -11,10 +11,10 @@ const tutorSchema : Schema =  new Schema ({
     country:{type:String, required:true}, 
     photo:{type:String, required:false},
     isBlocked:{type:Boolean, required:false, default:false},
-    about:{type:String},
-    qualification:{type:String},
-    skills: {type:String},
-    phone:{type:Number}   
+    phoneNumber:{type:String},
+    headline:{type:String},
+     applicationDetails:{type:String,  ref: "Instructor" }  
+
 })
 
 export const Tutor = mongoose.model("Tutor", tutorSchema )

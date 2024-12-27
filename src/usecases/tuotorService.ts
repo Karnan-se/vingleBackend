@@ -70,5 +70,18 @@ export default  class TutorUseCase{
         
 
 }
+async updatedUser(tutor:Itutor){
+
+    try {
+        const updateTutor = await this.tutorRepository.UpdateUser(tutor);
+        return updateTutor
+        
+    } catch (error) {
+        console.log(error)
+        throw error
+        
+    }
+  
+}
 
 }

@@ -1,3 +1,5 @@
+import { ObjectId } from "mongoose";
+
 interface Itutor {
     emailAddress?: string;
     password?: string;
@@ -8,8 +10,7 @@ interface Itutor {
     isVerified?:boolean
     photo?: string;
     about?:string;
-    qualification?:string,
-    skills?: string,
-    phone?:Number   
+    phoneNumber?:string,
+    applicationDetails?:ObjectId,  
 }
 export default Itutor

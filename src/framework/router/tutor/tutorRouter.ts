@@ -14,6 +14,7 @@ router.post("/login",(req, res, next)=>tutorController.SignIn(req, res, next))
 router.post("/resendOTP",(req, res, next)=>tutorVerifyController.resendOTP(req, res, next))
 router.post("/verifyUser",(req, res, next)=> tutorVerifyController.verifyUser(req, res, next))
 router.post("/applicationForm", uploadFile, jwtAuth, (req, res, next)=>tutorApplicationController.TutorApplication(req, res, next))
+router.post("/update",(req, res, next)=> tutorController.updatedUser(req, res,next))
 
 
 

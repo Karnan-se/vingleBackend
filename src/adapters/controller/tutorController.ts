@@ -37,4 +37,17 @@ async SignIn(req:Request, res:Response, next:NextFunction){
 
 }
 
+async updatedUser(req:Request, res:Response,next:NextFunction){
+    try {
+        const {user} = req.body
+        const updatedUser = await this.tutorUseCase.updatedUser(user);
+        res.status(200).json({message:"success", data:updatedUser}) 
+        
+    } catch (error) {
+        console.log(error);
+        next(error)
+        
+    }
+}
+
 }
