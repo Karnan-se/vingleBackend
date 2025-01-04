@@ -2,6 +2,7 @@
 .env
 
 node_modules/
+uploads
 
 
 bfg-repo-cleaner-1.14.0.jar
