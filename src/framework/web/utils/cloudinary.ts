@@ -1,6 +1,9 @@
 import { v2 as cloudinary } from "cloudinary";
 import { configKeys } from "../../../config.ts";
 import dotenv from 'dotenv';
+import { rejects } from "assert";
+import { error } from "console";
+import { ICloudinaryService } from "../../../entitties/interfaces/service.ts/IcloudinaryService.ts";
 dotenv.config(); 
 
 
@@ -11,7 +14,8 @@ cloudinary.config({
     api_secret:process.env.CLOUDINARY_API_SECRET
 })
 
-export class CloudinaryService {
+export class CloudinaryService implements ICloudinaryService {
+    
     async uploadImage(file: Express.Multer.File): Promise<string> {
         return new Promise((resolve, reject) => {
             if (!file || !file.buffer) {
@@ -20,17 +24,18 @@ export class CloudinaryService {
     
             const uploadStream = cloudinary.uploader.upload_stream(
                 {   
-                    upload_preset: "securePreset", // Replace with your preset
+                    upload_preset: "securePreset", 
                     folder: "tutor/resume", 
                     resource_type: "auto",
+                    
                 },
                 (error, result) => {
                     if (error) {
-                        console.error("Cloudinary upload error:", error); // Log error details
+                        console.error("Cloudinary upload error:", error); 
                         return reject(new Error(`Cloudinary upload failed: ${error.message}`));
                     }
                     if (result) {
-                        console.log("Cloudinary upload result:", result); // Log result
+                        console.log("Cloudinary upload result:", result); 
                         return resolve(result.secure_url);
                     }
                 }
@@ -99,6 +104,41 @@ export class CloudinaryService {
             uploaodStream.end(file.buffer);
         })
     }
+    async uploadCompressedVideo(file:Express.Multer.File): Promise<string> {
+        return new Promise((resolve, reject) => {
+            cloudinary.uploader.upload_large(
+                file.path,
+                {
+                    folder: "Video_uploads", 
+                    resource_type: "video", 
+                    use_filename: true,
+                    unique_filename: true,
+                    format: "mp4", 
+                    chunk_size: 6000000,
+                  
+                },
+                (error, result) => {
+                    if (error) {
+                        return reject(
+                            new Error(
+                                "Cloudinary Video Upload and Compression failed: " + error.message
+                            )
+                        );
+                    }
+                    if (result) {
+                        return resolve(result.secure_url);
+                    }
+                }
+            );
+        });
+    }
+    async uploadThumbnail(file:Express.Multer.File):Promise<string>{
+        return new Promise((resolve, reject)=>{
+
+
+        })
+    }
+    
 }
 
 

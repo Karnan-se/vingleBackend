@@ -71,7 +71,7 @@ export default  class InstructorService {
 
         let updateUserDetail
 
-        console.log("user_id ...........................................................", user_id)
+        console.log("user_id ...................................................", user_id)
 
         if(saveTutor){
            

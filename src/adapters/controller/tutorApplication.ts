@@ -19,13 +19,11 @@ export default class TutorApplicationController {
 
         const files = req.files as { [key: string]: Express.Multer.File[] };
     try {
-        console.log(req.user, "UserDEtails form accessToken")
-        const token = req.user as string
-        let tokenResponse = new mongoose.Types.ObjectId(token) 
-        // console.log(tokenResponse)
+       
+     
         
        
-        const { headline, degree, qualification, experience , skills} = req.body;
+        const { headline, degree, qualification, experience , skills , user_id} = req.body;
         const parsedcertifications = req.body.certifications || "[]"
         // console.log(parsedcertifications, "parsedCertificate")
 
@@ -49,7 +47,7 @@ export default class TutorApplicationController {
         const payload = {
         
             headline,
-            user_id : tokenResponse,
+            user_id,
             degree,
             qualification,
             experience,

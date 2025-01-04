@@ -40,10 +40,7 @@ const sectionSchema = new Schema({
 
 
 const courseSchema = new Schema({
-  courseId: {
-    type: String,
-    required: true,
-  },
+
   tutorId:{
     type:Schema.Types.ObjectId,
     ref:"Tutor"
@@ -94,10 +91,6 @@ const courseSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
   users: {
     type: [String],
     default: [],
@@ -110,11 +103,15 @@ const courseSchema = new Schema({
     type: Number,
     default: 0,
   },
+  isPublished:{
+    default:true,
+    type:Boolean,
+  }
 
 }, { timestamps: true });
 
-const Course = mongoose.model('Course', courseSchema);
-const Section = mongoose.model('Section', sectionSchema);
-const Item = mongoose.model('Item', itemSchema);
+const CourseModal = mongoose.model('Course', courseSchema);
+const SectionModal = mongoose.model('Section', sectionSchema);
+const ItemModal = mongoose.model('Item', itemSchema);
 
-export { Course, Section, Item };
+export { CourseModal, SectionModal, ItemModal };

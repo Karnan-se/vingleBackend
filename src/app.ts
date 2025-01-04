@@ -24,7 +24,7 @@ app.use(cors({
 
 app.use(cookieparser())
 app.use(express.json());
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({extended:true,  parameterLimit: 100000}))
 
 
 
