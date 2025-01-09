@@ -26,6 +26,7 @@ async SignIn(req:Request, res:Response, next:NextFunction){
     try {
         const {emailAddress, password} = req.body.user;
         const {tutor, accessToken, refreshToken} = await this.tutorUseCase.SignIn(emailAddress, password)
+        console.log(refreshToken, "\n" , accessToken )
         attachTokenCookie("AccessToken", accessToken, res);
         attachTokenCookie("RefreshToken", refreshToken, res);
         return res.status(200).json({message:"Success", data:tutor });

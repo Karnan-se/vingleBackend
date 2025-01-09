@@ -7,7 +7,7 @@ const attachTokenCookie =(cookieName:string, Token:string, res:Response )=>{
         httpOnly:true,
         secure:configKeys.NODE_ENV == "production",
         signed:false,
-        maxAge:cookieName == "AccessToken"? Number(configKeys.ACCESS_TOKEN_EXPIRES_IN) : Number(configKeys.REFRESH_TOKEN_EXPIRES_IN)
+        maxAge:cookieName == "AccessToken"? (configKeys.ACCESS_TOKEN_EXPIRES_IN) : (configKeys.REFRESH_TOKEN_EXPIRES_IN)
     }
     try {
         res.cookie(cookieName, Token,cookieOption)

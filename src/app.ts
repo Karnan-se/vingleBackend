@@ -3,6 +3,8 @@ import connectDB from "./framework/database/connection.ts"
 import cookieparser from "cookie-parser"
 import cors from "cors"
 import userRouter from "./framework/router/user/userRouter.ts"
+import { logStream } from "./framework/web/errors/error.ts"
+import morgan from "morgan"
 
 
 import errorHandler from "./framework/web/middlware/errorHandler.ts"
@@ -11,7 +13,9 @@ import tutorRouter from "./framework/router/tutor/tutorRouter.ts"
 
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-const passport = require("passport");
+
+
+
 
 
 
@@ -21,6 +25,8 @@ app.use(cors({
     credentials:true,
     origin:"http://localhost:5173"
 }))
+
+app.use(morgan('combined', { stream: logStream }));
 
 app.use(cookieparser())
 app.use(express.json());

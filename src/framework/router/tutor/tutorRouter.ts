@@ -11,10 +11,10 @@ import { uploadVideo_thumbnail } from "../../../adapters/middleware/multervideo.
 const router = express.Router()
 
 
-router.post("/tutorRegister", jwtAuth, (req, res, next)=>tutorController.Signup(req, res, next))
-router.post("/login", jwtAuth,  (req, res, next)=>tutorController.SignIn(req, res, next))
-router.post("/resendOTP", jwtAuth,  (req, res, next)=>tutorVerifyController.resendOTP(req, res, next))
-router.post("/verifyUser", jwtAuth,  (req, res, next)=> tutorVerifyController.verifyUser(req, res, next))
+router.post("/tutorRegister",  (req, res, next)=>tutorController.Signup(req, res, next))
+router.post("/login",  (req, res, next)=>tutorController.SignIn(req, res, next))
+router.post("/resendOTP",   (req, res, next)=>tutorVerifyController.resendOTP(req, res, next))
+router.post("/verifyUser",   (req, res, next)=> tutorVerifyController.verifyUser(req, res, next))
 router.post("/applicationForm", uploadFile, jwtAuth, (req, res, next)=>tutorApplicationController.TutorApplication(req, res, next))
 router.post("/update", jwtAuth, (req, res, next)=> tutorController.updatedUser(req, res,next))
 router.post("/createCourse", uploadVideo_thumbnail, jwtAuth, (req, res, next)=>courseController.newCourse(req, res, next))

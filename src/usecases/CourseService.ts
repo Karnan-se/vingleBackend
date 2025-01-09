@@ -1,8 +1,8 @@
-import { ICourse, IItem, ISection } from "../entitties/interfaces/course/course"
-import { ICourseRepository } from "../entitties/interfaces/course/IcouseRepository"
-import AppError from "../framework/web/utils/appError"
-import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService"
-import { InputCourse } from "../entitties/interfaces/course/course"
+import { ICourse, IItem, ISection } from "../entitties/interfaces/course/course.ts"
+import { ICourseRepository } from "../entitties/interfaces/course/IcouseRepository.ts"
+import AppError from "../framework/web/utils/appError.ts"
+import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService.ts"
+import { InputCourse } from "../entitties/interfaces/course/course.ts"
 
 
 
@@ -40,6 +40,12 @@ export default  class CourseService {
                 );
             }
 
+            let thumbnailurl
+            if(thumbnailFile){
+                thumbnailurl = await this.cloudinarySevice.uploadThumbnail(thumbnailFile[0])
+            }
+
+
             const section = course.sections.map((section: any) => {
                 section.items.forEach((item: IItem, index: number) => {
                     item.fileUrl = uploadedVideoUrl[index]; 
@@ -51,8 +57,9 @@ export default  class CourseService {
 
             console.log(section)
 
-            const courseup ={...course , thumbnail : "", section : section}
+            const courseup ={...course , thumbnail : thumbnailurl || "", tags:course.learningObjectives || [], section : section}
             const newCourse = await this.Course.createCourse(courseup)
+            console.log(newCourse, "heello tjis is courseDetail")
             
             return newCourse
               
@@ -66,9 +73,11 @@ export default  class CourseService {
     async getAllCourse(){
         try {
             const course = await this.Course.getAllCourseFromDataBase();
+            console.log(course  , "courses Populated")
             
             return course;   
         } catch (error) {
+            throw AppError.conflict("Error getting the course Details")
             
         }
     }

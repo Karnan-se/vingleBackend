@@ -19,6 +19,8 @@ export default class CourseController{
     }
      newCourse = async(req:Request, res:Response, next:NextFunction)=>{
         try {
+
+            console.log(req.body , "reached at ")
           
             const structuredData = transformData(req.body);
             console.log(structuredData, "structured Data")
@@ -42,11 +44,13 @@ export default class CourseController{
     getAllCourse = async(req:Request, res:Response, next:NextFunction)=>{
         try {
             const course = await this.Course.getAllCourse();
+            res.status(200).json(course)
            
             console.log(course);
 
 
             
+
         } catch (error) {
             
         }
