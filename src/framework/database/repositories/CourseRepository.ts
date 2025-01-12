@@ -56,7 +56,7 @@ export default class CourseRepository implements ICourseRepository {
       throw error;
     }
   }
-  async updateSection(section: InputSection): Promise<IItem> {
+  async updateItem(section: InputSection): Promise<ObjectId[]> {
     try {
       const updatedItems = await Promise.all(
         section.items.map(async (item: IItem) => {
@@ -67,18 +67,18 @@ export default class CourseRepository implements ICourseRepository {
           );
         })
       );
-      console.log(updatedItems, "updated Items ")
+      
 
-   
-
-      return updatedItems as unknown as IItem;
+      const updatedId = updatedItems.filter((item)=> item?._id).map((itemId:any)=> itemId._id)
+      console.log(updatedId , "updatedId")
+      return updatedId as unknown as ObjectId[]
     } catch (error) {
       console.log(error);
       throw error;
     }
   }
 
-  async createNewSection(section: any): Promise<ISection> {
+  async createNewSection(section: any): Promise<ObjectId[]> {
     try {
       const createdItems = await Promise.all(
         section.items.map(async (item: any) => {
@@ -100,7 +100,7 @@ export default class CourseRepository implements ICourseRepository {
         { $push: { items: { $each: createdItemIds} } }, 
         { new: true } 
       );
-      return updatedSection as unknown as ISection;
+      return createdItemIds as unknown as ObjectId[];
     } catch (error) {
       console.error("Error in createNewSection:", error);
       throw error;
@@ -121,5 +121,22 @@ export default class CourseRepository implements ICourseRepository {
       console.log(error);
       throw error;
     }
+  }
+  async filterItemsId(sectionID:ObjectId , items_ids: ObjectId[]):Promise<any> {
+
+    // const promises = Promise.all(items_ids.map(async(id)=> await ItemModal.deleteOne({_id:id})));
+    try {
+      const section = await SectionModal.updateOne({_id:sectionID}, {$set:{items: items_ids}})
+      console.log(section);
+      return section
+      
+    } catch (error) {
+      console.log(error)
+      
+    }
+
+  
+ 
+
   }
 }

@@ -88,7 +88,7 @@ export default  class CourseService {
         try {
           if (!fileIndex && !fileUrlFile) {
             console.log("fileUrl is not available");
-            const updateSection = await this.Course.updateSection(section);
+            const updateSection = await this.Course.updateItem(section);
             console.log(updateSection, "updated but there is no fileUrl");
             return updateSection;
           }
@@ -124,7 +124,7 @@ export default  class CourseService {
             } else {
             
               console.log(item, "this is updated by the way");
-              return await this.Course.updateSection({
+              return await this.Course.updateItem({
                 ...section,
                 items: [item], 
               });
@@ -133,7 +133,14 @@ export default  class CourseService {
           
           
           const results = await Promise.all(promises);
+          
           console.log(results, "result of the saved course from updating");
+          console.log(results.length)
+          const sectionId = section._id
+          const flatResult  = results.flat()
+
+          await this.filteritems(sectionId, flatResult)
+
           return results;
           
         } catch (error) {
@@ -153,5 +160,20 @@ export default  class CourseService {
             throw error;
             
         }
+    }
+
+    async filteritems(section_id:ObjectId | undefined,  result:ObjectId[]):Promise<void>{
+      try {
+        let objectID = result
+        .flat(Infinity)
+       
+       console.log(objectID , "ObjectId")
+       const filtered = await this.Course.filterItemsId(section_id , objectID)
+       console.log(filtered)
+        
+        
+      } catch (error) {
+        
+      }
     }
 }
