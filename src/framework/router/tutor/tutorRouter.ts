@@ -19,6 +19,8 @@ router.post("/applicationForm", uploadFile, jwtAuth, (req, res, next)=>tutorAppl
 router.post("/update", jwtAuth, (req, res, next)=> tutorController.updatedUser(req, res,next))
 router.post("/createCourse", uploadVideo_thumbnail, jwtAuth, (req, res, next)=>courseController.newCourse(req, res, next))
 router.get("/getallCourse",jwtAuth, (req, res, next)=>courseController.getAllCourse(req, res, next))
+router.put("/updateSection", jwtAuth, uploadVideo_thumbnail , (req, res, next)=> courseController.updateSection(req, res, next))
+router.post("/getCourse", jwtAuth ,(req, res, next)=>courseController.getCourse(req, res, next))
 
 
 
