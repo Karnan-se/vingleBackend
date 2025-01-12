@@ -90,7 +90,7 @@ export default class CourseRepository implements ICourseRepository {
       console.log(createdItems, "This is created items which are saved");
   
     
-      const createdItemIds = createdItems.map((item) => item._id);
+      const createdItemIds = createdItems.map((item) => item._id).reverse();
 
       console.log(createdItemIds  ,  "createddItemss . -id  ");
   
@@ -109,7 +109,7 @@ export default class CourseRepository implements ICourseRepository {
   
   async getcourse(courseId: ObjectId): Promise<ICourse> {
     try {
-      console.log(courseId ,  "ciurbwdjfbiewjf j wejfbweijf e3k fwqej fkewj fie courseID")
+      
       const courseDetails = await CourseModal.findById(courseId).populate({
         path: "sections",
         populate: {
