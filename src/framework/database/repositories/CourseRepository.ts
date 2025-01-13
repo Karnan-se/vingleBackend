@@ -78,7 +78,7 @@ export default class CourseRepository implements ICourseRepository {
     }
   }
 
-  async createNewSection(section: any): Promise<ObjectId[]> {
+  async createNewItem(section: any): Promise<ObjectId[]> {
     try {
       const createdItems = await Promise.all(
         section.items.map(async (item: any) => {
@@ -124,7 +124,7 @@ export default class CourseRepository implements ICourseRepository {
   }
   async filterItemsId(sectionID:ObjectId , items_ids: ObjectId[]):Promise<any> {
 
-    // const promises = Promise.all(items_ids.map(async(id)=> await ItemModal.deleteOne({_id:id})));
+    
     try {
       const section = await SectionModal.updateOne({_id:sectionID}, {$set:{items: items_ids}})
       console.log(section);
@@ -135,8 +135,34 @@ export default class CourseRepository implements ICourseRepository {
       
     }
 
-  
- 
+  }
+  async addnewSection(section:ISection):Promise<any> {
+    try {
+      const createSection = await SectionModal.create({...section});
+      return createSection
+      
+    } catch (error) {
+      console.log(error);
+      throw error;
+      
+    }
 
+  }
+  async courseUpdate(sectionId: ObjectId , courseId:ObjectId): Promise<any> {
+    try {
+      console.log(sectionId, "this is sectionId being added");
+
+      const courseUpdated = await CourseModal.findOneAndUpdate(
+        { _id: courseId }, 
+        { $addToSet: {sections: sectionId } }, 
+        { new: true }
+      );
+      return courseUpdated
+      
+    } catch (error) {
+      console.log(error)
+      throw error
+      
+    }
   }
 }
