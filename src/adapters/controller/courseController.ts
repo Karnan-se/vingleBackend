@@ -101,9 +101,12 @@ export default class CourseController{
             console.log(course_id)
             
             const addNewsection = await this.Course.addNewSections(course_id, fileIndex, fileUrlFile, JSON.parse(sectionData))
+            console.log(addNewsection, "addnewSection")
+            res.status(200).json({addNewsection})
    
 
         } catch (error) {
+            next(error)
             
         }
     }
