@@ -15,7 +15,7 @@ const itemSchema = new Schema({
   description: {
     type: String,
     required: false,
-  },
+  }, 
   fileUrl: {
     type: String,
     required: true,
@@ -63,7 +63,8 @@ const courseSchema = new Schema({
     required: true,
   },
   category: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref:"Category",
     required: true,
   },
   tags: {
