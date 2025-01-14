@@ -1,6 +1,5 @@
 import CourseService from "../../usecases/CourseService";
 import { Request, Response , NextFunction } from "express";
-import qs from "qs"
 import transformData from "../../framework/web/utils/transformData.ts";
 import { ISection } from "../../entitties/interfaces/course/course.ts";
 import multer from "multer";
