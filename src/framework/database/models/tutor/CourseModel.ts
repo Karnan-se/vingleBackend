@@ -77,18 +77,13 @@ const courseSchema = new Schema({
       ref: 'Section',
     },
   ],
-  ratings: [
-    { 
-      type: Schema.Types.ObjectId, 
-      ref: 'Rating', 
-    },
-  ],
-  comments: [
-    { 
-      type: Schema.Types.ObjectId, 
-      ref: 'Comment', 
-    },
-  ],
+  // ratings: [
+  //   { 
+  //     type: Schema.Types.ObjectId, 
+  //     ref: 'Rating', 
+  //   },
+  // ],
+
   isBlocked: {
     type: Boolean,
     default: false,

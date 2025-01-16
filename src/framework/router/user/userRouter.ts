@@ -20,6 +20,7 @@ userRouter.post("/update", jwtAuth, (req, res, next)=> userController.updatedUse
 userRouter.post("/sendotp",  (req, res, next)=> userController.SendOTP(req, res, next))
 userRouter.put("/changepassword",jwtAuth, (req, res, next)=> userController.ChangePassword(req, res, next))
 userRouter.get("/getallCourse", jwtAuth ,(req, res, next)=> userCourseController.AllCourses(req, res, next) )
+userRouter.post("/create-checkout-session", jwtAuth, (req, res, next)=> userCourseController.checkout(req, res, next))
 
 
 

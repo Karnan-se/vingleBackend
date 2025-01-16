@@ -17,4 +17,11 @@ export class UserCourseController {
         res.status(200).json({courses})
 
     }
+    async checkout(req:Request, res:Response, next:NextFunction){
+        const { price, courseName , courseImage } = req.body;
+
+        console.log( price, courseName )
+        const checkoutPage = await this.courseService.payementPage( parseInt(price), courseName , courseImage )
+
+    }
 }

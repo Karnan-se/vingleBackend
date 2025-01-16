@@ -25,14 +25,11 @@ export class UserCourseRepository implements IuserCourseRepository {
                     path: "items",
                   },
                 },
-                {
-                  path: "ratings",
-                  select: "_id rating userId comment", 
-                },
-                {
-                  path: "comments",
-                  select: "_id text userId createdAt", 
-                },
+                // {
+                //   path: "ratings",
+                //   select: "_id rating userId comment", 
+                // },
+                
               ]);
     
               console.log(courses)

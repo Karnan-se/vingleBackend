@@ -30,6 +30,7 @@
     "nodemailer": "^6.9.16",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
+    "stripe": "^17.5.0",
     "winston": "^3.17.0"
   },
   "devDependencies": {
