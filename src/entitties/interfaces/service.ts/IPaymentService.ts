@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { Iuser } from "../user/user";
 
 export interface IPaymentService {
   stripePayment(
@@ -12,4 +13,7 @@ export interface IPaymentService {
     courseName: string,
     courseImage:string,
   ): Promise<Stripe.Checkout.Session>;
+
+  ispaymentverified(sessionId:string):Promise<Stripe.Checkout.Session>
+  getInvoice(session:Stripe.Checkout.Session , userInfo:Iuser):Promise<any>
 }

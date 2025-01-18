@@ -2,6 +2,9 @@ import { configKeys } from "../../../config.ts"
 import Stripe from "stripe"
 
 import { IPaymentService } from "../../../entitties/interfaces/service.ts/IPaymentService.ts"
+import AppError from "./appError.ts"
+import { Iuser } from "../../../entitties/interfaces/user/user.ts"
+import { use } from "passport"
 
 
 const stripe = new Stripe(configKeys.STRIPE_SECRET_KEY as string)
@@ -25,7 +28,7 @@ export class PaymentService implements IPaymentService {
                 line_items: [
                   {
                     price_data: {
-                      currency: 'usd',
+                      currency: 'INR',
                       product_data: { name: courseName , images:[courseImage] },
                       unit_amount: price,
                     
@@ -33,6 +36,8 @@ export class PaymentService implements IPaymentService {
                     quantity: 1,
                   },
                 ],
+                invoice_creation:{enabled:true},
+                
                 mode: 'payment',
               });
               
@@ -43,10 +48,42 @@ export class PaymentService implements IPaymentService {
             throw error
             
         }
-        
-        
-        
+   
     }
-    
+   async ispaymentverified(sessionId:string):Promise<Stripe.Checkout.Session> {
+    const session = await stripe.checkout.sessions.retrieve(sessionId)
+    try {
+      if(!session){
+        throw AppError.conflict("payment is not verifies")
+        
+      }
+      if(session.payment_status == "paid"){
+        console.log(session.customer ,  "session customer ")
+        
+        return session as unknown as Stripe.Checkout.Session
+      }
+      throw  AppError.conflict("Payment not completed");
+ 
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
 
-}
+  async getInvoice(session:Stripe.Checkout.Session , userInfo:Iuser):Promise<any>{
+
+
+    let invoiceDetail = session.invoice
+
+  if(!invoiceDetail){
+    console.log("no Invoice")
+  }
+
+    const invoice = await stripe.invoices.retrieve(invoiceDetail as string)
+    console.log(invoice.invoice_pdf)
+    return invoice.invoice_pdf
+  
+    };
+
+  }
+

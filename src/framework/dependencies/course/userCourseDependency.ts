@@ -2,6 +2,7 @@ import { UserCourseService } from "../../../usecases/userCourseService.ts";
 import { UserCourseController } from "../../../adapters/controller/userCourseController.ts";
 import { UserCourseRepository} from "../../database/repositories/userCourseRepository.ts"
 import {PaymentService} from "../../web/utils/stripe.ts";
+import  { OrderRepository } from "../../database/repositories/orderRepository.ts";
 
 
 
@@ -10,7 +11,8 @@ import {PaymentService} from "../../web/utils/stripe.ts";
 
 
 const Repository ={
-    courseRepository: new UserCourseRepository()
+    courseRepository: new UserCourseRepository(),
+    orderRepository : new OrderRepository
 }
 const service = {
     paymentService : new PaymentService()

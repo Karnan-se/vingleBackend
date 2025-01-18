@@ -8,6 +8,7 @@ const  OrderSchema = new Schema({
     totalAmount:{type:Number, required:true},
     paymentId:{type:String, required:true},
     paymentStatus: { type: String, enum: ['Pending', 'Completed', 'Failed'], default: 'Pending' },
+    invoice:{type:String}
 },{
     timestamps:true
 })
