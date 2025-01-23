@@ -17,7 +17,7 @@ export class UserCourseRepository implements IuserCourseRepository {
                 },
                 {
                   path: "category",
-                  select: "name description", 
+                  
                 },
                 {
                   path: "sections",
@@ -32,7 +32,7 @@ export class UserCourseRepository implements IuserCourseRepository {
                 
               ]);
     
-              console.log(courses)
+              
               return courses as unknown as ICourse
         } catch (error) {
             throw error

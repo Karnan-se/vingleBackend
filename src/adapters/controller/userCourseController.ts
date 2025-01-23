@@ -45,4 +45,27 @@ export class UserCourseController {
         res.status(200).json(paymetupdate)
         
     }
+    async isOrderCompleated(req:Request, res:Response, next:NextFunction){
+        try {
+            const {courseId, userId} = req.body;
+            const order = await this.courseService.isorderCompleated(userId, courseId);
+            console.log("orderDEtail has send")
+            res.status(200).json(order)
+        } catch (error) {
+            console.log(error)
+            throw error;
+            
+    }
+    }
+    async alluserOrder(req:Request, res:Response, next:NextFunction){
+        try {
+            const {userId} = req.body;
+            console.log(userId, "userOId")
+            const order = await this.courseService.allUserOrder(userId)
+            res.status(200).json(order)
+
+        } catch (error) {
+            
+        }
+    }
 }

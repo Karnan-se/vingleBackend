@@ -93,4 +93,17 @@ export class UserCourseService {
       throw error;
     }
   }
+  async isorderCompleated(userId:ObjectId, courseId:ObjectId){
+    const isOrdeCompleated = await this.OrderService.isOrderPlaced(userId, courseId)
+    return isOrdeCompleated
+  }
+  async allUserOrder(userId:ObjectId){
+    try {
+      const alluserOrder = await this.OrderService.allUserOrder(userId);
+      return alluserOrder
+      
+    } catch (error) {
+      
+    }
+  }
 }

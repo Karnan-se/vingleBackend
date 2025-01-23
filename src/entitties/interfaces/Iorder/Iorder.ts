@@ -1,6 +1,8 @@
+import { ObjectId } from "mongoose";
+
 export interface IOrder {
-    userId: string;
-    courseId: string;
+    userId: ObjectId;
+    courseId: ObjectId;
     totalAmount: number;
     paymentId: string;
     paymentStatus?: 'Pending' | 'Completed' | 'Failed';

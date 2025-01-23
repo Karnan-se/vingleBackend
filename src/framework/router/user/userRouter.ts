@@ -4,6 +4,8 @@ import verificationController from "../../dependencies/verificationDependency.ts
 import { googleController } from "../../dependencies/user/googledependency.ts";
 import jwtAuth from "../../web/middlware/authentication.ts";
 import { userCourseController } from "../../dependencies/course/userCourseDependency.ts";
+import { UserCourseController } from "../../../adapters/controller/userCourseController.ts";
+import { progresssController } from "../../dependencies/Progress/progresDependency.ts";
 
 
 
@@ -22,8 +24,10 @@ userRouter.put("/changepassword",jwtAuth, (req, res, next)=> userController.Chan
 userRouter.get("/getallCourse", jwtAuth ,(req, res, next)=> userCourseController.AllCourses(req, res, next) )
 userRouter.post("/create-checkout-session", jwtAuth, (req, res, next)=> userCourseController.checkout(req, res, next))
 userRouter.post("/verifyPayment", jwtAuth,(req, res, next)=> userCourseController.verifyPayment(req, res, next))
-
-
-
+userRouter.post("/isorderCompleated", jwtAuth, (req, res, next)=> userCourseController.isOrderCompleated(req, res, next))
+userRouter.post("/alluserOrder", jwtAuth, (req, res, next)=> userCourseController.alluserOrder(req,res,next))
+userRouter.get("/isprogressTracked" , jwtAuth , (req, res, next)=> progresssController.isCourseProgressed(req, res, next))
+userRouter.post("/createProgress",jwtAuth, (req, res, next)=>progresssController.createProgress(req, res, next))
+userRouter.post("/updateProgressPercentage", jwtAuth , (req, res, next)=> progresssController.updateProgress(req, res, next))
 
 export default userRouter
