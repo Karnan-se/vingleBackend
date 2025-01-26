@@ -64,7 +64,7 @@ export class OrderRepository implements IOrderRepository {
         populate: [
           {
             path: "tutorId",
-            select: "_id emailAddress firstName",
+          
           },
           {
             path: "category",

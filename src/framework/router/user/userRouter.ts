@@ -4,7 +4,6 @@ import verificationController from "../../dependencies/verificationDependency.ts
 import { googleController } from "../../dependencies/user/googledependency.ts";
 import jwtAuth from "../../web/middlware/authentication.ts";
 import { userCourseController } from "../../dependencies/course/userCourseDependency.ts";
-import { UserCourseController } from "../../../adapters/controller/userCourseController.ts";
 import { progresssController } from "../../dependencies/Progress/progresDependency.ts";
 
 

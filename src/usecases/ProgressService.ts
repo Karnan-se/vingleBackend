@@ -42,12 +42,12 @@ export default class ProgressServcie {
         const item = findProgress.completedItems.find((completed) =>
             completed.itemId?.toString() == itemId.toString()
           );
-          console.log("reached here")
-          console.log(item)
+        //   console.log("reached here")
+        //   console.log(item)
         if(percentageCompleted > item!.percentageCompleted){
             item!.percentageCompleted = percentageCompleted
         }
-        console.log(findProgress , "findProgress")
+        // console.log(findProgress , "findProgress")
         await findProgress.save()
         return findProgress;
     

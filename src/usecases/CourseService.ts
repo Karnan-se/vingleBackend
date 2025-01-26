@@ -236,4 +236,18 @@ export default class CourseService {
       await Promise.all(uploadPromises);
     }
   }
+  async tutorsCourse(tutorId:ObjectId){
+   try {
+    const tutorCourse  = await this.Course.tutorsCourse(tutorId)
+   
+    return tutorCourse
+    
+   } catch (error) {
+    console.log(error)
+    throw error
+    
+   }
+
+  }
+
 }

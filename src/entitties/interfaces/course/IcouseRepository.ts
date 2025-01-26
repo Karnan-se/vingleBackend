@@ -2,6 +2,7 @@ import { ICourse, IItem } from "./course";
 import { InputSection } from "./course";
 import { ISection } from "./course";
 import { ObjectId } from "mongoose";
+import { IInstructor } from "../tutor.ts/IInstructor";
 
 export interface ICourseRepository {
   createCourse(course: ICourse): Promise<ICourse>;
@@ -12,4 +13,5 @@ export interface ICourseRepository {
   filterItemsId(sectionID:ObjectId | undefined  , items_ids: ObjectId[]):Promise<any>
   addnewSection(section:ISection):Promise<any>
   courseUpdate(sectionId:ObjectId , courseId:ObjectId):Promise<any>
+  tutorsCourse(tutorsId:ObjectId):Promise<IInstructor>
 }

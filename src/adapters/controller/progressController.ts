@@ -37,7 +37,7 @@ export default class ProgressController {
         console.log("update Route ")
         try {
             const {userId, courseId, itemId, percentageCompleted} = req.body;
-            console.log( userId, courseId, itemId, percentageCompleted)
+            // console.log( userId, courseId, itemId, percentageCompleted)
 
             const response = await this.ProgressService.updateProgress(userId, courseId, itemId, percentageCompleted)
             res.status(200).json(response)

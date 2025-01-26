@@ -11,6 +11,7 @@ import {
   SectionModal,
 } from "../models/tutor/CourseModel.ts";
 import { ICourseRepository } from "../../../entitties/interfaces/course/IcouseRepository.ts";
+import { IInstructor } from "../../../entitties/interfaces/tutor.ts/IInstructor.ts";
 
 export default class CourseRepository implements ICourseRepository {
   constructor() {}
@@ -164,5 +165,10 @@ export default class CourseRepository implements ICourseRepository {
       throw error
       
     }
+  }
+  async tutorsCourse(tutorsId:ObjectId):Promise<IInstructor>{
+    const tutorsCourse  = await  CourseModal.find({tutorId:tutorsId})
+    return tutorsCourse as unknown as IInstructor
+
   }
 }

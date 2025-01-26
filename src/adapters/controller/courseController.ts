@@ -4,6 +4,7 @@ import transformData from "../../framework/web/utils/transformData.ts";
 import { ISection } from "../../entitties/interfaces/course/course.ts";
 import multer from "multer";
 import { file } from "googleapis/build/src/apis/file/index";
+import mongoose, { ObjectId } from "mongoose";
 
 interface controllerDependency {
     course:CourseService
@@ -107,6 +108,21 @@ export default class CourseController{
         } catch (error) {
             next(error)
             
+        }
+    }
+
+    tutorsCourse = async(req:Request, res:Response, next:NextFunction) =>{
+        try {
+            const {tutorId} = req.query
+            console.log(tutorId , "tutorId")
+            const id = new mongoose.Types.ObjectId(tutorId as string);
+            console.log(id, "objectID")
+            const tutorsCourse = await this.Course.tutorsCourse(id as unknown as  ObjectId)
+            res.status(200).json(tutorsCourse)
+            
+        } catch (error) {
+            console.log(error)
+            next(error)
         }
     }
 

@@ -13,7 +13,7 @@ export class UserCourseRepository implements IuserCourseRepository {
             const courses = await CourseModal.find().populate([
                 {
                   path: "tutorId",
-                  select: "_id emailAddress firstName", 
+                  
                 },
                 {
                   path: "category",

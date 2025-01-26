@@ -22,6 +22,7 @@ router.get("/getallCourse",jwtAuth, (req, res, next)=>courseController.getAllCou
 router.put("/updateSection", jwtAuth, uploadVideo_thumbnail , (req, res, next)=> courseController.updateSection(req, res, next))
 router.post("/getCourse", jwtAuth ,(req, res, next)=>courseController.getCourse(req, res, next))
 router.post("/addnewSection", jwtAuth, uploadVideo_thumbnail , (req, res, next)=> courseController.addSection(req, res, next))
+router.get("/tutorsCourse", jwtAuth, (req, res , next)=>courseController.tutorsCourse(req, res, next))
 
 
 
