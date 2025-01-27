@@ -5,6 +5,8 @@ import { googleController } from "../../dependencies/user/googledependency.ts";
 import jwtAuth from "../../web/middlware/authentication.ts";
 import { userCourseController } from "../../dependencies/course/userCourseDependency.ts";
 import { progresssController } from "../../dependencies/Progress/progresDependency.ts";
+import ConversationController from "../../../adapters/controller/conversationController.ts";
+import { conversationController } from "../../dependencies/conversation/conversationDependency.ts";
 
 
 
@@ -28,5 +30,5 @@ userRouter.post("/alluserOrder", jwtAuth, (req, res, next)=> userCourseControlle
 userRouter.get("/isprogressTracked" , jwtAuth , (req, res, next)=> progresssController.isCourseProgressed(req, res, next))
 userRouter.post("/createProgress",jwtAuth, (req, res, next)=>progresssController.createProgress(req, res, next))
 userRouter.post("/updateProgressPercentage", jwtAuth , (req, res, next)=> progresssController.updateProgress(req, res, next))
-
+userRouter.post("/sendMessage", jwtAuth,(req, res, next)=> conversationController.sendMessage(req, res, next) )
 export default userRouter
