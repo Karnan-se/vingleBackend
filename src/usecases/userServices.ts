@@ -7,6 +7,7 @@ import IGenerateOtp from "../entitties/interfaces/admin/IGenerateOtp.ts";
 import OTPRepository from "../entitties/interfaces/common/IOTPRepository.ts";
 import EmailService from "../entitties/interfaces/common/emailservice.ts";
 import { IOTP } from "../entitties/interfaces/admin/Iotp.ts";
+import { ObjectId } from "mongoose";
 
 
 interface Dependencies {
@@ -161,6 +162,11 @@ export default class userUseCase {
       
     }
   
+}
+async findUserById(userId:ObjectId){
+  const userDetails = await this.userRepository.findUserById(userId)
+  console.log(userDetails , "UserDetails  dbwekdbj")
+  return userDetails 
 }
 
 

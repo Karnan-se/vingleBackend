@@ -25,4 +25,33 @@ export default class ConversationController {
         
     }
     }
+
+    async fetchMessage (req:Request , res:Response, next :NextFunction){
+        try {
+            const {senderId, receiverId} = req.body;
+            console.log(senderId , receiverId ,  "sender amd reviever Id");
+            const fetchedMessages = await this.conversationService.fetchConversation(senderId , receiverId)
+            return res.status(200).json({fetchedMessages})
+
+            
+        } catch (error) {   
+            console.log(error)
+            next(error)
+        }
+
+    }
+    async getConversation (req:Request, res:Response , next:NextFunction) {
+        try {
+            const {receiverId} = req.body;
+            console.log(receiverId)
+            const getConversation  = await this.conversationService.getConversation(receiverId)
+            console.log(getConversation ,  "conversation is get Conversation");
+            res.status(200).json({getConversation})
+            
+        } catch (error) {
+            console.log(error)
+            next(error)
+            
+        }
+    }
 }

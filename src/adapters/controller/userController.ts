@@ -88,4 +88,17 @@ export class UserController {
 
       
     }
+
+    async findUserBYId(req:Request , res:Response , next:NextFunction){
+      try {
+        
+        const {userId} = req.body;
+        const userDetails = await this.userUseCase.findUserById(userId)
+        console.log("from controlller ," ,  userDetails)
+        res.status(200).json({userDetails})
+      } catch (error) {
+        
+      }
+
+    }
   }

@@ -32,4 +32,28 @@ export class ConversationService {
         
      }
     }
+    async fetchConversation(senderId: ObjectId, recieverId : ObjectId) {
+        try {
+            const  messages = await this.conversationRepository.fetchMessages(senderId ,  recieverId)
+            console.log(messages ,  "Messages")
+            return messages
+            
+        } catch (error) {
+            
+        }
+    }
+    async getConversation(recieverId:ObjectId){
+        try {
+            const response = await this.conversationRepository.getConversation(recieverId)
+            const userId  = response.map((response)=> response.participants.filter((participant)=>participant.toString() !=recieverId.toString()))
+            const groupOfUserId =userId.flat()
+            console.log(groupOfUserId , "group")
+            return groupOfUserId;
+            
+            
+            
+        } catch (error) {
+            
+        }
+    }
 }

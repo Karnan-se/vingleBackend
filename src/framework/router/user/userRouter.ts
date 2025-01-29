@@ -31,4 +31,6 @@ userRouter.get("/isprogressTracked" , jwtAuth , (req, res, next)=> progresssCont
 userRouter.post("/createProgress",jwtAuth, (req, res, next)=>progresssController.createProgress(req, res, next))
 userRouter.post("/updateProgressPercentage", jwtAuth , (req, res, next)=> progresssController.updateProgress(req, res, next))
 userRouter.post("/sendMessage", jwtAuth,(req, res, next)=> conversationController.sendMessage(req, res, next) )
+userRouter.post("/fetchMessage",  jwtAuth, (req, res , next) => conversationController.fetchMessage(req, res, next))
+userRouter.post("/findUserById" ,jwtAuth, (req, res , next)=> userController.findUserBYId(req, res, next))
 export default userRouter

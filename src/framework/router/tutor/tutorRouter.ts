@@ -7,6 +7,7 @@ import multer from "multer"
 import jwtAuth from "../../web/middlware/authentication.ts"
 import { courseController } from "../../dependencies/course/course.ts"
 import { uploadVideo_thumbnail } from "../../../adapters/middleware/multervideo.ts"
+import { conversationController } from "../../dependencies/conversation/conversationDependency.ts"
 
 const router = express.Router()
 
@@ -23,6 +24,7 @@ router.put("/updateSection", jwtAuth, uploadVideo_thumbnail , (req, res, next)=>
 router.post("/getCourse", jwtAuth ,(req, res, next)=>courseController.getCourse(req, res, next))
 router.post("/addnewSection", jwtAuth, uploadVideo_thumbnail , (req, res, next)=> courseController.addSection(req, res, next))
 router.get("/tutorsCourse", jwtAuth, (req, res , next)=>courseController.tutorsCourse(req, res, next))
+router.post("/getConversation" , jwtAuth ,  (req, res, next)=>conversationController.getConversation(req, res, next))
 
 
 

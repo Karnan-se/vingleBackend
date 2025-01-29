@@ -1,3 +1,4 @@
+import { IcalAttachment } from "nodemailer/lib/mailer/index";
 import { IConversation, IMessage } from "../../../entitties/interfaces/conversation/IMessage.ts";
 import { IConversationRepository } from "../../../entitties/interfaces/conversation/ImessageRepository.ts";
 import { ConversationModal } from "../models/chat/conversationModal.ts";
@@ -51,5 +52,22 @@ export class ConversationRepository implements IConversationRepository{
             
         }
 
+    }
+    async fetchMessages(senderId:ObjectId, recieverId :ObjectId):Promise<IConversation> {
+        const conversation  = await ConversationModal.findOne({participants:{$all:[senderId , recieverId]}}).populate("messages")
+        return conversation as unknown as  IConversation
+        
+    }
+    async getConversation(recieverId: ObjectId): Promise<IConversation[]> {
+        try {
+        const conversation = await ConversationModal.find({participants:{$in:[recieverId]}}).populate("messages")
+        return conversation as unknown as  IConversation[]
+            
+        } catch (error) {
+            console.log(error)
+            throw error
+            
+        }
+        
     }
 }
