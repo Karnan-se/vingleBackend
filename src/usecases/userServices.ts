@@ -165,7 +165,7 @@ export default class userUseCase {
 }
 async findUserById(userId:ObjectId){
   const userDetails = await this.userRepository.findUserById(userId)
-  console.log(userDetails , "UserDetails  dbwekdbj")
+  // console.log(userDetails , "UserDetails  dbwekdbj")
   return userDetails 
 }
 

@@ -11,7 +11,7 @@ const jwtAuth = async (req: Request, res: Response, next: NextFunction) => {
 
   if (!refreshToken) {
     console.log("token is missing")
-    return res.status(400).json({ err: "Token is Missing", name: "TokenMissingError" });
+    return res.status(403).json({ err: "Token is Missing", name: "TokenMissingError" });
   }
 
   try {
