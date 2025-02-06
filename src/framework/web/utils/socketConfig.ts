@@ -1,6 +1,7 @@
 import { Server as SocketIOServer } from "socket.io";
 import { Server as HttpServer } from "http";
 import { ReadNotification } from "../socket/socketCommunication.ts";
+import { saveMessage } from "../socket/socketCommunication.ts";
 import { userInfo } from "os";
 
 let io: SocketIOServer;
@@ -30,16 +31,17 @@ export function startSocket(server: HttpServer) {
  
       io.to(onlineUser[userId]).emit("onlineUsers" , onlineUser)
     } 
+
+
+    socket.on("sendMessage", async (messages)=>{
+      // console.log(messages, "messages received by sooket ")
+      const savedMessage  = await  saveMessage(messages , socket , onlineUser);
+      console.log(savedMessage, "messages saved")
+      socket.to(onlineUser[savedMessage.receiverId]).emit("savedMessage", messages)
+      socket.to(onlineUser[savedMessage.senderId]).emit("savedMessage", messages)
+
+    })
     
-    // socket.on("joinRoom", (userId) => {
-    //   if(!userId){
-    //     return        
-    //   }
-    //   onlineUser[userId]  = socket.id
-    //   socket.join(userId);
-    //   console.log(onlineUser);
-    //   io.emit("onlineUsers" , onlineUser)
-    // });
 
 
     socket.on("isRead", (notificationSender, senderId) => {

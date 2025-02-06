@@ -10,7 +10,7 @@ class NotificationRepository implements INotificationRepository {
     }
     async createNotification(notification:INotification):Promise<INotification>{
        try {
-        const createNotification  = NotificationModal.create(notification)
+        const createNotification  = await  NotificationModal.create(notification)
         return createNotification as unknown as INotification
         
        } catch (error) {

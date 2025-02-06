@@ -40,7 +40,7 @@ export class ConversationService {
             const findNotification  = await this.notificationRepository.findNotifications(createNotification.sender as ObjectId , createNotification!.receiver as ObjectId)
             // console.log(findNotification , "findNotificationnotifciationn")
             const recipientId = createNotification.receiver.toString(); 
-            console.log(recipientId , "rciepientID")
+            // console.log(recipientId , "rciepientID")
             io.to(recipientId).emit("notification", findNotification)    
         }
      
