@@ -29,7 +29,7 @@ export default class ConversationController {
     async fetchMessage (req:Request , res:Response, next :NextFunction){
         try {
             const {senderId, receiverId} = req.body;
-            console.log(senderId , receiverId ,  "sender amd reviever Id");
+           
             const fetchedMessages = await this.conversationService.fetchConversation(senderId , receiverId)
             return res.status(200).json({fetchedMessages})
 

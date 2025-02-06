@@ -1,5 +1,5 @@
 {
-    "exec": "ts-node --esm",
+    "exec": "ts-node /src/app.ts",
     "ext": "ts",
     "watch": ["src"]
   }

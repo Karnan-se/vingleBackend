@@ -34,7 +34,6 @@ export default class CategoryController {
     async getCategories(req:Request, res:Response, next:NextFunction){
         try {
             const getAllCategory = await this.category.findAllCAtegory();
-            console.log(getAllCategory)
             res.status(200).json({data:getAllCategory});
 
             

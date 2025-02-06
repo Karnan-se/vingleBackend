@@ -55,7 +55,7 @@ export class CategoryRepository implements ICategoryRepository{
     async getAll(): Promise<ICategory[]> {
         try {
             const allCategory = await CategoryModal.find({}).sort({ _id: -1 });
-            console.log(allCategory , "allCategory")
+          
 
             return allCategory as unknown as ICategory[]
             

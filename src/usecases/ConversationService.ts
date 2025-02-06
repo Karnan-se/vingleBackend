@@ -1,7 +1,7 @@
 import { ObjectId } from "mongoose"
 import { IMessage } from "../entitties/interfaces/conversation/IMessage"
 import { IConversationRepository } from "../entitties/interfaces/conversation/ImessageRepository"
-import { io } from "../app.ts"
+import { io } from "../framework/web/utils/socketConfig.ts"
 import { INotificationRepository } from "../entitties/interfaces/notification/INotificationRepository.ts"
 import { INotification } from "../entitties/interfaces/notification/INotification.ts"
 
@@ -82,5 +82,9 @@ export class ConversationService {
             
         }
     }
+
+    
+
+
     
 }
