@@ -3,6 +3,7 @@ import { Server as HttpServer } from "http";
 import { ReadNotification } from "../socket/socketCommunication.ts";
 import { saveMessage } from "../socket/socketCommunication.ts";
 import { userInfo } from "os";
+import { send } from "process";
 
 let io: SocketIOServer;
 
@@ -34,12 +35,17 @@ export function startSocket(server: HttpServer) {
 
 
     socket.on("sendMessage", async (messages)=>{
-      // console.log(messages, "messages received by sooket ")
+    
       const savedMessage  = await  saveMessage(messages , socket , onlineUser);
       console.log(savedMessage, "messages saved")
       socket.to(onlineUser[savedMessage.receiverId]).emit("savedMessage", messages)
       socket.to(onlineUser[savedMessage.senderId]).emit("savedMessage", messages)
 
+    })
+
+    socket.on("peerSignal" , (signal)=>{
+      console.log(signal , "signal signal  signals")
+      socket.to(onlineUser[signal.receiverId]).emit("peerSignal", signal)
     })
     
 
@@ -55,6 +61,22 @@ export function startSocket(server: HttpServer) {
 
       
     });
+
+    socket.on("isRinging", (sender)=>{
+      // console.log(sender , "isRInging Reached at backEnd ")
+      socket.to(onlineUser[sender.receiverId._id]).emit("isRinging", sender)
+
+    })
+
+    // socket.on("streamVideoCall", (stream)=>{
+    //   console.log(stream)
+
+    // })
+
+    socket.on("isCallAttended" , (sender)=>{
+      socket.to(onlineUser[sender.sender._id]).emit("isCallAttended" , sender)
+      console.log(sender)
+    })
 
     
 
