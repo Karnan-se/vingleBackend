@@ -38,6 +38,7 @@ export function startSocket(server: HttpServer) {
     
       const savedMessage  = await  saveMessage(messages , socket , onlineUser);
       console.log(savedMessage, "messages saved")
+      
       socket.to(onlineUser[savedMessage.receiverId]).emit("savedMessage", messages)
       socket.to(onlineUser[savedMessage.senderId]).emit("savedMessage", messages)
 
@@ -63,19 +64,25 @@ export function startSocket(server: HttpServer) {
     });
 
     socket.on("isRinging", (sender)=>{
-      // console.log(sender , "isRInging Reached at backEnd ")
       socket.to(onlineUser[sender.receiverId._id]).emit("isRinging", sender)
 
     })
 
-    // socket.on("streamVideoCall", (stream)=>{
-    //   console.log(stream)
+    socket.on("callDeclined", (sender)=>{
+      console.log("receiverId " ,  sender)
+      console.log(onlineUser[sender.sender._id])
 
-    // })
+    })
 
     socket.on("isCallAttended" , (sender)=>{
       socket.to(onlineUser[sender.sender._id]).emit("isCallAttended" , sender)
       console.log(sender)
+    })
+
+
+    socket.on("userCallCancelled", (participant)=>{
+      console.log(participant ,  "participants")
+      socket.to(onlineUser[participant._id]).emit("userCallCancelled", participant )
     })
 
     
@@ -88,6 +95,7 @@ export function startSocket(server: HttpServer) {
           break;
         }
       }
+
       console.log("A user disconnected", socket.id);
       console.log(onlineUser, "Updated Online Users after disconnect")
     });
