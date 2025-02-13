@@ -8,6 +8,7 @@ import jwtAuth from "../../web/middlware/authentication.ts"
 import { courseController } from "../../dependencies/course/course.ts"
 import { uploadVideo_thumbnail } from "../../../adapters/middleware/multervideo.ts"
 import { conversationController } from "../../dependencies/conversation/conversationDependency.ts"
+import { revenueController } from "../../dependencies/revenue/revenueDependency.ts"
 
 const router = express.Router()
 
@@ -25,6 +26,7 @@ router.post("/getCourse", jwtAuth ,(req, res, next)=>courseController.getCourse(
 router.post("/addnewSection", jwtAuth, uploadVideo_thumbnail , (req, res, next)=> courseController.addSection(req, res, next))
 router.get("/tutorsCourse", jwtAuth, (req, res , next)=>courseController.tutorsCourse(req, res, next))
 router.post("/getConversation" , jwtAuth ,  (req, res, next)=>conversationController.getConversation(req, res, next))
+router.post("/fetchRevenue" , jwtAuth , (req,res,next) =>revenueController.getRevenue(req, res, next) )
 
 
 

@@ -90,4 +90,17 @@ export class OrderRepository implements IOrderRepository {
         return null
       }
   }
+
+  async findByCourse(courseId:ObjectId):Promise<IOrder[]>{
+   try {
+    const orderDetails = await OrderModal.find({courseId : courseId})
+    return orderDetails as unknown as IOrder[]
+    
+   } catch (error) {
+    console.log(error)
+    throw error
+    
+   }
+    
+  }
 }

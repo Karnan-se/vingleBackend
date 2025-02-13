@@ -13,5 +13,5 @@ export interface ICourseRepository {
   filterItemsId(sectionID:ObjectId | undefined  , items_ids: ObjectId[]):Promise<any>
   addnewSection(section:ISection):Promise<any>
   courseUpdate(sectionId:ObjectId , courseId:ObjectId):Promise<any>
-  tutorsCourse(tutorsId:ObjectId):Promise<IInstructor>
+  tutorsCourse(tutorsId:ObjectId):Promise<ICourse[]>
 }
