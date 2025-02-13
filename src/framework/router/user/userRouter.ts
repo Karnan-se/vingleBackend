@@ -7,6 +7,7 @@ import { userCourseController } from "../../dependencies/course/userCourseDepend
 import { progresssController } from "../../dependencies/Progress/progresDependency.ts";
 import ConversationController from "../../../adapters/controller/conversationController.ts";
 import { conversationController } from "../../dependencies/conversation/conversationDependency.ts";
+import { ratingsController } from "../../dependencies/rating/ratingDependency.ts";
 
 
 
@@ -33,4 +34,5 @@ userRouter.post("/updateProgressPercentage", jwtAuth , (req, res, next)=> progre
 userRouter.post("/sendMessage", jwtAuth,(req, res, next)=> conversationController.sendMessage(req, res, next) )
 userRouter.post("/fetchMessage",  jwtAuth, (req, res , next) => conversationController.fetchMessage(req, res, next))
 userRouter.post("/findUserById" ,jwtAuth, (req, res , next)=> userController.findUserBYId(req, res, next))
+userRouter.post("/saveRatings", jwtAuth ,(req, res, next)=> ratingsController.createRatings(req, res, next))
 export default userRouter

@@ -171,4 +171,19 @@ export default class CourseRepository implements ICourseRepository {
     return tutorsCourse as unknown as IInstructor
 
   }
+
+  async findCourseById(courseId:ObjectId):Promise<ICourse>{
+    try {
+      const course = await CourseModal.findOne({_id:courseId})
+    return course as unknown as  ICourse
+      
+    } catch (error) {
+      console.log(error)
+      throw error;
+      
+    }
+  }
+
+ 
+  
 }

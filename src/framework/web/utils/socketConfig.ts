@@ -34,13 +34,15 @@ export function startSocket(server: HttpServer) {
     } 
 
 
-    socket.on("sendMessage", async (messages)=>{
+    socket.on("sendMessage", async (Messages)=>{
+      const{ Message,  firstName } = Messages
+      console.log(Message , firstName ,  "message and FirstName")
     
-      const savedMessage  = await  saveMessage(messages , socket , onlineUser);
+      const savedMessage  = await  saveMessage(Message , socket , onlineUser);
       console.log(savedMessage, "messages saved")
-      
-      socket.to(onlineUser[savedMessage.receiverId]).emit("savedMessage", messages)
-      socket.to(onlineUser[savedMessage.senderId]).emit("savedMessage", messages)
+
+      socket.to(onlineUser[savedMessage.receiverId]).emit("savedMessage", {Message, firstName})
+      socket.to(onlineUser[savedMessage.senderId]).emit("savedMessage", {Message , firstName})
 
     })
 

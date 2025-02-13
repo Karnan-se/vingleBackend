@@ -6,12 +6,12 @@ import mongoose from "mongoose";
 const ratingSchema = new Schema({
     courseId :  {
         type:String,
-        ref:"Course",
+        ref:"courses",
         required:true,
     },
     userId: {
         type: String,
-        ref: 'User',
+        ref: 'users',
         required: true,
       },
       ratingValue: {
@@ -22,7 +22,7 @@ const ratingSchema = new Schema({
       },
       review: {
         type: String,
-        required: true,
+        required: false,
       },
       createdAt: {
         type: Date,
