@@ -48,6 +48,8 @@ export class RatingsRepository {
     updateRatings = async (ratings : IRatings):Promise<IRatings> =>{
         try {
             const updatedRatings = await RatingModal.findOneAndUpdate({courseId:ratings.courseId , userId:ratings.userId}, {$set:{...ratings}},{new:true})
+            const averageRatings = await this.averageCourseRatings(ratings.courseId as unknown as ObjectId)
+            const updateCourse = await CourseModal.updateOne({_id:ratings.courseId}, {$set:{averageRating:averageRatings}})
             console.log(updatedRatings , "updatedRatings")
             return updatedRatings as unknown as IRatings
             

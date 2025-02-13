@@ -11,7 +11,7 @@ export class RatingsController {
     createRatings = async (req:Request, res:Response, next :NextFunction)=>{
         try {
             const {ratings} = req.body;
-            console.log(ratings , "ratings")
+         
             const createRatings = await this.RatingsService.saveRatings(ratings)
             res.status(200).json({createRatings})
         } catch (error) {
@@ -20,4 +20,5 @@ export class RatingsController {
             
         }
     }
+   
 }
