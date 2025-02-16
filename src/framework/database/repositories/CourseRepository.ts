@@ -71,7 +71,7 @@ export default class CourseRepository implements ICourseRepository {
       
 
       const updatedId = updatedItems.filter((item)=> item?._id).map((itemId:any)=> itemId._id)
-      console.log(updatedId , "updatedId")
+      // console.log(updatedId , "updatedId")
       return updatedId as unknown as ObjectId[]
     } catch (error) {
       console.log(error);
@@ -88,12 +88,12 @@ export default class CourseRepository implements ICourseRepository {
         })
       );
   
-      console.log(createdItems, "This is created items which are saved");
+      // console.log(createdItems, "This is created items which are saved");
   
     
       const createdItemIds = createdItems.map((item) => item._id).reverse();
 
-      console.log(createdItemIds  ,  "createddItemss . -id  ");
+      // console.log(createdItemIds  ,  "createddItemss . -id  ");
   
     
       const updatedSection = await SectionModal.findOneAndUpdate(
@@ -167,7 +167,7 @@ export default class CourseRepository implements ICourseRepository {
     }
   }
   async tutorsCourse(tutorsId:ObjectId):Promise<ICourse[]>{
-    const tutorsCourse  = await  CourseModal.find({tutorId:tutorsId})
+    const tutorsCourse  = await  CourseModal.find({tutorId:tutorsId}).populate("category")
     return tutorsCourse as unknown as ICourse[]
 
   }

@@ -25,7 +25,8 @@ export class RevenueService {
 
     const revenueData = courses.map((course, index)=> {
         const orders  = courseOrders[index];
-        console.log(orders , "orders  orders")
+        console.log((course as any)?.category?.name , "orders  orders")
+        
         const students = orders.length;
         const price = typeof course.price === "number" ? course.price : parseFloat(course.price);
         const totalRevenue = students * (price || 0);
@@ -35,14 +36,32 @@ export class RevenueService {
             name:course.name,
             thumbnail: course.thumbnail,
             students,
+            category : (course  as any)?.category?.name,
             rate:price || 0,
             uploadedDate: (course as any).createdAt ? new Date((course as any).createdAt).toISOString().split("T")[0] : "Unknown",
             totalRevenue
         }
         
     })
-    console.log(revenueData , "revenueData revenueData")
+    // console.log(revenueData , "revenueData revenueData")
     return revenueData
 
+  }
+
+  async chartDetails(){
+    interface MonthlyIncome {
+      _id :number ,
+      income:number
+    }
+     const monthlyIncome : MonthlyIncome[]  = await this.OrderRepository.chartDetails()
+     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+     const chartData = monthlyIncome.map(({ _id, income }) => ({
+      name: monthNames[_id - 1], 
+      income
+    }));
+    console.log(chartData  , "chartData")
+    return chartData
+    
   }
 }

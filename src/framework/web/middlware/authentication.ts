@@ -7,7 +7,7 @@ const jwtService = new JwtService();
 const jwtAuth = async (req: Request, res: Response, next: NextFunction) => {
   const accessToken = req.cookies["AccessToken"];
   const refreshToken = req.cookies["RefreshToken"];
-  // console.log(refreshToken, "RefreshToken")
+ 
 
   if (!refreshToken) {
     console.log("token is missing")
@@ -18,7 +18,8 @@ const jwtAuth = async (req: Request, res: Response, next: NextFunction) => {
     if (accessToken) {
       const response = jwtService.verifyAccessToken(accessToken);
       if (response) {
-        // console.log(response, "it is from middleware")
+
+      
         req.user = response.userId
 
         return next(); 

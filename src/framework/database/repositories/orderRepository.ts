@@ -13,10 +13,10 @@ export class OrderRepository implements IOrderRepository {
         courseId: orderDetails.courseId,
       });
       if (isOrdered) {
-        console.log("order is already there those payments were pending");
+        
         return isOrdered as unknown as IOrder;
       }
-      console.log("new Order is created");
+      
 
       const orders = await OrderModal.create(orderDetails);
       return orders as unknown as IOrder;
@@ -102,5 +102,36 @@ export class OrderRepository implements IOrderRepository {
     
    }
     
+  }
+
+  async chartDetails():Promise<any>{
+    try {
+
+      const monthlyIncome = await OrderModal.aggregate([
+        {
+          $match: { paymentStatus: "Completed" } 
+        },
+        {
+          $group: {
+            _id: { $month: "$createdAt" }, 
+            income: { $sum: "$totalAmount" } 
+          }
+        },
+        {
+          $sort: { _id: 1 } 
+        }
+      ]);
+
+      console.log(monthlyIncome ,  "monthly income ...")
+
+      return monthlyIncome
+      
+      
+    } catch (error) {
+      console.log(error)
+      throw error
+      
+    }
+
   }
 }
