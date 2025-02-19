@@ -5,6 +5,8 @@ import { ISection } from "../../entitties/interfaces/course/course.ts";
 import multer from "multer";
 import { file } from "googleapis/build/src/apis/file/index";
 import mongoose, { ObjectId } from "mongoose";
+import AppError from "../../framework/web/utils/appError.ts";
+import { ErrorTypes } from "../../entitties/Enums/errorTypes.ts";
 
 interface controllerDependency {
     course:CourseService
@@ -50,6 +52,7 @@ export default class CourseController{
            return  res.status(200).json(course)
 
         } catch (error) {
+            next(error)
             
         }
 
@@ -114,6 +117,11 @@ export default class CourseController{
     tutorsCourse = async(req:Request, res:Response, next:NextFunction) =>{
         try {
             const {tutorId} = req.query
+            if(!tutorId){
+               throw AppError.conflict(ErrorTypes.MISSING_ID)
+               
+
+            }
             console.log(tutorId , "tutorId")
             const id = new mongoose.Types.ObjectId(tutorId as string);
             console.log(id, "objectID")
@@ -121,7 +129,7 @@ export default class CourseController{
             res.status(200).json(tutorsCourse)
             
         } catch (error) {
-            console.log(error)
+            console.log(error , "error")
             next(error)
         }
     }

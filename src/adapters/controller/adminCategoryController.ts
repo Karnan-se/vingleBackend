@@ -38,6 +38,7 @@ export default class CategoryController {
 
             
         } catch (error) {
+            next(error)
             
         }
     }

@@ -3,6 +3,7 @@ import AppError from "../../framework/web/utils/appError.ts";
 import AdminApplicationService from "../../usecases/adminApplicationService.ts";
 import { Request, Response, NextFunction } from "express";
 import { IInstructor } from "../../entitties/interfaces/tutor.ts/IInstructor.ts";
+import { ErrorTypes } from "../../entitties/Enums/errorTypes.ts";
 
 
 interface UseCase{
@@ -24,7 +25,7 @@ export default  class AdminApplicationController{
             const objId = new mongoose.Types.ObjectId(_id) 
             
             if(!_id){
-                throw AppError.conflict("_id is missing")
+                throw AppError.conflict(ErrorTypes.INVALID_ID)
             }
             const applicationDetails = await this.applicationService.viewApplication(objId as unknown as  ObjectId)
             res.status(200).json({applicationDetails})

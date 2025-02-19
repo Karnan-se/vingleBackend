@@ -13,6 +13,7 @@
   "description": "A backend server using TypeScript and Node.js",
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.7",
+    "@types/pdfkit": "^0.13.9",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.5.1",
     "cloudinary-core": "^2.13.1",
@@ -32,6 +33,7 @@
     "nodemon": "^3.1.9",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
+    "pdfkit": "^0.16.0",
     "socket.io": "^4.8.1",
     "stripe": "^17.5.0",
     "winston": "^3.17.0"

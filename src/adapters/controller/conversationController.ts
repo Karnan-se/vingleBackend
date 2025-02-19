@@ -43,9 +43,7 @@ export default class ConversationController {
     async getConversation (req:Request, res:Response , next:NextFunction) {
         try {
             const {receiverId} = req.body;
-            // console.log(receiverId)
             const getConversation  = await this.conversationService.getConversation(receiverId)
-            // console.log(getConversation ,  "conversation is get Conversation");
             res.status(200).json({getConversation})
             
         } catch (error) {
