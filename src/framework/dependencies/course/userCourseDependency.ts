@@ -3,6 +3,8 @@ import { UserCourseController } from "../../../adapters/controller/userCourseCon
 import { UserCourseRepository} from "../../database/repositories/userCourseRepository.ts"
 import {PaymentService} from "../../web/utils/stripe.ts";
 import  { OrderRepository } from "../../database/repositories/orderRepository.ts";
+import { PDFcreator } from "../../web/utils/pdfGenerator.ts";
+import { CloudinaryService } from "../../web/utils/cloudinary.ts";
 
 
 
@@ -12,10 +14,13 @@ import  { OrderRepository } from "../../database/repositories/orderRepository.ts
 
 const Repository ={
     courseRepository: new UserCourseRepository(),
-    orderRepository : new OrderRepository
+    orderRepository : new OrderRepository(),
+    pdfCreator : new PDFcreator(),
 }
+
 const service = {
-    paymentService : new PaymentService()
+    paymentService : new PaymentService(),
+    cloudinaryService: new CloudinaryService()
 }
 const userCourseService = new UserCourseService({Repository , service})
 

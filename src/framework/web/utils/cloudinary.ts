@@ -72,11 +72,12 @@ export class CloudinaryService implements ICloudinaryService {
     }
   }
 
-  async uploadPDF(file: Express.Multer.File): Promise<string> {
+  async uploadPDF(file: Express.Multer.File | Buffer ): Promise<string> {
     return new Promise((resolve, reject) => {
-      const uploaodStream = cloudinary.uploader.upload_stream(
+      const uploadStream = cloudinary.uploader.upload_stream(
         {
           folder: "Pdf_uploads",
+          upload_preset:"securePreset",
           resource_type: "raw",
           use_filename: true,
           unique_filename: true,
@@ -93,7 +94,11 @@ export class CloudinaryService implements ICloudinaryService {
           }
         }
       );
-      uploaodStream.end(file.buffer);
+      if (Buffer.isBuffer(file)) {
+        uploadStream.end(file); 
+      } else {
+        uploadStream.end(file.buffer);
+      }
     });
   }
   async uploadCompressedVideo(file: Express.Multer.File): Promise<string> {

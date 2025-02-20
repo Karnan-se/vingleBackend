@@ -6,13 +6,19 @@ import { ObjectId } from "mongoose";
 import { Iuser } from "../entitties/interfaces/user/user.ts";
 import AppError from "../framework/web/utils/appError.ts";
 import { ICourse } from "../entitties/interfaces/course/course.ts";
+import { IInvoiceData } from "../entitties/interfaces/Invoice/Invoice.ts";
+import { IPDFCreator } from "../entitties/interfaces/Invoice/IPDFcreator.ts";
+import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService.ts";
 interface Dependency {
   Repository: {
     courseRepository: IuserCourseRepository;
     orderRepository: IOrderRepository;
+    pdfCreator :IPDFCreator;
+
   };
   service: {
     paymentService: IPaymentService;
+    cloudinaryService:ICloudinaryService,
   };
 }
 
@@ -20,11 +26,15 @@ export class UserCourseService {
   private course;
   private paymentService;
   private OrderService;
+  private pdfCreator;
+  private cloudinaryService;
 
   constructor(dependency: Dependency) {
     this.course = dependency.Repository.courseRepository;
     this.paymentService = dependency.service.paymentService;
     this.OrderService = dependency.Repository.orderRepository;
+    this.pdfCreator = dependency.Repository.pdfCreator;
+    this.cloudinaryService = dependency.service.cloudinaryService
   }
 
   async getAllCourse() {
@@ -63,12 +73,36 @@ export class UserCourseService {
       throw error;
     }
   }
-  async createOrder(order: IOrder) {
-    
+  async createOrder(order: IOrder):Promise<IOrder> {
+    try {
     const orders = await this.OrderService.createOrder(order);
+    const getFullDetails = await this.OrderService.findOrderById((orders as any)._id)
+    const invoice :IInvoiceData = {
+      customerEmail:(getFullDetails as any).userId.emailAddress,
+      customerName:(getFullDetails as any ).userId.firstName,
+      date: new Date().toLocaleDateString("en-GB"), 
+      invoiceNumber:Math.floor((Math.random())*1000).toString(),
+      items:[{description :((getFullDetails as any).courseId.name as string)  , amount : order.totalAmount} ],
+      total:order.totalAmount 
+    }
+    console.log(invoice , "invoice")
+    const getInvoice = await this.generateInvoice(invoice)
+   const secureUrl=await this.cloudinaryService.uploadPDF(getInvoice as unknown as any)
+   console.log("secure url" , secureUrl)
+   getFullDetails.invoice = secureUrl
+   const updateOrder = await this.OrderService.updateOrder(getFullDetails)
+   console.log(updateOrder , "updateOrder")
+    
     return orders;
+    
+      
+    } catch (error) {
+      throw error
+      
+    }
+    
   }
-  async paymentverify(userInfo: Iuser, sessionId: string) {
+  async paymentverify(userInfo: Iuser, sessionId: string ) {
     try {
       
       const isPaymentSuccess = await this.paymentService.ispaymentverified(
@@ -76,17 +110,9 @@ export class UserCourseService {
       );
       if (isPaymentSuccess) {
         console.log("payment success");
-        const getInvoice = await this.paymentService.getInvoice(
-          isPaymentSuccess,
-          userInfo
-        );
-        if (getInvoice) {
-          const updateOrder = await this.OrderService.orderPaymentUpdate(
-            getInvoice,
-            sessionId
-          );
+          const updateOrder = await this.OrderService.orderPaymentUpdate(sessionId);
           return updateOrder;
-        }
+        
       }
     } catch (error) {
       console.log(error);
@@ -103,7 +129,21 @@ export class UserCourseService {
       return alluserOrder
       
     } catch (error) {
+      throw error
       
     }
+  }
+
+  generateInvoice(InvoiceData : IInvoiceData){
+    try {
+      const generatePdf =  this.pdfCreator.generateInvoice(InvoiceData)
+      console.log(generatePdf , "pdfGenerated")
+      return generatePdf
+      
+    } catch (error) {
+      throw error
+    }
+   
+
   }
 }

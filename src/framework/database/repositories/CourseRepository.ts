@@ -46,7 +46,7 @@ export default class CourseRepository implements ICourseRepository {
   }
   async getAllCourseFromDataBase(): Promise<ICourse> {
     try {
-      const courses = await CourseModal.find().populate({
+      const courses = await CourseModal.find({isPublished : true}).populate({
         path: "sections",
         populate: {
           path: "items",

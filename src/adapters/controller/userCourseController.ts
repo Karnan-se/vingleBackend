@@ -1,4 +1,5 @@
 import { IOrder } from "../../entitties/interfaces/Iorder/Iorder"
+import AppError from "../../framework/web/utils/appError.ts"
 import { UserCourseService } from "../../usecases/userCourseService"
 import { Request , Response , NextFunction } from "express"
 
@@ -23,13 +24,18 @@ export class UserCourseController {
             const { price, courseName , courseImage , userInfo, course } = req.body;
             const {url , sessionId} = await this.courseService.payementPage( parseInt(price)*100, courseName , courseImage  , userInfo , course ) || {}
             if (!url || !sessionId) {
-                throw new Error("Failed to retrieve payment session.");
+                throw AppError.conflict("Failed to retrieve payment session.");
               }
             const Orders:IOrder = {userId:userInfo._id, courseId:course._id,paymentId:sessionId , totalAmount:price  }
             const createOrders = await this.courseService.createOrder(Orders)
             console.log(createOrders, "order has been saved")
-           
+         
+
+           if(createOrders){
             res.json({url})
+
+           }
+          
             
         } catch (error) {
             console.log(error)
@@ -65,7 +71,11 @@ export class UserCourseController {
             res.status(200).json(order)
 
         } catch (error) {
+            next(error)
+
             
         }
     }
+
+
 }

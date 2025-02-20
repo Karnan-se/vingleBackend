@@ -1,5 +1,5 @@
 import { IInvoiceData } from "./Invoice";
 
 export interface IPDFCreator {
-    generateInvoice(invoiceData: IInvoiceData): void;
+    generateInvoice(invoiceData: IInvoiceData):Promise<Buffer> ;
 }

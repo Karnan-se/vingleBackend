@@ -62,6 +62,7 @@ export class PaymentService implements IPaymentService {
         
         return session as unknown as Stripe.Checkout.Session
       }
+      console.log("payeement not compleated")
       throw  AppError.conflict("Payment not completed");
  
     } catch (error) {
