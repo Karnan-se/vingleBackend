@@ -31,10 +31,10 @@ export class PDFcreator implements IPDFCreator {
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(__filename);
 
-        // Resolve the absolute path of the image
+        
         const imagePath = path.resolve(__dirname, "../../../entitties/Assets/vingle.png");
 
-        // Add the image to the PDF
+        
         doc.image(imagePath, 50, 45, { width: 100 });
 
 
