@@ -2,6 +2,7 @@
 import { adminApplicationController } from "../../dependencies/admin/adminApplication.ts";
 import { adminController } from "../../dependencies/admin/admindependency.ts";
 import { categoryController } from "../../dependencies/course/category.ts";
+import { revenueController } from "../../dependencies/revenue/revenueDependency.ts";
 import jwtAuth from "../../web/middlware/authentication.ts"
 import express from "express"
 
@@ -17,5 +18,6 @@ router.put("/rejectApplication", jwtAuth ,  (req, res, next)=> adminApplicationC
 router.post("/createCategory", jwtAuth,  (req, res, next)=>categoryController.AddCategory(req, res, next) )
 router.post("/updateCategory", jwtAuth, (req, res, next)=>categoryController.updateCategory(req, res, next))
 router.get("/getCategories", jwtAuth, (req, res, next)=>categoryController.getCategories(req, res, next))
+router.get("/fetchAdminChart" , jwtAuth , (req, res, next)=> revenueController.adminChartDetails(req, res, next))
 
 export default router

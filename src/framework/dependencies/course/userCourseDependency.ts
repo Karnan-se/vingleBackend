@@ -5,6 +5,7 @@ import {PaymentService} from "../../web/utils/stripe.ts";
 import  { OrderRepository } from "../../database/repositories/orderRepository.ts";
 import { PDFcreator } from "../../web/utils/pdfGenerator.ts";
 import { CloudinaryService } from "../../web/utils/cloudinary.ts";
+import { RevenueRepository } from "../../database/repositories/revenueRepository.ts";
 
 
 
@@ -16,6 +17,7 @@ const Repository ={
     courseRepository: new UserCourseRepository(),
     orderRepository : new OrderRepository(),
     pdfCreator : new PDFcreator(),
+    revenueRepository : new RevenueRepository
 }
 
 const service = {

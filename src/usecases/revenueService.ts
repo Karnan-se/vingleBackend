@@ -1,20 +1,27 @@
 import { ObjectId } from "mongoose";
 import { ICourseRepository } from "../entitties/interfaces/course/IcouseRepository";
 import { IOrderRepository } from "../entitties/interfaces/Iorder/IOrderRespository";
+import { IRevenueRepository } from "../entitties/interfaces/revenue/IRevenueRepository";
+import { IOrder } from "../entitties/interfaces/Iorder/Iorder";
+import { IRevenue } from "../entitties/interfaces/revenue/IRevenue";
 
 interface Dependency {
   repository: {
     courseRepository: ICourseRepository;
     orderRepositiory: IOrderRepository;
+    revenueRepository : IRevenueRepository
   };
 }
 
 export class RevenueService {
     private CourseRepository
     private OrderRepository
+    private RevenueRepository
+  
   constructor(dependency: Dependency) {
     this.CourseRepository = dependency.repository.courseRepository
     this.OrderRepository = dependency.repository.orderRepositiory
+    this.RevenueRepository = dependency.repository.revenueRepository
   }
 
   async getrevenue(tutorId: ObjectId) {
@@ -43,7 +50,7 @@ export class RevenueService {
         }
         
     })
-    // console.log(revenueData , "revenueData revenueData")
+    
     return revenueData
 
   }
@@ -63,5 +70,40 @@ export class RevenueService {
     console.log(chartData  , "chartData")
     return chartData
     
+  }
+  async CreateRevenue(revenue:IRevenue):Promise<IRevenue>{
+    try {
+      const createdRevenue = await this.RevenueRepository.create(revenue)
+      return createdRevenue as unknown as IRevenue
+      
+    } catch (error) {
+      console.log(error)
+      throw error
+      
+    }
+   
+  }
+  async fetchAdminRevenue(startDate:Date):Promise<any> {
+    try {
+      interface IRevenueItem {
+        _id: { day: number };
+        income: number;
+      }
+      const revenue : IRevenueItem[]= await this.RevenueRepository.adminchartDetails(startDate)
+
+    const adminRevenue = revenue.map(({_id, income})=> ({
+      day:_id.day,
+      income:income
+    }))
+      console.log(adminRevenue , "adminRevenue")
+      return adminRevenue
+      
+    
+    } catch (error) {
+      console.log(error)
+      throw error
+
+      
+    }
   }
 }

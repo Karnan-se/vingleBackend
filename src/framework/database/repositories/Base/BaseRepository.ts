@@ -1,13 +1,14 @@
+import { IBaseRepository } from "../../../../entitties/interfaces/BaseRepository.ts/IBaseRepository.ts";
 import { Model } from "mongoose";
-import { BaseRepository } from "../../../entitties/interfaces/BaseRepository.ts/IBaseRepository";
 
-export class MongoRepository<T> implements BaseRepository<T> {
-  private model: Model<T>;
+export class BaseRepository <T> implements IBaseRepository <T>{
+    protected model: Model<T>
 
-  constructor(model: Model<T>) {
-    this.model = model;
-  }
+    constructor(model : Model<T> ){
+        this.model = model
 
+    }
+   
   async create(data: Partial<T>): Promise<T> {
     return await this.model.create(data);
   }
@@ -28,4 +29,5 @@ export class MongoRepository<T> implements BaseRepository<T> {
     const result = await this.model.findByIdAndDelete(id).exec();
     return !!result;
   }
+
 }

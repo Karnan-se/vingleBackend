@@ -106,6 +106,7 @@ export class OrderRepository implements IOrderRepository {
 
   async chartDetails(): Promise<any> {
     try {
+      console.log(" it is chart details of  User")
       const monthlyIncome = await OrderModal.aggregate([
         {
           $match: { paymentStatus: "Completed" },

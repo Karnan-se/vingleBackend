@@ -33,4 +33,18 @@ export class RevenueController {
             next(error)
         }
     }
+
+    async adminChartDetails(req:Request , res:Response , next:NextFunction){
+        try {
+            const {startDate} = req.query
+            const start = new Date(startDate as string);
+            const adminChart = await this.RevenueService.fetchAdminRevenue(start)
+            res.status(200).json({adminChart})
+
+            
+        } catch (error) {
+            console.log(error)
+            next(error)
+        }
+    }
 }
