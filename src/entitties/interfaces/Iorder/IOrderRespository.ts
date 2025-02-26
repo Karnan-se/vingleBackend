@@ -11,5 +11,7 @@ export interface IOrderRepository  {
     chartDetails():Promise<any>
     findOrderById(orderId:ObjectId):Promise<IOrder>
     updateOrder(order:IOrder):Promise<IOrder>
+    getAllOrder():Promise<IOrder>
+
 
 }

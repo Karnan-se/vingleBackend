@@ -35,4 +35,5 @@ userRouter.post("/sendMessage", jwtAuth,(req, res, next)=> conversationControlle
 userRouter.post("/fetchMessage",  jwtAuth, (req, res , next) => conversationController.fetchMessage(req, res, next))
 userRouter.post("/findUserById" ,jwtAuth, (req, res , next)=> userController.findUserBYId(req, res, next))
 userRouter.post("/saveRatings", jwtAuth ,(req, res, next)=> ratingsController.createRatings(req, res, next))
+
 export default userRouter

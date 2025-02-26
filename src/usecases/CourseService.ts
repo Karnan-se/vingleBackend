@@ -249,5 +249,17 @@ export default class CourseService {
    }
 
   }
+  async updateCourse (courserId:ObjectId, course:ICourse):Promise<ICourse>{
+    try {
+      const updatedcourse = await this.Course.updateCourse(courserId , course)
+      return updatedcourse
+      
+    } catch (error) {
+      console.log(error)
+      throw error
+      
+    }
+
+  }
 
 }

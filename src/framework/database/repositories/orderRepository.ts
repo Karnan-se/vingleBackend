@@ -158,4 +158,26 @@ export class OrderRepository implements IOrderRepository {
       
     }
   }
+
+  async getAllOrder():Promise<IOrder> {
+    try {
+      const order = await OrderModal.find().populate([
+        {path: "courseId",
+          populate:[{
+            path: "tutorId"
+          }]
+          
+        },
+        {path: "userId"}
+      ]);
+      return order as unknown as IOrder
+
+      
+    } catch (error) {
+      console.log(error)
+      throw error
+      
+    }
+  }
+  
 }

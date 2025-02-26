@@ -133,6 +133,17 @@ export default class CourseController{
             next(error)
         }
     }
+    updateCourse = async(req: Request , res:Response , next: NextFunction)=>{
+        try {
+            const {courseId, courseDetails } = req.body
+            console.log(courseId , courseDetails,  "courseId and course")
+
+            const updatedCourse = await this.Course.updateCourse(courseId, courseDetails)
+            res.status(200).json({updatedCourse})
+        } catch (error) {
+            next(error)
+        }
+    }
 
 }
 

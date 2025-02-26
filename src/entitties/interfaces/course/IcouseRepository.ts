@@ -14,4 +14,5 @@ export interface ICourseRepository {
   addnewSection(section:ISection):Promise<any>
   courseUpdate(sectionId:ObjectId , courseId:ObjectId):Promise<any>
   tutorsCourse(tutorsId:ObjectId):Promise<ICourse[]>
+  updateCourse(courseId:ObjectId , course:ICourse):Promise<ICourse>
 }

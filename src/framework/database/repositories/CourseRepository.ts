@@ -12,6 +12,8 @@ import {
 } from "../models/tutor/CourseModel.ts";
 import { ICourseRepository } from "../../../entitties/interfaces/course/IcouseRepository.ts";
 import { IInstructor } from "../../../entitties/interfaces/tutor.ts/IInstructor.ts";
+import { InputCourse } from "../../../entitties/interfaces/course/course.ts";
+
 
 export default class CourseRepository implements ICourseRepository {
   constructor() {}
@@ -46,7 +48,7 @@ export default class CourseRepository implements ICourseRepository {
   }
   async getAllCourseFromDataBase(): Promise<ICourse> {
     try {
-      const courses = await CourseModal.find({isPublished : true}).populate({
+      const courses = await CourseModal.find().populate({
         path: "sections",
         populate: {
           path: "items",
@@ -180,6 +182,20 @@ export default class CourseRepository implements ICourseRepository {
     } catch (error) {
       console.log(error)
       throw error;
+      
+    }
+  }
+
+
+  async updateCourse(courseId:ObjectId , course:ICourse):Promise<ICourse>{
+    try {
+      const updatedCourse = await CourseModal.findOneAndUpdate({_id:courseId}, {$set:{...course}}, {new:true})
+      console.log("updatedCourse")
+      return updatedCourse as unknown as ICourse
+      
+    } catch (error) {
+      console.log(error)
+      throw error
       
     }
   }
