@@ -61,19 +61,16 @@ export default class userUseCase {
     const sendOtp = await this.EmailService.sendVerificationEmail(createOtp.email,createOtp.otp);
     const createdUser = await this.userRepository.createUser(user);
     console.log(createdUser);
-    const accessToken = this.jwtService.generateAccesSToken(createdUser._id)
+    const accessToken = this.jwtService.generateAccesSToken(createdUser._id , "User")
     if(!accessToken){
       console.log("couldnot generate")
     }
-    const refreshToken = this.jwtService.generateRefreshToken(createdUser._id)
+    const refreshToken = this.jwtService.generateRefreshToken(createdUser._id ,  "User")
     if(!refreshToken){
       console.log("refresg")
     }
     return {createdUser, accessToken, refreshToken}
       
-
-    
-   
   }
 
   async verifyOtp(email:string, otp:string){
@@ -107,9 +104,9 @@ export default class userUseCase {
     const isPasswordMatching = await this.passwordService.comparepassword(user.password,existingUser.password);
     if  (!isPasswordMatching) throw AppError.authentication("InValid Password");
     if(existingUser.isBlocked) throw AppError.forbidden("user is blocked")
-      const accessToken = this.jwtService.generateAccesSToken(existingUser._id)
+      const accessToken = this.jwtService.generateAccesSToken(existingUser._id , "User")
     if(!accessToken)throw AppError.conflict("couldnot Generate JWT-TOken")
-    const refreshToken = this.jwtService.generateRefreshToken(existingUser._id)
+    const refreshToken = this.jwtService.generateRefreshToken(existingUser._id, "User")
     return {
       existingUser,
       accessToken,

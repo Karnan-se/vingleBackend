@@ -46,7 +46,7 @@ export default class CourseRepository implements ICourseRepository {
       throw error;
     }
   }
-  async getAllCourseFromDataBase(): Promise<ICourse> {
+  async getAllCourseFromDataBase(): Promise<ICourse[]> {
     try {
       const courses = await CourseModal.find().populate({
         path: "sections",
@@ -54,7 +54,7 @@ export default class CourseRepository implements ICourseRepository {
           path: "items",
         },
       });
-      return courses as unknown as ICourse;
+      return courses as unknown as ICourse[];
     } catch (error) {
       throw error;
     }

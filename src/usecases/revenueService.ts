@@ -106,4 +106,29 @@ export class RevenueService {
       
     }
   }
+
+  async adminRevenue():Promise<any> {
+   try {
+    const revenue = await this.RevenueRepository.getAdminRevenue()
+    const Totalrevenue = await this.RevenueRepository.totalRevenue();
+    const totalCourse  = (await this.CourseRepository.getAllCourseFromDataBase()).length
+
+    const totalSum = revenue[0].totalSum;
+    
+
+    const revenueS ={
+      revenue :totalSum,
+      totalSales : Totalrevenue,
+      totalCourse:totalCourse
+    }
+
+    console.log(revenueS , "revenueS")
+    return revenueS
+
+   } catch (error) {
+    console.log(error)
+    throw error
+    
+   }
+  } 
 }

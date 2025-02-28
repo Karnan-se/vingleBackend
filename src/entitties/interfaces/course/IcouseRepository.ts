@@ -6,7 +6,7 @@ import { IInstructor } from "../tutor.ts/IInstructor";
 
 export interface ICourseRepository {
   createCourse(course: ICourse): Promise<ICourse>;
-  getAllCourseFromDataBase(): Promise<ICourse>;
+  getAllCourseFromDataBase(): Promise<ICourse[]>;
   updateItem(section: InputSection): Promise<ObjectId[]> 
   createNewItem(section: any): Promise<ObjectId[]>;
   getcourse(courseId: ObjectId): Promise<ICourse>;

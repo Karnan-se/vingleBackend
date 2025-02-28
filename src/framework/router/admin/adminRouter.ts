@@ -23,5 +23,6 @@ router.get("/getCategories", jwtAuth, (req, res, next)=>categoryController.getCa
 router.get("/fetchAdminChart" , jwtAuth , (req, res, next)=> revenueController.adminChartDetails(req, res, next))
 router.get("/getAllOrders", jwtAuth , (req, res, next)=>orderController.getAllOrders(req, res, next) )
 router.post("/updateCourse", jwtAuth , (req, res, next)=>courseController.updateCourse(req, res, next) )
+router.get("/adminRevenue", jwtAuth ,  (req , res, next)=> revenueController.adminRevenue(req, res, next))
 
 export default router 

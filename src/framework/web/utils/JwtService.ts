@@ -9,12 +9,12 @@ const ACCESS_TOKEN_EXPIRES_IN = "15m";
 const REFRESH_TOKEN_EXPIRES_IN = "7d";
 
 export class JwtService implements IJwtService {
-  generateAccesSToken(userId: ObjectId | undefined | string): string {
-    return jwt.sign({ userId }, JWT_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRES_IN });
+  generateAccesSToken(userId: ObjectId | undefined | string , role:string): string {
+    return jwt.sign({ userId , role }, JWT_SECRET, { expiresIn: ACCESS_TOKEN_EXPIRES_IN });
   }
 
-  generateRefreshToken(userId: ObjectId | undefined | string): string {
-    return jwt.sign({ userId }, REFRESH_TOKEN_SECRET, { expiresIn: REFRESH_TOKEN_EXPIRES_IN });
+  generateRefreshToken(userId: ObjectId | undefined | string , role:string): string {
+    return jwt.sign({ userId , role }, REFRESH_TOKEN_SECRET, { expiresIn: REFRESH_TOKEN_EXPIRES_IN });
   }
 
   verifyAccessToken(token: string): JwtPayload & { userId: string } {

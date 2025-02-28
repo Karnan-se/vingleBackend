@@ -37,8 +37,8 @@ export  default class adminUseCase {
             if(existingadmin)throw AppError.conflict("User Already Exists");
             user.password = await this.passwordService.passwordHash(user.password)
             const adminDetails = await this.adminRepository.createAdmin(user);
-            const accesToken = this.jwtService.generateAccesSToken(adminDetails._id)
-            const refreshToken = this.jwtService.generateRefreshToken(adminDetails._id)
+            const accesToken = this.jwtService.generateAccesSToken(adminDetails._id , "Admin")
+            const refreshToken = this.jwtService.generateRefreshToken(adminDetails._id , "Admin")
             return {
                 adminDetails, 
                 accesToken, 
@@ -58,8 +58,8 @@ export  default class adminUseCase {
         if(!exist) throw AppError.conflict("Email_id not registered");
         const isMatching = this.passwordService.comparepassword(password,exist.password )
         if(!isMatching) throw AppError.conflict("Incorrect Password")
-            const accessToken = this.jwtService.generateAccesSToken(exist._id);
-            const refreshToken = this.jwtService.generateRefreshToken(exist._id)
+            const accessToken = this.jwtService.generateAccesSToken(exist._id , "Admin");
+            const refreshToken = this.jwtService.generateRefreshToken(exist._id , "Admin")
             return {
                 adminDetail : exist, 
                 accessToken,

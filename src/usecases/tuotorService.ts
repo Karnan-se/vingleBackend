@@ -36,9 +36,9 @@ export default  class TutorUseCase{
         user.password = await this.passwordService.passwordHash(user.password);
       
         const TutorCreate = await this.tutorRepository.createTutor(user)
-        const accessToken = this.jwtService.generateAccesSToken(TutorCreate._id);
+        const accessToken = this.jwtService.generateAccesSToken(TutorCreate._id , "Tutor");
         if(!accessToken) throw AppError.conflict("couldnot Generate Token");
-        const refreshToken  = this.jwtService.generateRefreshToken(TutorCreate._id);
+        const refreshToken  = this.jwtService.generateRefreshToken(TutorCreate._id , "Tutor");
         if(!refreshToken)  throw AppError.conflict("couldnot generate refresh Token");
         return {
             TutorCreate ,
@@ -58,9 +58,9 @@ export default  class TutorUseCase{
         if(!tutor) throw AppError.conflict("User Not registered")
             const isMatching = await this.passwordService.comparepassword(password, tutor.password)
         if(!isMatching) throw AppError.conflict("Password Not Matching");
-        const accessToken = this.jwtService.generateAccesSToken(tutor._id);
+        const accessToken = this.jwtService.generateAccesSToken(tutor._id , "Tutor");
         if(!accessToken) throw AppError.conflict("couldnot Generate Token");
-        const refreshToken  = this.jwtService.generateRefreshToken(tutor._id);
+        const refreshToken  = this.jwtService.generateRefreshToken(tutor._id , "Tutor");
         if(!refreshToken)  throw AppError.conflict("couldnot generate refresh Token");
         return  {
             tutor,

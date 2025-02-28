@@ -47,4 +47,16 @@ export class RevenueController {
             next(error)
         }
     }
+
+    async adminRevenue(req:Request , res:Response , next: NextFunction){
+        try {
+            const revenue = await this.RevenueService.adminRevenue()
+            res.status(200).json({revenue})
+            
+        } catch (error) {
+            console.log(error)
+            throw error
+            
+        }
+    }
 }
