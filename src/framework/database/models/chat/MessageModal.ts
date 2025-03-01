@@ -9,6 +9,13 @@ const MessageSchema = new Schema({
         type:mongoose.Schema.Types.ObjectId,
         required:true,
     },
+    type:{
+        type:String,
+        enum: ["text", "image", "pdf"], 
+        default: "text",
+      
+
+    },
     message:{
         type:String,
         required:true,

@@ -47,6 +47,16 @@ export default class ProgressController {
             
         }
        
-
+    }
+    async getProgress(req :Request, res:Response, next:NextFunction){
+      try {
+        const { userId, courseId }= req.query
+        const progress = await this.ProgressService.getProgress(userId as unknown as  ObjectId , courseId as unknown as ObjectId)
+        return res.status(200).json(progress)
+        
+      } catch (error) {
+        throw error
+        
+      }
     }
 }

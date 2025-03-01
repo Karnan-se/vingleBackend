@@ -70,5 +70,32 @@ export  default class ProgressRepository implements IProgressRepository {
        
     
     }
+    async updateProgress(Progress:IProgress):Promise<IProgress>{
+        try {
+            const userId = Progress.userId
+            const courseId = Progress.courseId
+            const updateProgress = await ProgressModal.findOneAndUpdate({userId ,courseId },{$set:{...Progress}},{new:true})
+            return updateProgress as unknown as  IProgress
+            
+        } catch (error) {
+            console.log(error)
+            throw error;
+            
+        }
+
+    }
+  async getProgress(userId: ObjectId, courseId: ObjectId): Promise<IProgress> {
+    try {
+        const progress = await ProgressModal.findOne({userId, courseId})
+        return progress as unknown as IProgress
+
+        
+    } catch (error) {
+        console.log(error)
+        throw error
+        
+    }
+      
+  }
 
 }

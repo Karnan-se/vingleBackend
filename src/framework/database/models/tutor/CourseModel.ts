@@ -9,7 +9,7 @@ const itemSchema = new Schema({
   },
   type: {
     type: String,
-    enum: ['video', 'document'], 
+    enum: ['video', 'document',"pdf" ], 
     required: true,
   },
   description: {

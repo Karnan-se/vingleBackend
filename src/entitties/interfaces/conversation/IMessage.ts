@@ -4,6 +4,7 @@ export interface IMessage {
     _id?:ObjectId
     senderId :string,
     receiverId:string,
+    type?:string,
     message:string, 
 }
 

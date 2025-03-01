@@ -9,6 +9,8 @@ import AppError from "../framework/web/utils/appError.ts";
 import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService.ts";
 import { isValidObjectId } from "mongoose";
 import { ObjectId } from "mongoose";
+import fs from "fs"
+import path from "path"
 
 interface Dependency {
   Repository: {
@@ -27,18 +29,27 @@ export default class CourseService {
     this.cloudinarySevice = dependency.Service.cloudinaryService;
   }
 
-  async CreateCourse(
-    course: any,
-    thumbnailFile: Express.Multer.File[],
-    fileUrl: Express.Multer.File[] | null
-  ) {
+  async CreateCourse(course: any, thumbnailFile: Express.Multer.File[], fileUrl: Express.Multer.File[] | null) {
     try {
       console.log(fileUrl, "fileUrl");
       let uploadedVideoUrl: string[] = [];
       if (fileUrl) {
         uploadedVideoUrl = await Promise.all(
-          fileUrl.map((file) =>
-            this.cloudinarySevice.uploadCompressedVideo(file)
+          fileUrl.map(async (file) =>{
+            if(file.mimetype == "application/pdf"){
+         
+             const filePath = path.join(file.destination , file.filename)
+             const buffer = await fs.promises.readFile(filePath); 
+             return this.cloudinarySevice.uploadPDF(buffer as unknown as  Express.Multer.File)
+
+            }else{
+              return this.cloudinarySevice.uploadCompressedVideo(file)
+
+            }
+           
+           
+          }
+            
           )
         );
       }
