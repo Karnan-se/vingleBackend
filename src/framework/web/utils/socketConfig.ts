@@ -70,6 +70,13 @@ export function startSocket(server: HttpServer) {
 
     })
 
+    socket.on("closeVideoCall",  (participant)=>{
+      console.log(participant , "participant")
+      console.log(onlineUser[participant])
+      socket.to(onlineUser[participant]).emit("closeVideoCall")
+
+    })
+
     socket.on("callDeclined", (sender)=>{
       console.log("receiverId " ,  sender)
       console.log(onlineUser[sender.sender._id])
