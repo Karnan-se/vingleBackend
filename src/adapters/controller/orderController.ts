@@ -1,6 +1,6 @@
 import { Request , Response , NextFunction } from "express";
 import { OrderService } from "../../usecases/orderService";
-import { HttpStatus } from "../../entitties/Enums/statusCode";
+import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
 
 
 

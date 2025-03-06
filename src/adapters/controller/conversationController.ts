@@ -1,6 +1,6 @@
 import { Request , Response , NextFunction } from "express"
 import { ConversationService } from "../../usecases/ConversationService"
-import { HttpStatus } from "../../entitties/Enums/statusCode"
+import { HttpStatus } from "../../entitties/Enums/statusCode.ts"
 
 interface UseCase{
 

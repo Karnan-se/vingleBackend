@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction, json } from "express"
 import InstructorService from "../../usecases/InstructorService"
 import mongoose, { ObjectId } from "mongoose"
-import { HttpStatus } from "../../entitties/Enums/statusCode"
+import { HttpStatus } from "../../entitties/Enums/statusCode.ts"
 
 interface useCase {
     instructorService : InstructorService,
