@@ -1,5 +1,6 @@
 import CategoryService from "../../usecases/CategoryService.ts";
 import { Request , Response , NextFunction } from "express";
+import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
 
 export default class CategoryController {
     private category
@@ -12,7 +13,7 @@ export default class CategoryController {
         try {
         
             const createcategory = await this.category.createNewCategory(req.body);
-            return res.status(200).json({createcategory})
+            return res.status(HttpStatus.OK).json({createcategory})
   
         } catch (error) {
             console.log(error);
@@ -24,7 +25,7 @@ export default class CategoryController {
         try {
             console.log(req.body , "hello")
             const updateCategory = await this.category.updateCategory(req.body)
-            res.status(200).json({data:updateCategory})
+            res.status(HttpStatus.OK).json({data:updateCategory})
             
         } catch (error) {
             next(error)
@@ -34,7 +35,7 @@ export default class CategoryController {
     async getCategories(req:Request, res:Response, next:NextFunction){
         try {
             const getAllCategory = await this.category.findAllCAtegory();
-            res.status(200).json({data:getAllCategory});
+            res.status(HttpStatus.OK).json({data:getAllCategory});
 
             
         } catch (error) {

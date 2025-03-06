@@ -7,6 +7,7 @@ import { file } from "googleapis/build/src/apis/file/index";
 import mongoose, { ObjectId } from "mongoose";
 import AppError from "../../framework/web/utils/appError.ts";
 import { ErrorTypes } from "../../entitties/Enums/errorTypes.ts";
+import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
 
 interface controllerDependency {
     course:CourseService
@@ -37,7 +38,7 @@ export default class CourseController{
             console.log(fileUrlFile.length, "fileurls")
             
             const create = await this.Course.CreateCourse(structuredData, thumbnailFile, fileUrlFile)
-            res.status(200).json({create})
+            res.status(HttpStatus.OK).json({create})
 
             
         } catch (error) {
@@ -49,7 +50,7 @@ export default class CourseController{
     getAllCourse = async(req:Request, res:Response, next:NextFunction)=>{
         try {
             const course = await this.Course.getAllCourse();
-           return  res.status(200).json(course)
+           return  res.status(HttpStatus.OK).json(course)
 
         } catch (error) {
             next(error)
@@ -75,7 +76,7 @@ export default class CourseController{
             console.log(index)
             
             const updateSection = await this.Course.updateSection(index, fileUrlFile , JSON.parse(sectionData))
-            res.status(200).json({updateSection})
+            res.status(HttpStatus.OK).json({updateSection})
   
 
         } catch (error) {
@@ -90,7 +91,7 @@ export default class CourseController{
         console.log(req.body)
         const course = await this.Course.getCourse(courseId);
        
-        res.status(200).json({course})
+        res.status(HttpStatus.OK).json({course})
     }
 
     addSection = async(req:Request, res:Response, next:NextFunction)=>{
@@ -105,7 +106,7 @@ export default class CourseController{
             
             const addNewsection = await this.Course.addNewSections(course_id, fileIndex, fileUrlFile, JSON.parse(sectionData))
             console.log(addNewsection, "addnewSection")
-            res.status(200).json({addNewsection})
+            res.status(HttpStatus.OK).json({addNewsection})
    
 
         } catch (error) {
@@ -126,7 +127,7 @@ export default class CourseController{
             const id = new mongoose.Types.ObjectId(tutorId as string);
             console.log(id, "objectID")
             const tutorsCourse = await this.Course.tutorsCourse(id as unknown as  ObjectId)
-            res.status(200).json(tutorsCourse)
+            res.status(HttpStatus.OK).json(tutorsCourse)
             
         } catch (error) {
             console.log(error , "error")
@@ -139,7 +140,7 @@ export default class CourseController{
             console.log(courseId , courseDetails,  "courseId and course")
 
             const updatedCourse = await this.Course.updateCourse(courseId, courseDetails)
-            res.status(200).json({updatedCourse})
+            res.status(HttpStatus.OK).json({updatedCourse})
         } catch (error) {
             next(error)
         }

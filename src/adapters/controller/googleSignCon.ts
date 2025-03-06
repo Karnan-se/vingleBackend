@@ -6,6 +6,7 @@ import { GooglePayload } from "../../entitties/interfaces/service.ts/googleServi
 import { IuserRepository } from "../../entitties/interfaces/user/userrepository.ts";
 import { IUserUseCase } from "../../entitties/interfaces/user/userUseCase.ts";
 import { MongoUserRepository } from "../../framework/database/repositories/userRepository.ts";
+import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
 
 interface usecase {
   googleSignService: IGoogleSignService;
@@ -43,7 +44,7 @@ export default class GoogleController {
       try {
         const userDetail = await this.userUseCase.signup(userDetails as Iuser);
         if (userDetail) {
-          res.status(200).json({ message: "success", data: userDetail });
+          res.status(HttpStatus.OK).json({ message: "success", data: userDetail });
         }
       } catch (error) {
         console.log(error);
@@ -51,7 +52,7 @@ export default class GoogleController {
           const userDetail = await this.useRepository.findUserByEmail(
             userDetails.emailAddress
           );
-          res.status(200).json({ message: "success", data: userDetail });
+          res.status(HttpStatus.OK).json({ message: "success", data: userDetail });
         }
       }
     } catch (error) {

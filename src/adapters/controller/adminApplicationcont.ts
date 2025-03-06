@@ -4,6 +4,7 @@ import AdminApplicationService from "../../usecases/adminApplicationService.ts";
 import { Request, Response, NextFunction } from "express";
 import { IInstructor } from "../../entitties/interfaces/tutor.ts/IInstructor.ts";
 import { ErrorTypes } from "../../entitties/Enums/errorTypes.ts";
+import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
 
 
 interface UseCase{
@@ -28,7 +29,7 @@ export default  class AdminApplicationController{
                 throw AppError.conflict(ErrorTypes.INVALID_ID)
             }
             const applicationDetails = await this.applicationService.viewApplication(objId as unknown as  ObjectId)
-            res.status(200).json({applicationDetails})
+            res.status(HttpStatus.OK).json({applicationDetails})
             
         } catch (error) {
             console.log(error);
@@ -43,7 +44,7 @@ export default  class AdminApplicationController{
             console.log(application)
             const approve = await this.applicationService.approveApplication(application._id , application.user_id)
             console.log(approve)
-            res.status(200).json({approve})
+            res.status(HttpStatus.OK).json({approve})
             
         } catch (error) {
             console.log(error);
@@ -58,7 +59,7 @@ export default  class AdminApplicationController{
             console.log(rejectionReasons, "Rejection Reasons")
             const reject = await this.applicationService.rejectApplication(application._id, application.user_id, rejectionReasons)
             console.log(reject);
-            res.status(200).json({reject})
+            res.status(HttpStatus.OK).json({reject})
             
         } catch (error) {
             

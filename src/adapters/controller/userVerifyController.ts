@@ -1,5 +1,6 @@
 import VerificationService from "../../usecases/userVerificationService";
 import { Request, Response, NextFunction } from "express";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
 
 interface ControllerDependency {
     verfication : VerificationService
@@ -16,7 +17,7 @@ export  default class VerificationController {
         const {email} = req.body;
         try {
             const sendOTP = await this.verfication.resendOTP(email)
-            res.status(200).json({data: sendOTP})
+            res.status(HttpStatus.OK).json({data: sendOTP})
             
         } catch (error) {
             console.log(error)
@@ -30,7 +31,7 @@ export  default class VerificationController {
             
             try {
                 const verifyUser = await this.verfication.VerifyOTP(userDetails, otp)
-                res.status(200).json({data: verifyUser})
+                res.status(HttpStatus.OK).json({data: verifyUser})
             } catch (error) {
                 
                 next(error)

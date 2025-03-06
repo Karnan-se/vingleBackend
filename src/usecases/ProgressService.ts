@@ -73,6 +73,7 @@ export default class ProgressServcie {
     return findProgress;
   }
   async totalProgressUpdate(progress: IProgress) {
+    console.log("updating total Percentage of the course")
     const totalSum = progress.completedItems.reduce(
       (acc, item) => acc + item.percentageCompleted,
       0

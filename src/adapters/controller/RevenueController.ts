@@ -1,6 +1,6 @@
 import { Request , Response , NextFunction } from "express";
 import { RevenueService } from "../../usecases/revenueService";
-
+import { HttpStatus } from "../../entitties/Enums/statusCode";
 export class RevenueController {
     private RevenueService
     constructor(useCase  : RevenueService) {
@@ -15,7 +15,7 @@ export class RevenueController {
         // console.log(tutorId , "tutorId")
         const revenue = await this.RevenueService.getrevenue(tutorId)
         // console.log(revenue , "revenuess revenue revenue ")
-        res.status(200).json({revenue}) 
+        res.status(HttpStatus.OK).json({revenue}) 
        } catch (error) {
         console.log(error)
         next(error)
@@ -26,7 +26,7 @@ export class RevenueController {
         try {
             const chart = await this.RevenueService.chartDetails()
             console.log(chart ,  "chart chart")
-            res.status(200).json({chart})
+            res.status(HttpStatus.OK).json({chart})
             
         } catch (error) {
             console.log(error)
@@ -39,7 +39,7 @@ export class RevenueController {
             const {startDate} = req.query
             const start = new Date(startDate as string);
             const adminChart = await this.RevenueService.fetchAdminRevenue(start)
-            res.status(200).json({adminChart})
+            res.status(HttpStatus.OK).json({adminChart})
 
             
         } catch (error) {
@@ -51,7 +51,7 @@ export class RevenueController {
     async adminRevenue(req:Request , res:Response , next: NextFunction){
         try {
             const revenue = await this.RevenueService.adminRevenue()
-            res.status(200).json({revenue})
+            res.status(HttpStatus.OK).json({revenue})
             
         } catch (error) {
             console.log(error)

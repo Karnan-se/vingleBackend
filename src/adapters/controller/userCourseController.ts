@@ -2,6 +2,7 @@ import { IOrder } from "../../entitties/interfaces/Iorder/Iorder"
 import AppError from "../../framework/web/utils/appError.ts"
 import { UserCourseService } from "../../usecases/userCourseService"
 import { Request , Response , NextFunction } from "express"
+import { HttpStatus } from "../../entitties/Enums/statusCode.ts"
 
 interface useCase {
     userCourseService : UserCourseService
@@ -16,7 +17,7 @@ export class UserCourseController {
 
     async AllCourses (req:Request, res:Response, next : NextFunction){
         const courses  = await  this.courseService.getAllCourse()
-        res.status(200).json({courses})
+        res.status(HttpStatus.OK).json({courses})
 
     }
     async checkout(req:Request, res:Response, next:NextFunction){
@@ -48,7 +49,7 @@ export class UserCourseController {
         const {userInfo , sessionId} = req.body;
         console.log(userInfo, sessionId);
         const paymetupdate = await this.courseService.paymentverify(userInfo, sessionId)
-        res.status(200).json(paymetupdate)
+        res.status(HttpStatus.OK).json(paymetupdate)
         
     }
     async isOrderCompleated(req:Request, res:Response, next:NextFunction){
@@ -56,7 +57,7 @@ export class UserCourseController {
             const {courseId, userId} = req.body;
             const order = await this.courseService.isorderCompleated(userId, courseId);
             console.log("orderDEtail has send")
-            res.status(200).json(order)
+            res.status(HttpStatus.OK).json(order)
         } catch (error) {
             console.log(error)
             throw error;
@@ -68,7 +69,7 @@ export class UserCourseController {
             const {userId} = req.body;
             console.log(userId, "userOId")
             const order = await this.courseService.allUserOrder(userId)
-            res.status(200).json(order)
+            res.status(HttpStatus.OK).json(order)
 
         } catch (error) {
             next(error)

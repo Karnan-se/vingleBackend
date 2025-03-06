@@ -1,6 +1,7 @@
 import adminUseCase from "../../usecases/adminService.ts";
 import { Request, Response, NextFunction } from "express";
 import { attachTokenCookie } from "../middleware/cookie.ts";
+import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
 
 
 
@@ -18,7 +19,7 @@ export  class AdminController {
       const {accesToken, refreshToken, adminDetails} = await this.adiminUseCase.signup(user);
       attachTokenCookie("AccessToken", accesToken, res, )
       attachTokenCookie("RefreshToken", refreshToken, res)
-      res.status(200).json({message:"succuss", data:adminDetails})
+      res.status(HttpStatus.OK).json({message:"succuss", data:adminDetails})
     }catch(error){
         next(error)
 
@@ -30,7 +31,7 @@ async sigIn(req:Request, res:Response, next:NextFunction){
         const {adminDetail, refreshToken, accessToken} = await this.adiminUseCase.signIn(emailAddress, password)
         attachTokenCookie("AccessToken", accessToken, res)
         attachTokenCookie("RefreshToken", refreshToken, res)
-        res.status(200).json({message:"Succuss", data:adminDetail})
+        res.status(HttpStatus.OK).json({message:"Succuss", data:adminDetail})
 
         
     } catch (error) {
@@ -42,7 +43,7 @@ async sigIn(req:Request, res:Response, next:NextFunction){
 async getAllusers(req:Request, res:Response, next:NextFunction){
     try {
         const students = await this.adiminUseCase.getAllStudents()
-        return res.status(200).json({students})
+        return res.status(HttpStatus.OK).json({students})
         
     } catch (error) {
         next(error)

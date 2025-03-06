@@ -1,6 +1,7 @@
 
 import TutorVerifivationService from "../../usecases/tutorverification.ts";
 import { Request, Response, NextFunction } from "express";
+import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
 
 
 export default class TutorVerifyController{
@@ -15,7 +16,7 @@ export default class TutorVerifyController{
         const {email} = req.body;
         try {
             const sendOTP = await this.verfication.resendOTP(email)
-            res.status(200).json({data: sendOTP})
+            res.status(HttpStatus.OK).json({data: sendOTP})
             
         } catch (error) {
             console.log(error)
@@ -29,7 +30,7 @@ export default class TutorVerifyController{
             
             try {
                 const verifyUser = await this.verfication.VerifyOTP(userDetails, otp)
-                res.status(200).json({data: verifyUser})
+                res.status(HttpStatus.OK).json({data: verifyUser})
             } catch (error) {
                 console.log(error)
                 next

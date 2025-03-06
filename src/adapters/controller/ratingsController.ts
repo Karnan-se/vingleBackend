@@ -1,5 +1,6 @@
 import { RatingService } from "../../usecases/ratingservice"
 import { Request , Response , NextFunction } from "express"
+import { HttpStatus } from "../../entitties/Enums/statusCode"
 
 export class RatingsController {
     private RatingsService
@@ -13,7 +14,7 @@ export class RatingsController {
             const {ratings} = req.body;
          
             const createRatings = await this.RatingsService.saveRatings(ratings)
-            res.status(200).json({createRatings})
+            res.status(HttpStatus.OK).json({createRatings})
         } catch (error) {
             console.log(error)
             next(error)

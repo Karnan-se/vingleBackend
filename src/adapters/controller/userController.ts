@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import UserUseCase from "../../usecases/userServices"
-
 import { attachTokenCookie } from "../middleware/cookie.ts";
+import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
 
 
 
@@ -23,7 +23,7 @@ export class UserController {
         console.log(refreshToken, "RefreshToken") 
         attachTokenCookie("AccessToken", accessToken, res)
         attachTokenCookie("RefreshToken", refreshToken, res)
-         res.status(201).json({ success: true, data: createdUser });
+         res.status(HttpStatus.OK).json({ success: true, data: createdUser });
       } catch (error: any) {
         console.log(error)
         next(error)
@@ -40,7 +40,7 @@ export class UserController {
         console.log(refreshToken, "RefreshToken") 
         attachTokenCookie("AccessToken", accessToken, res)
         attachTokenCookie("RefreshToken", refreshToken, res)
-         res.status(200).json({success:true, data:existingUser})
+         res.status(HttpStatus.OK).json({success:true, data:existingUser})
     
       } catch (error:any) {
         next(error)
@@ -54,7 +54,7 @@ export class UserController {
       try {
         const updatedUser = await  this.userUseCase.UpdateUser(user)
         console.log(updatedUser, "updated User")
-        res.status(200).json({message:"success", data:updatedUser}) 
+        res.status(HttpStatus.OK).json({message:"success", data:updatedUser}) 
       } catch (error) {
         next(error)
         
@@ -66,7 +66,7 @@ export class UserController {
         const sendOTP = await this.userUseCase.sendOTP(email);
         console.log(sendOTP);
         
-        res.status(200).json({message:"success" ,data:sendOTP})
+        res.status(HttpStatus.OK).json({message:"success" ,data:sendOTP})
          
       } catch (error) {
         next(error)
@@ -78,7 +78,7 @@ export class UserController {
       try {
         const userDetails = await this.userUseCase.changePassword(emailAddress, password);
         if(userDetails){
-          return res.status(200).json({data:userDetails})
+          return res.status(HttpStatus.OK).json({data:userDetails})
         }
         
       } catch (error) {
@@ -95,7 +95,7 @@ export class UserController {
         const {userId} = req.body;
         const userDetails = await this.userUseCase.findUserById(userId)
         // console.log("from controlller ," ,  userDetails)
-        res.status(200).json({userDetails})
+        res.status(HttpStatus.OK).json({userDetails})
       } catch (error) {
         
       }

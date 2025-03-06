@@ -1,5 +1,6 @@
 import { Request , Response , NextFunction } from "express";
 import { OrderService } from "../../usecases/orderService";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
 
 
 
@@ -13,7 +14,7 @@ export class OrderController {
         try {
             const orders = await this.orderService.getOrderDetails()
             console.log("orders")
-            res.status(200).json({orders})
+            res.status(HttpStatus.OK).json({orders})
         } catch (error) {
             next(error)
             

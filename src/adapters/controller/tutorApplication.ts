@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction, json } from "express"
 import InstructorService from "../../usecases/InstructorService"
 import mongoose, { ObjectId } from "mongoose"
+import { HttpStatus } from "../../entitties/Enums/statusCode"
 
 interface useCase {
     instructorService : InstructorService,
@@ -62,7 +63,7 @@ export default class TutorApplicationController {
 
 
 
-        res.status(200).json({message:savedInstructor})
+        res.status(HttpStatus.OK).json({message:savedInstructor})
 
 
       
