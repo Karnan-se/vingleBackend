@@ -129,6 +129,38 @@ export class CloudinaryService implements ICloudinaryService {
       );
     });
   }
+
+  async uploadVideo(file: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      cloudinary.uploader.upload_large(
+        file,
+        {
+          folder: "Video_uploads",
+          resource_type: "video",
+          use_filename: true,
+          unique_filename: true,
+          format: "mp4",
+          chunk_size: 6000000,
+        },
+        (error, result) => {
+          if (error) {
+            return reject(
+              new Error(
+                "Cloudinary Video Upload and Compression failed: " +
+                  error.message
+              )
+            );
+          }
+          if (result) {
+            return resolve(result.secure_url);
+          }
+        }
+      );
+    });
+  }
+
+
+
   async uploadThumbnail(file: Express.Multer.File): Promise<string> {
     if (!file || !file.path) {
       throw new Error("No file or file path provided");

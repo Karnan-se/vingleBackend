@@ -3,6 +3,7 @@
 
 node_modules/
 uploads/
+output/
 
 
 bfg-repo-cleaner-1.14.0.jar

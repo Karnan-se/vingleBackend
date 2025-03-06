@@ -7,4 +7,5 @@ export interface ICloudinaryService {
   uploadPDF(file: Express.Multer.File): Promise<string>;
   uploadCompressedVideo(file: Express.Multer.File): Promise<string>
   uploadThumbnail(file: Express.Multer.File): Promise<string>
+  uploadVideo(file: string): Promise<string>
 }
