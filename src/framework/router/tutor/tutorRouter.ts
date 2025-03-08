@@ -28,6 +28,7 @@ router.get("/tutorsCourse", jwtAuth, (req, res , next)=>courseController.tutorsC
 router.post("/getConversation" , jwtAuth ,  (req, res, next)=>conversationController.getConversation(req, res, next))
 router.post("/fetchRevenue" , jwtAuth , (req,res,next) =>revenueController.getRevenue(req, res, next) )
 router.get("/tutorsChart", jwtAuth , (req ,  res, next)=>revenueController.chartDetails(req, res , next))
+router.get("/getAlltutors", jwtAuth , (req, res, next)=> tutorController.getAllTutors(req, res, next))
 
 
 export default router

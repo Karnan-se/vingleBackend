@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { JwtService } from "../utils/JwtService.ts";
 import { attachTokenCookie } from "../../../adapters/middleware/cookie.ts";
+import { HttpStatus } from "../../../entitties/Enums/statusCode.ts";
 
 const jwtService = new JwtService();
 
@@ -11,7 +12,7 @@ const jwtAuth = async (req: Request, res: Response, next: NextFunction) => {
   if (!refreshToken) {
     console.log("token is missing");
     return res
-      .status(403)
+      .status(HttpStatus.FORBIDDEN)
       .json({ err: "Token is Missing", name: "TokenMissingError" });
   }
 
@@ -48,7 +49,7 @@ const jwtAuth = async (req: Request, res: Response, next: NextFunction) => {
     return next();
   } catch (error: any) {
     console.log("Refresh token verification failed:", error.message);
-    return res.status(403).json({ err: "Refresh Token is Invalid" });
+    return res.status(HttpStatus.FORBIDDEN).json({ err: "Refresh Token is Invalid" });
   }
 };
 

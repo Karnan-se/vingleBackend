@@ -44,5 +44,16 @@ export default class TutorMongoRepository implements ItutorRepository {
             
         }
     }
+   async getAllTutors():Promise<Itutor[]> {
+        try {
+            const tutors = await Tutor.find()
+            return tutors as unknown as Itutor[]
+
+        } catch (error) {
+            throw error
+            
+        }
+        
+    }
     
 }

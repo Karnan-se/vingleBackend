@@ -25,4 +25,5 @@ router.get("/getAllOrders", jwtAuth , (req, res, next)=>orderController.getAllOr
 router.post("/updateCourse", jwtAuth , (req, res, next)=>courseController.updateCourse(req, res, next) )
 router.get("/adminRevenue", jwtAuth ,  (req , res, next)=> revenueController.adminRevenue(req, res, next))
 
+
 export default router 

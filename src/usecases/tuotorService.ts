@@ -83,5 +83,16 @@ async updatedUser(tutor:Itutor){
     }
   
 }
+async getAllTutors(){
+    try {
+        const tutors = await this.tutorRepository.getAllTutors()
+        return tutors
+        
+    } catch (error) {
+        console.log(error)
+        throw error
+        
+    }
+}
 
 }

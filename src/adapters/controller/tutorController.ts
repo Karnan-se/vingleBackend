@@ -49,4 +49,15 @@ async updatedUser(req:Request, res:Response,next:NextFunction){
     }
 }
 
+async getAllTutors(req:Request , res:Response, next:NextFunction){
+    try {
+        const tutors = await this.tutorUseCase.getAllTutors()
+        res.status(HttpStatus.OK).json({tutors})
+        
+    } catch (error) {
+        next(error)
+        
+    }
+}
+
 }
