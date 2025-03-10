@@ -25,6 +25,9 @@ export default class InstructorRepository implements IInstructorRepoInterface  {
             try {
                 const tutorDetail = await InstructorModel.findOne({user_id : userId})
                 console.log(tutorDetail)
+                if(!tutorDetail){
+                    throw AppError.conflict("no application available")
+                }
                 return tutorDetail as unknown as IInstructor
                 
             } catch (error) {

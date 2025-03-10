@@ -55,5 +55,18 @@ export default class TutorMongoRepository implements ItutorRepository {
         }
         
     }
+ async fetchTutorByEmail(emailAddress: string[]): Promise<Itutor[]> {
+    try {
+        
+       console.log(emailAddress , "emailaddress is recieved at backEnd")
+        const tutors = await Tutor.find({emailAddress: {$in:emailAddress}})
+        return tutors as unknown as  Itutor[]
+    } catch (error) {
+        console.log(error)
+        throw error
+        
+    }
+     
+ }
     
 }

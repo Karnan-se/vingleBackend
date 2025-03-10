@@ -29,6 +29,7 @@ router.post("/getConversation" , jwtAuth ,  (req, res, next)=>conversationContro
 router.post("/fetchRevenue" , jwtAuth , (req,res,next) =>revenueController.getRevenue(req, res, next) )
 router.get("/tutorsChart", jwtAuth , (req ,  res, next)=>revenueController.chartDetails(req, res , next))
 router.get("/getAlltutors", jwtAuth , (req, res, next)=> tutorController.getAllTutors(req, res, next))
+router.get("/fetchTutorByEmail", jwtAuth,(req, res, next)=> tutorController.fetchTutorByEmail(req, res, next))
 
 
 export default router

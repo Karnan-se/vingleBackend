@@ -7,6 +7,7 @@ interface ItutorRepository {
     findByEmail(email:string | undefined):Promise<Itutor | any>
     UpdateUser(user:Itutor):Promise<Itutor | any>
     getAllTutors():Promise<Itutor[]>
+    fetchTutorByEmail(emailAddress:string[]):Promise<Itutor[]>
 }
 
 export {ItutorRepository}

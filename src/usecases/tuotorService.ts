@@ -94,5 +94,16 @@ async getAllTutors(){
         
     }
 }
+async fetchTutorByEmail(emailAddress:string[]){
+    try {
+        const tutors = await this.tutorRepository.fetchTutorByEmail(emailAddress)
+        return tutors
+        
+    } catch (error) {
+        console.log(error)
+        throw error
+        
+    }
+}
 
 }

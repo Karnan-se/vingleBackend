@@ -2,6 +2,7 @@ import TutorUseCase from "../../usecases/tuotorService.ts";
 import { Request , Response, NextFunction } from "express";
 import { attachTokenCookie } from "../middleware/cookie.ts";
 import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
+import AppError from "../../framework/web/utils/appError.ts";
 export default class TutorController {
     private tutorUseCase:TutorUseCase
     constructor(tutorUseCase: TutorUseCase){
@@ -52,6 +53,22 @@ async updatedUser(req:Request, res:Response,next:NextFunction){
 async getAllTutors(req:Request , res:Response, next:NextFunction){
     try {
         const tutors = await this.tutorUseCase.getAllTutors()
+        res.status(HttpStatus.OK).json({tutors})
+        
+    } catch (error) {
+        next(error)
+        
+    }
+}
+async fetchTutorByEmail(req:Request, res:Response, next:NextFunction){
+    try {
+        const emailList = req.query.emailAddress as string[];
+        if(!emailList){
+            throw AppError.conflict("emailList is Empty")
+        }
+        console.log(emailList , "emailLists")
+        const tutors = await this.tutorUseCase.fetchTutorByEmail(emailList)
+        console.log(tutors , "tutors Availbale")
         res.status(HttpStatus.OK).json({tutors})
         
     } catch (error) {
