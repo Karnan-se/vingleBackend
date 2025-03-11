@@ -19,7 +19,8 @@ const configKeys = {
     REFRESH_TOKEN_EXPIRES_IN : 7 * 24 * 60 * 60 * 1000,
     STRIPE_SECRET_KEY:process.env.STRIPE_SECRET_KEY,
     MY_DOMAIN_NAME:process.env.MY_DOMAIN,
-    VINGLE_LOGO : process.env.VINGLE_LOGO
+    VINGLE_LOGO : process.env.VINGLE_LOGO,
+    CERTIFICATE_TEMPLATE : process.env.CERTIFICATE_TEMPLATE
 
 }
 

@@ -3,6 +3,8 @@ import { ProgressModal } from "../models/Progress/ProgressModal.ts";
 import { IProgress } from "../../../entitties/interfaces/Progress/IProgress.ts";
 import IProgressRepository from "../../../entitties/interfaces/Progress/IprogressRepository.ts";
 import AppError from "../../web/utils/appError.ts";
+import { CourseModal } from "../models/tutor/CourseModel.ts";
+import { ICourse } from "../../../entitties/interfaces/course/course.ts";
 
 export  default class ProgressRepository implements IProgressRepository {
 
@@ -96,6 +98,19 @@ export  default class ProgressRepository implements IProgressRepository {
         
     }
       
+  }
+
+  async courseDetails(courseId:ObjectId):Promise<ICourse> {
+    try {
+        const courseDetails = await CourseModal.findOne({_id:courseId}).populate("tutorId")
+        console.log(courseDetails)
+        return courseDetails as unknown as ICourse
+        
+    } catch (error) {
+        console.log(error)
+        throw error
+        
+    }
   }
 
 }

@@ -113,12 +113,13 @@ export default class CourseRepository implements ICourseRepository {
   async getcourse(courseId: ObjectId): Promise<ICourse> {
     try {
       
-      const courseDetails = await CourseModal.findById(courseId).populate({
-        path: "sections",
-        populate: {
-          path: "items",
+      const courseDetails =await CourseModal.findById(courseId).populate([
+        { path: "tutorId" },
+        {
+          path: "sections",
+          populate: { path: "items" },
         },
-      });
+      ]);
       return courseDetails as unknown as ICourse;
     } catch (error) {
       console.log(error);

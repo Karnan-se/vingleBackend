@@ -4,6 +4,7 @@ import type { IPDFCreator } from "../../../entitties/interfaces/Invoice/IPDFcrea
 import { fileURLToPath } from "url";
 
 import path from "path"
+import { ICertificateData } from "../../../entitties/interfaces/certificate/ICertificate";
 
 export class PDFcreator implements IPDFCreator {
   constructor() {}
@@ -94,6 +95,106 @@ export class PDFcreator implements IPDFCreator {
         reject(error)
       }
     })
+  }
+   async  generateCertificate(certificateData: ICertificateData): Promise<Buffer> {
+    return new Promise<Buffer>((resolve, reject) => {
+      try {
+        const doc = new PDFDocument({
+          layout: "landscape",
+          size: "A4",
+          margin: 50,
+        });
+  
+        const buffers: Buffer[] = [];
+        doc.on("data", (chunk: Buffer) => buffers.push(chunk));
+        doc.on("end", () => resolve(Buffer.concat(buffers)));
+  
+        
+        const drawLine = (x1: number, y1: number, x2: number, y2: number): void => {
+          doc.moveTo(x1, y1).lineTo(x2, y2).stroke();
+        };
+  
+        
+        if (certificateData.certificateBackground) {
+          try {
+            doc.image(certificateData.certificateBackground, 0, 0, {
+              width: doc.page.width,
+              height: doc.page.height,
+            });
+          } catch (error) {
+            console.error("Error loading background image:", error);
+          }
+        }
+  
+ 
+        doc.font("Helvetica");
+  
+        
+        doc.fontSize(36).fill("#333333").text("Certificate of Achievement", 0, 100, { align: "center" });
+  
+      
+        doc.fontSize(16).fill("#666666").text("THE FOLLOWING AWARD IS GIVEN TO", 0, 160, { align: "center" });
+  
+      
+        doc.fontSize(32).fill("#333333").text(certificateData.userName, 0, 220, { align: "center" });
+  
+      
+        const lineY = 270;
+        drawLine(doc.page.width / 2 - 150, lineY, doc.page.width / 2 + 150, lineY);
+  
+       
+        doc
+          .fontSize(16)
+          .fill("#666666")
+          .text(
+            `${certificateData.userName} has successfully completed the course on ${certificateData.date}.`,
+            0,
+            300,
+            { align: "center" }
+          );
+  
+        
+        if (certificateData.vigleLogo) {
+          try {
+            const logoX = doc.page.width / 2 - 40;
+            const logoY = 380;
+            doc.image(certificateData.vigleLogo, logoX, logoY, { width: 80 });
+          } catch (error) {
+            console.error("Error loading logo:", error);
+  
+           
+            const centerX = doc.page.width / 2;
+            const centerY = 420;
+            doc.circle(centerX, centerY, 40).fillAndStroke("#444444", "#000000");
+          }
+        }
+  
+   
+        const signatureY = 500;
+  
+      
+        doc.fontSize(14).text("Provider", doc.page.width / 4, signatureY, { align: "center" });
+        drawLine(doc.page.width / 4 - 100, signatureY - 30, doc.page.width / 4 + 100, signatureY - 30);
+  
+        
+        doc.fontSize(14).text(`Tutor: ${certificateData.tutorName}`, (doc.page.width * 3) / 4, signatureY, { align: "center" });
+        drawLine((doc.page.width * 3) / 4 - 100, signatureY - 30, (doc.page.width * 3) / 4 + 100, signatureY - 30);
+  
+       
+        doc.fontSize(10).text(
+          "This certificate is awarded in recognition of the successful completion of the course.",
+          0,
+          550,
+          { align: "center" }
+        );
+  
+        
+        doc.end();
+      } catch (error) {
+        console.error("Error generating certificate:", error);
+        reject(error);
+      }
+    });
   }
 }
 
