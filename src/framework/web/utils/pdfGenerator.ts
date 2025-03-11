@@ -2,9 +2,11 @@ import PDFDocument from "pdfkit"
 import type { IInvoiceData } from "../../../entitties/interfaces/Invoice/Invoice"
 import type { IPDFCreator } from "../../../entitties/interfaces/Invoice/IPDFcreator"
 import { fileURLToPath } from "url";
+import sharp from "sharp";
 
 import path from "path"
 import { ICertificateData } from "../../../entitties/interfaces/certificate/ICertificate";
+import AppError from "./appError.ts";
 
 export class PDFcreator implements IPDFCreator {
   constructor() {}
@@ -96,7 +98,13 @@ export class PDFcreator implements IPDFCreator {
       }
     })
   }
-   async  generateCertificate(certificateData: ICertificateData): Promise<Buffer> {
+  async generateCertificate(certificateData: ICertificateData): Promise<Buffer> {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    
+    const vingleLogo = path.resolve(__dirname, "../../../entitties/Assets/vingle.png");
+    const backgroundImage = path.resolve(__dirname, "../../../entitties/Assets/certificateTemplate.png");
+  
     return new Promise<Buffer>((resolve, reject) => {
       try {
         const doc = new PDFDocument({
@@ -109,15 +117,13 @@ export class PDFcreator implements IPDFCreator {
         doc.on("data", (chunk: Buffer) => buffers.push(chunk));
         doc.on("end", () => resolve(Buffer.concat(buffers)));
   
-        
         const drawLine = (x1: number, y1: number, x2: number, y2: number): void => {
-          doc.moveTo(x1, y1).lineTo(x2, y2).stroke();
+          doc.moveTo(x1, y1).lineTo(x2, y2).stroke("#666666");
         };
   
-        
-        if (certificateData.certificateBackground) {
+        if (backgroundImage) {
           try {
-            doc.image(certificateData.certificateBackground, 0, 0, {
+            doc.image(backgroundImage, 0, 0, {
               width: doc.page.width,
               height: doc.page.height,
             });
@@ -126,69 +132,83 @@ export class PDFcreator implements IPDFCreator {
           }
         }
   
- 
-        doc.font("Helvetica");
+        // Title - using Times-Roman for serif font
+        doc.font("Times-Roman")
+           .fontSize(42)
+           .fill("#333333")
+           .text("Certificate of Achievement", 0, 100, { align: "center" });
   
-        
-        doc.fontSize(36).fill("#333333").text("Certificate of Achievement", 0, 100, { align: "center" });
+        // Subtitle
+        doc.font("Helvetica")
+           .fontSize(14)
+           .fill("#666666")
+           .text("THE FOLLOWING AWARD IS GIVEN TO", 0, 180, { align: "center" });
   
-      
-        doc.fontSize(16).fill("#666666").text("THE FOLLOWING AWARD IS GIVEN TO", 0, 160, { align: "center" });
+        // User name
+        doc.font("Times-Roman")
+           .fontSize(36)
+           .fill("#333333")
+           .text(certificateData.userName, 0, 240, { align: "center" });
   
-      
-        doc.fontSize(32).fill("#333333").text(certificateData.userName, 0, 220, { align: "center" });
+        // Completion text
+        doc.font("Times-Roman")
+           .fontSize(14)
+           .fill("#666666")
+           .text(
+             `${certificateData.userName} has successfully completed the ${certificateData.courseName} course on ${certificateData.date}.`,
+             0,
+             320,
+             { align: "center" }
+           );
   
-      
-        const lineY = 270;
-        drawLine(doc.page.width / 2 - 150, lineY, doc.page.width / 2 + 150, lineY);
-  
-       
-        doc
-          .fontSize(16)
-          .fill("#666666")
-          .text(
-            `${certificateData.userName} has successfully completed the course on ${certificateData.date}.`,
-            0,
-            300,
-            { align: "center" }
-          );
-  
-        
-        if (certificateData.vigleLogo) {
+        // Logo/Seal
+        if (vingleLogo) {
           try {
             const logoX = doc.page.width / 2 - 40;
-            const logoY = 380;
-            doc.image(certificateData.vigleLogo, logoX, logoY, { width: 80 });
+            const logoY = 400;
+            doc.image(vingleLogo, logoX, logoY, { width: 80 });
           } catch (error) {
             console.error("Error loading logo:", error);
-  
-           
             const centerX = doc.page.width / 2;
-            const centerY = 420;
+            const centerY = 440;
             doc.circle(centerX, centerY, 40).fillAndStroke("#444444", "#000000");
           }
         }
   
-   
-        const signatureY = 500;
-  
-      
-        doc.fontSize(14).text("Provider", doc.page.width / 4, signatureY, { align: "center" });
-        drawLine(doc.page.width / 4 - 100, signatureY - 30, doc.page.width / 4 + 100, signatureY - 30);
-  
+        // Signature section - positioned lower and more spread out
+        const signatureY = 520;
+        const leftX = 150; // More to the left
+        const rightX = doc.page.width - 150; // More to the right
         
-        doc.fontSize(14).text(`Tutor: ${certificateData.tutorName}`, (doc.page.width * 3) / 4, signatureY, { align: "center" });
-        drawLine((doc.page.width * 3) / 4 - 100, signatureY - 30, (doc.page.width * 3) / 4 + 100, signatureY - 30);
+        // Provider signature on the left
+        drawLine(leftX - 100, signatureY, leftX + 100, signatureY);
+        doc.font("Times-Roman")
+           .fontSize(12)
+           .text("Provider", leftX - 100, signatureY + 10, { 
+             width: 200, 
+             align: "center" 
+           });
   
-       
-        doc.fontSize(10).text(
-          "This certificate is awarded in recognition of the successful completion of the course.",
-          0,
-          550,
-          { align: "center" }
-        );
+        // Tutor signature on the right
+        drawLine(rightX - 100, signatureY, rightX + 100, signatureY);
+        doc.font("Times-Roman")
+           .fontSize(12)
+           .text("Tutor", rightX - 100, signatureY + 10, { 
+             width: 200, 
+             align: "center" 
+           });
   
-        
+        // Footer text - positioned higher to avoid page overflow
+        doc.font("Times-Roman")
+           .fontSize(10)
+           .fill("#666666")
+           .text(
+             "This certificate is awarded in recognition of the successful completion of the course.",
+             0,
+             signatureY + 50,
+             { align: "center" }
+           );
+  
         doc.end();
       } catch (error) {
         console.error("Error generating certificate:", error);
@@ -196,5 +216,6 @@ export class PDFcreator implements IPDFCreator {
       }
     });
   }
+  
 }
 

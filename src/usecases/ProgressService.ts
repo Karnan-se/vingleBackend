@@ -10,6 +10,7 @@ import { configKeys } from "../config.ts";
 import { IPDFCreator } from "../entitties/interfaces/Invoice/IPDFcreator.ts";
 import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService.ts";
 
+
 interface Dependency {
   Repository: {
     progresRepository: IProgressRepository;
@@ -126,12 +127,14 @@ export default class ProgressServcie {
     }
     const savedCertificate = await this.certificateRepository.create(certificate)
     const certificateDetails = await this.certificateRepository.findByIdandPopulate(savedCertificate._id as unknown as  string);
+    
    
     const certificateData: ICertificateData = {
       date: certificateDetails.createdAt ? new Date(certificateDetails.createdAt).toLocaleDateString("en-GB")  : "", 
       vigleLogo: configKeys.VINGLE_LOGO || "", 
       tutorName: certificateDetails.tutorId?.firstName ?? "Unknown Tutor", 
       userName: certificateDetails.userId?.firstName ?? "Unknown User",
+      courseName:certificateDetails.courseId.name ?? "",
       certificateBackground: configKeys.CERTIFICATE_TEMPLATE || "",
     };
     const generateCertificate = await this.pdfGenerator.generateCertificate(certificateData);

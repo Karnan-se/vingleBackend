@@ -16,5 +16,6 @@ export interface  ICertificate <I = ObjectId , C = ObjectId , T = ObjectId , U =
         vigleLogo: string;
         tutorName: string;
         userName: string;
+        courseName:string,
         certificateBackground: string;
       }
