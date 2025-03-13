@@ -142,6 +142,11 @@ export default class ProgressServcie {
     const secureUrl = await this.cloudinaryService.uploadPDF(generateCertificate as unknown as any)
     console.log(secureUrl , "secureURL")
     savedCertificate.certificateUrl = secureUrl;
+    const updateCertificate = await this.certificateRepository.update(savedCertificate._id as unknown as  string, savedCertificate)
+    if(updateCertificate){
+      console.log("certificate Updated Compleated")
+    }
+
   
   }
 

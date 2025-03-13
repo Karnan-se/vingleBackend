@@ -6,6 +6,7 @@ import { ICertifiateRepository } from "../../../entitties/interfaces/certificate
 import { ICourse } from "../../../entitties/interfaces/course/course.ts";
 import Itutor from "../../../entitties/interfaces/tutor.ts/Itutor.ts";
 import { Iuser } from "../../../entitties/interfaces/user/user.ts";
+import AppError from "../../web/utils/appError.ts";
 
 
 export class CertificateRepository extends BaseRepository<ICertificate> implements ICertifiateRepository {
@@ -50,6 +51,31 @@ export class CertificateRepository extends BaseRepository<ICertificate> implemen
     }
         
     }
+    async update(id: string, data: Partial<ICertificate>): Promise<ICertificate> {
+        try {
+            return await this.model.findByIdAndUpdate(id, data, { new: true }).exec() as unknown as ICertificate
+            
+        } catch (error) {
+            console.log(error)
+            throw error
+            
+        }
+        
+    }
+    async findUserCertificate(userId : ObjectId):Promise<ICertificate[]>{
+        try {
+            const certificate = await certificateModal.find({userId}).populate([{path : "courseId"}])
+            console.log(certificate , "certificate")
+            return certificate as unknown as ICertificate[]
+            
+        } catch (error) {
+            console.log(error)
+            throw error
+            
+        }
+    }
+
+        
+    }
 
     
-}

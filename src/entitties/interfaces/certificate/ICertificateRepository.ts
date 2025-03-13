@@ -9,4 +9,6 @@ export interface ICertifiateRepository {
     create(data: Partial<ICertificate>): Promise<ICertificate>
     findByIdandPopulate(id: string): Promise<ICertificate<Schema.Types.ObjectId, ICourse , Itutor,Iuser > >
     findcertificateExist(courseId:ObjectId, tutorId :ObjectId , userId:ObjectId):Promise<ICertificate>
+    update(id: string, data: Partial<ICertificate>): Promise<ICertificate> 
+    findUserCertificate(userId : ObjectId):Promise<ICertificate[]>
 }

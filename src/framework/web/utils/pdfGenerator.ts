@@ -101,7 +101,7 @@ export class PDFcreator implements IPDFCreator {
   async generateCertificate(certificateData: ICertificateData): Promise<Buffer> {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
-    
+
     const vingleLogo = path.resolve(__dirname, "../../../entitties/Assets/vingle.png");
     const backgroundImage = path.resolve(__dirname, "../../../entitties/Assets/certificateTemplate.png");
   
@@ -110,7 +110,7 @@ export class PDFcreator implements IPDFCreator {
         const doc = new PDFDocument({
           layout: "landscape",
           size: "A4",
-          margin: 50,
+          margin: 40,
         });
   
         const buffers: Buffer[] = [];
@@ -170,7 +170,7 @@ export class PDFcreator implements IPDFCreator {
           } catch (error) {
             console.error("Error loading logo:", error);
             const centerX = doc.page.width / 2;
-            const centerY = 440;
+            const centerY = 420;
             doc.circle(centerX, centerY, 40).fillAndStroke("#444444", "#000000");
           }
         }
