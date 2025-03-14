@@ -1,7 +1,9 @@
+import { ObjectId } from "mongoose";
 import Itutor from "../../../entitties/interfaces/tutor.ts/Itutor.ts";
 import { ItutorRepository } from "../../../entitties/interfaces/tutor.ts/tutorrepository.ts";
 import AppError from "../../web/utils/appError.ts";
 import { Tutor } from "../models/tutor/tutorModels.ts";
+
 
 export default class TutorMongoRepository implements ItutorRepository {
 
@@ -64,6 +66,22 @@ export default class TutorMongoRepository implements ItutorRepository {
     } catch (error) {
         console.log(error)
         throw error
+        
+    }
+     
+ }
+ async findById(tutorId: ObjectId): Promise<Itutor> {
+    try {
+        console.log(tutorId , "it is tutuor ID")
+        const tutor = await Tutor.findOne({_id:tutorId})
+        if(!tutor){
+            console.log("no tutorPresent")
+        }
+        return tutor as unknown as Itutor
+        
+    } catch (error) {
+        console.log(error)
+        throw error;
         
     }
      

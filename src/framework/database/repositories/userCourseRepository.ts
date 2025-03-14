@@ -25,10 +25,10 @@ export class UserCourseRepository implements IuserCourseRepository {
                     path: "items",
                   },
                 },
-                // {
-                //   path: "ratings",
-                //   select: "_id rating userId comment", 
-                // },
+                {
+                  path: "ratings",
+                  select: "_id ratingValue userId review", 
+                },
                 
               ]);
     

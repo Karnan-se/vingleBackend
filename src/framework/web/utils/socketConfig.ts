@@ -108,6 +108,10 @@ export function startSocket(server: HttpServer) {
       console.log("A user disconnected", socket.id);
       console.log(onlineUser, "Updated Online Users after disconnect")
     });
+
+    socket.on("userBlocked", (user)=>{
+      console.log(user._id , "this user Is blocked")
+    })
   });
 
   return io;

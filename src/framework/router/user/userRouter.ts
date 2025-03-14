@@ -9,6 +9,7 @@ import ConversationController from "../../../adapters/controller/conversationCon
 import { conversationController } from "../../dependencies/conversation/conversationDependency.ts";
 import { ratingsController } from "../../dependencies/rating/ratingDependency.ts";
 import { certificateController } from "../../dependencies/certificate/certificateDependency.ts";
+import { courseController } from "../../dependencies/course/course.ts";
 
 
 
@@ -38,5 +39,6 @@ userRouter.post("/findUserById" ,jwtAuth, (req, res , next)=> userController.fin
 userRouter.post("/saveRatings", jwtAuth ,(req, res, next)=> ratingsController.createRatings(req, res, next))
 userRouter.get("/getProgress", (req, res, next)=> progresssController.getProgress(req, res, next))
 userRouter.get("/getUserCertificate", jwtAuth , (req, res, next)=> certificateController.getUserCertificate(req, res, next))
+userRouter.post("/getCourse", jwtAuth ,(req, res, next)=>courseController.getCourse(req, res, next))
 
 export default userRouter

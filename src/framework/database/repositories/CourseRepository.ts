@@ -114,10 +114,23 @@ export default class CourseRepository implements ICourseRepository {
     try {
       
       const courseDetails =await CourseModal.findById(courseId).populate([
-        { path: "tutorId" },
+        {
+          path: "tutorId",
+          
+        },
+        {
+          path: "category",
+          
+        },
         {
           path: "sections",
-          populate: { path: "items" },
+          populate: {
+            path: "items",
+          },
+        },
+        {
+          path: "ratings",
+          select: "_id ratingValue userId review", 
         },
       ]);
       return courseDetails as unknown as ICourse;

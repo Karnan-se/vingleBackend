@@ -52,6 +52,7 @@ export class UserController {
       const user = req.body.user;
       console.log(user);
       try {
+        
         const updatedUser = await  this.userUseCase.UpdateUser(user)
         console.log(updatedUser, "updated User")
         res.status(HttpStatus.OK).json({message:"success", data:updatedUser}) 

@@ -138,4 +138,18 @@ export default class AdminApplicationService{
             
         }
     }
+    async rejectCourse(rejectionDetails : any, tutorId:ObjectId){
+     try {
+        const tutor = await this.tutorRepository.findById(tutorId)
+        console.log(tutorId , "tutorId")
+        const sendMail = await this.emailService.sendRejectionMail(tutor.emailAddress as string, rejectionDetails).then(()=> console.log("email is send"))
+        return tutor
+        
+     } catch (error) {
+        console.log(error)
+        throw error
+        
+     }
+
+    }
 }

@@ -65,6 +65,24 @@ export default  class AdminApplicationController{
             
         }
     }
+
+    async courseRejection(req:Request, res:Response, next:NextFunction){
+        try {
+            const {rejectionReasons , tutorId} = req.body
+            console.log(rejectionReasons , "reaasoine")
+          
+            if(!rejectionReasons || !tutorId){
+                return res.status(HttpStatus.NO_CONTENT)
+            }
+            const rejection = await this.applicationService.rejectCourse(rejectionReasons , tutorId)
+            res.status(HttpStatus.OK).json({rejection})
+            
+        } catch (error) {
+            console.log(error)
+            next(error)
+            
+        }
+    }
     
 
 }
