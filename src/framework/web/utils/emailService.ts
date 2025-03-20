@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import { config } from 'dotenv';
-import { configKeys } from '../../../config.ts';
-import AppError from './appError.ts';
+import { configKeys } from '../../../config';
+import AppError from './appError';
 
 
 export class EmailService {

@@ -1,9 +1,9 @@
-import { Iadmin } from "../entitties/interfaces/admin/Iadmin.ts";
-import { IadminRepository } from "../entitties/interfaces/admin/Iadminrepository.ts";
-import IpasswordService from "../entitties/interfaces/service.ts/passwordService.ts";
-import { IuserRepository } from "../entitties/interfaces/user/userrepository.ts";
-import AppError from "../framework/web/utils/appError.ts";
-import { JwtService } from "../framework/web/utils/JwtService.ts";
+import { Iadmin } from "../entitties/interfaces/admin/Iadmin";
+import { IadminRepository } from "../entitties/interfaces/admin/Iadminrepository";
+import IpasswordService from "../entitties/interfaces/service.ts/passwordService";
+import { IuserRepository } from "../entitties/interfaces/user/userrepository";
+import AppError from "../framework/web/utils/appError";
+import { JwtService } from "../framework/web/utils/JwtService";
 
 
 

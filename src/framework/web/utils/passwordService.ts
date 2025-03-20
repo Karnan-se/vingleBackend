@@ -1,5 +1,4 @@
 import bcrypt from "bcrypt"
-import AppError from "./appError";
 import IpasswordService from "../../../entitties/interfaces/service.ts/passwordService";
 
 

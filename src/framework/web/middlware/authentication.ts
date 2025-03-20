@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { JwtService } from "../utils/JwtService.ts";
-import { attachTokenCookie } from "../../../adapters/middleware/cookie.ts";
-import { HttpStatus } from "../../../entitties/Enums/statusCode.ts";
+import { JwtService } from "../utils/JwtService";
+import { attachTokenCookie } from "../../../adapters/middleware/cookie";
+import { HttpStatus } from "../../../entitties/Enums/statusCode";
 
 const jwtService = new JwtService();
 

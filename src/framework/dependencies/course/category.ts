@@ -1,6 +1,6 @@
-import CategoryService from "../../../usecases/CategoryService.ts";
-import { CategoryRepository } from "../../database/repositories/CategoryRepository.ts";
-import CategoryController from "../../../adapters/controller/adminCategoryController.ts";
+import CategoryService from "../../../usecases/CategoryService";
+import { CategoryRepository } from "../../database/repositories/CategoryRepository";
+import CategoryController from "../../../adapters/controller/adminCategoryController";
 
 
 

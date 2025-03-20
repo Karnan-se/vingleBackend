@@ -1,11 +1,11 @@
 
-import { adminApplicationController } from "../../dependencies/admin/adminApplication.ts";
-import { adminController } from "../../dependencies/admin/admindependency.ts";
-import { categoryController } from "../../dependencies/course/category.ts";
-import { orderController } from "../../dependencies/order/orderDependency.ts";
-import { revenueController } from "../../dependencies/revenue/revenueDependency.ts";
-import jwtAuth from "../../web/middlware/authentication.ts"
-import { courseController } from "../../dependencies/course/course.ts";
+import { adminApplicationController } from "../../dependencies/admin/adminApplication";
+import { adminController } from "../../dependencies/admin/admindependency";
+import { categoryController } from "../../dependencies/course/category";
+import { orderController } from "../../dependencies/order/orderDependency";
+import { revenueController } from "../../dependencies/revenue/revenueDependency";
+import jwtAuth from "../../web/middlware/authentication"
+import { courseController } from "../../dependencies/course/course";
 import express from "express"
 
 

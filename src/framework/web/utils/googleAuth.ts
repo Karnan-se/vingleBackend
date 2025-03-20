@@ -1,6 +1,6 @@
 // import passport  from "passport";
 // import { Strategy  } from "passport-google-oauth20";
-// import { configKeys } from "../../../config.ts";
+// import { configKeys } from "../../../config";
 
 
 

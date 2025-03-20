@@ -1,7 +1,7 @@
-import { configKeys } from "../config.ts";
-import { IGoogleService } from "../entitties/interfaces/service.ts/googleService.ts";
-import { IuserRepository } from "../entitties/interfaces/user/userrepository.ts";
-import AppError from "../framework/web/utils/appError.ts";
+
+import { IGoogleService } from "../entitties/interfaces/service.ts/googleService";
+import { IuserRepository } from "../entitties/interfaces/user/userrepository";
+import AppError from "../framework/web/utils/appError";
 
 
 

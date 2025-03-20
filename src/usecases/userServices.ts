@@ -1,13 +1,13 @@
-import { IuserRepository } from "../entitties/interfaces/user/userrepository.ts";
-import { Iuser } from "../entitties/interfaces/user/user.ts";
-import IpasswordService from "../entitties/interfaces/service.ts/passwordService.ts";
-import AppError from "../framework/web/utils/appError.ts";
-import JwtService from "../entitties/interfaces/service.ts/IJwtService.ts";
-import IGenerateOtp from "../entitties/interfaces/admin/IGenerateOtp.ts";
-import OTPRepository from "../entitties/interfaces/common/IOTPRepository.ts";
-import EmailService from "../entitties/interfaces/common/emailservice.ts";
-import { IOTP } from "../entitties/interfaces/admin/Iotp.ts";
+import { IuserRepository } from "../entitties/interfaces/user/userrepository";
+import { Iuser } from "../entitties/interfaces/user/user";
+import AppError from "../framework/web/utils/appError";
+import IGenerateOtp from "../entitties/interfaces/admin/IGenerateOtp";
+import OTPRepository from "../entitties/interfaces/common/IOTPRepository";
+import EmailService from "../entitties/interfaces/common/emailservice";
+import { IOTP } from "../entitties/interfaces/admin/Iotp";
 import { ObjectId } from "mongoose";
+import { JwtService } from "../framework/web/utils/JwtService";
+import IpasswordService from "../entitties/interfaces/service.ts/passwordService";
 
 
 interface Dependencies {

@@ -1,9 +1,9 @@
 
-import TutorUseCase from "../../../usecases/tuotorService.ts";
-import TutorMongoRepository from "../../database/repositories/tutorRepository.ts";
-import { JwtService } from "../../web/utils/JwtService.ts";
-import { PasswordService } from "../../web/utils/passwordService.ts";
-import TutorController from "../../../adapters/controller/tutorController.ts";
+import TutorUseCase from "../../../usecases/tuotorService";
+import TutorMongoRepository from "../../database/repositories/tutorRepository";
+import { JwtService } from "../../web/utils/JwtService";
+import { PasswordService } from "../../web/utils/passwordService";
+import TutorController from "../../../adapters/controller/tutorController";
 
 
   const  repository ={

@@ -1,17 +1,17 @@
-import { IuserCourseRepository } from "../entitties/interfaces/course/IuserCourseRepository.ts";
-import { IOrder } from "../entitties/interfaces/Iorder/Iorder.ts";
-import { IOrderRepository } from "../entitties/interfaces/Iorder/IOrderRespository.ts";
-import { IPaymentService } from "../entitties/interfaces/service.ts/IPaymentService.ts";
+import { IuserCourseRepository } from "../entitties/interfaces/course/IuserCourseRepository";
+import { IOrder } from "../entitties/interfaces/Iorder/Iorder";
+import { IOrderRepository } from "../entitties/interfaces/Iorder/IOrderRespository";
 import { ObjectId } from "mongoose";
-import { Iuser } from "../entitties/interfaces/user/user.ts";
-import AppError from "../framework/web/utils/appError.ts";
-import { ICourse } from "../entitties/interfaces/course/course.ts";
-import { IInvoiceData } from "../entitties/interfaces/Invoice/Invoice.ts";
-import { IPDFCreator } from "../entitties/interfaces/Invoice/IPDFcreator.ts";
-import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService.ts";
-import { IRevenueRepository } from "../entitties/interfaces/revenue/IRevenueRepository.ts";
-import { IRevenue } from "../entitties/interfaces/revenue/IRevenue.ts";
-import Itutor from "../entitties/interfaces/tutor.ts/Itutor.ts";
+import { Iuser } from "../entitties/interfaces/user/user";
+import AppError from "../framework/web/utils/appError";
+import { ICourse } from "../entitties/interfaces/course/course";
+import { IInvoiceData } from "../entitties/interfaces/Invoice/Invoice";
+import { IPDFCreator } from "../entitties/interfaces/Invoice/IPDFcreator";
+import { IRevenueRepository } from "../entitties/interfaces/revenue/IRevenueRepository";
+import { IRevenue } from "../entitties/interfaces/revenue/IRevenue";
+import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService";
+import { IPaymentService } from "../entitties/interfaces/service.ts/IPaymentService";
+
 interface Dependency {
   Repository: {
     courseRepository: IuserCourseRepository;

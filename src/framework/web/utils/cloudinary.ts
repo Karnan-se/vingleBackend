@@ -1,10 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
-import { configKeys } from "../../../config.ts";
 import dotenv from "dotenv";
-import { rejects } from "assert";
-import { error } from "console";
-import { ICloudinaryService } from "../../../entitties/interfaces/service.ts/IcloudinaryService.ts";
 import fs from "fs/promises";
+import { ICloudinaryService } from "../../../entitties/interfaces/service.ts/IcloudinaryService";
 dotenv.config();
 
 cloudinary.config({

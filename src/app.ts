@@ -1,15 +1,15 @@
 import express from "express";
-import connectDB from "./framework/database/connection.ts";
+import connectDB from "./framework/database/connection";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import morgan from "morgan";
 import http from "http";
-import { logStream } from "./framework/web/errors/error.ts";
-import errorHandler from "./framework/web/middlware/errorHandler.ts";
-import userRouter from "./framework/router/user/userRouter.ts";
-import adminRouter from "./framework/router/admin/adminRouter.ts";
-import tutorRouter from "./framework/router/tutor/tutorRouter.ts";
-import {   startSocket } from "./framework/web/utils/socketConfig.ts"; 
+import { logStream } from "./framework/web/errors/error";
+import errorHandler from "./framework/web/middlware/errorHandler";
+import userRouter from "./framework/router/user/userRouter";
+import adminRouter from "./framework/router/admin/adminRouter";
+import tutorRouter from "./framework/router/tutor/tutorRouter";
+import {   startSocket } from "./framework/web/utils/socketConfig"; 
 
 const app = express();
 const server = http.createServer(app); 

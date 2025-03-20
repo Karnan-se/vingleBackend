@@ -1,6 +1,6 @@
-import { ICategory } from "../entitties/interfaces/course/ICategory.ts";
-import { ICategoryRepository } from "../entitties/interfaces/course/ICategoryRepository.ts";
-import AppError from "../framework/web/utils/appError.ts";
+import { ICategory } from "../entitties/interfaces/course/ICategory";
+import { ICategoryRepository } from "../entitties/interfaces/course/ICategoryRepository";
+import AppError from "../framework/web/utils/appError";
 
 interface  Dependency {
     repository :{

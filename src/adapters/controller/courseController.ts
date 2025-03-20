@@ -1,13 +1,13 @@
 import CourseService from "../../usecases/CourseService";
 import { Request, Response , NextFunction } from "express";
-import transformData from "../../framework/web/utils/transformData.ts";
-import { ISection } from "../../entitties/interfaces/course/course.ts";
+import transformData from "../../framework/web/utils/transformData";
+import { ISection } from "../../entitties/interfaces/course/course";
 import multer from "multer";
 import { file } from "googleapis/build/src/apis/file/index";
 import mongoose, { ObjectId } from "mongoose";
-import AppError from "../../framework/web/utils/appError.ts";
-import { ErrorTypes } from "../../entitties/Enums/errorTypes.ts";
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
+import AppError from "../../framework/web/utils/appError";
+import { ErrorTypes } from "../../entitties/Enums/errorTypes";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
 
 interface controllerDependency {
     course:CourseService

@@ -1,6 +1,6 @@
 import { Request , Response , NextFunction } from "express";
 import { RevenueService } from "../../usecases/revenueService";
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
 export class RevenueController {
     private RevenueService
     constructor(useCase  : RevenueService) {

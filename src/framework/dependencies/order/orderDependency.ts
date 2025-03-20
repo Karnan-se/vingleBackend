@@ -1,6 +1,6 @@
-import { OrderService } from "../../../usecases/orderService.ts";
-import { OrderRepository } from "../../database/repositories/orderRepository.ts";
-import { OrderController } from "../../../adapters/controller/orderController.ts";
+import { OrderService } from "../../../usecases/orderService";
+import { OrderRepository } from "../../database/repositories/orderRepository";
+import { OrderController } from "../../../adapters/controller/orderController";
 
 
 const repository  ={

@@ -1,8 +1,9 @@
 import { ObjectId } from "mongoose";
-import Itutor from "../../../entitties/interfaces/tutor.ts/Itutor.ts";
-import { ItutorRepository } from "../../../entitties/interfaces/tutor.ts/tutorrepository.ts";
-import AppError from "../../web/utils/appError.ts";
-import { Tutor } from "../models/tutor/tutorModels.ts";
+
+import AppError from "../../web/utils/appError";
+import { Tutor } from "../models/tutor/tutorModels";
+import Itutor from "../../../entitties/interfaces/tutor.ts/Itutor";
+import { ItutorRepository } from "../../../entitties/interfaces/tutor.ts/tutorrepository";
 
 
 export default class TutorMongoRepository implements ItutorRepository {

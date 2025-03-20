@@ -1,6 +1,6 @@
 import VerificationService from "../../usecases/userVerificationService";
 import { Request, Response, NextFunction } from "express";
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
 
 interface ControllerDependency {
     verfication : VerificationService

@@ -1,7 +1,7 @@
 import { Server as SocketIOServer } from "socket.io";
 import { Server as HttpServer } from "http";
-import { ReadNotification } from "../socket/socketCommunication.ts";
-import { saveMessage } from "../socket/socketCommunication.ts";
+import { ReadNotification } from "../socket/socketCommunication";
+import { saveMessage } from "../socket/socketCommunication";
 import { userInfo } from "os";
 import { send } from "process";
 

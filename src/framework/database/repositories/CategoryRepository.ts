@@ -1,8 +1,8 @@
-import { CategoryModal } from "../models/course/CategoryModal.ts";
-import { ICategory } from "../../../entitties/interfaces/course/ICategory.ts";
-import { ICourse } from "../../../entitties/interfaces/course/course.ts";
+import { CategoryModal } from "../models/course/CategoryModal";
+import { ICategory } from "../../../entitties/interfaces/course/ICategory";
+import { ICourse } from "../../../entitties/interfaces/course/course";
 import { ObjectId } from "mongoose";
-import { ICategoryRepository } from "../../../entitties/interfaces/course/ICategoryRepository.ts";
+import { ICategoryRepository } from "../../../entitties/interfaces/course/ICategoryRepository";
 
 export class CategoryRepository implements ICategoryRepository{
     constructor(){

@@ -1,9 +1,9 @@
-import { AdminController } from "../../../adapters/controller/adminController.ts";
-import  AdminUseCase  from "../../../usecases/adminService.ts";
-import AdminRepository from "../../database/repositories/adminRepository.ts";
-import { JwtService } from "../../web/utils/JwtService.ts";
-import { PasswordService } from "../../web/utils/passwordService.ts";
-import { MongoUserRepository } from "../../database/repositories/userRepository.ts";
+import { AdminController } from "../../../adapters/controller/adminController";
+import  AdminUseCase  from "../../../usecases/adminService";
+import AdminRepository from "../../database/repositories/adminRepository";
+import { JwtService } from "../../web/utils/JwtService";
+import { PasswordService } from "../../web/utils/passwordService";
+import { MongoUserRepository } from "../../database/repositories/userRepository";
 
 
 

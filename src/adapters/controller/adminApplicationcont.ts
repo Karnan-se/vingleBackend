@@ -1,10 +1,9 @@
 import mongoose, { ObjectId } from "mongoose";
-import AppError from "../../framework/web/utils/appError.ts";
-import AdminApplicationService from "../../usecases/adminApplicationService.ts";
+import AppError from "../../framework/web/utils/appError";
+import AdminApplicationService from "../../usecases/adminApplicationService";
 import { Request, Response, NextFunction } from "express";
-import { IInstructor } from "../../entitties/interfaces/tutor.ts/IInstructor.ts";
-import { ErrorTypes } from "../../entitties/Enums/errorTypes.ts";
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
+import { ErrorTypes } from "../../entitties/Enums/errorTypes";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
 
 
 interface UseCase{

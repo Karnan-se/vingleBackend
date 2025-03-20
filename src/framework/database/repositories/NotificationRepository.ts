@@ -1,7 +1,7 @@
 import { ObjectId } from "mongoose";
-import { INotification } from "../../../entitties/interfaces/notification/INotification.ts";
-import { INotificationRepository } from "../../../entitties/interfaces/notification/INotificationRepository.ts";
-import NotificationModal from "../models/Notification/NotificationModal.ts";
+import { INotification } from "../../../entitties/interfaces/notification/INotification";
+import { INotificationRepository } from "../../../entitties/interfaces/notification/INotificationRepository";
+import NotificationModal from "../models/Notification/NotificationModal";
 
 
 class NotificationRepository implements INotificationRepository {

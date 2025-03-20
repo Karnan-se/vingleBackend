@@ -1,8 +1,8 @@
 import { IOrder } from "../../entitties/interfaces/Iorder/Iorder"
-import AppError from "../../framework/web/utils/appError.ts"
+import AppError from "../../framework/web/utils/appError"
 import { UserCourseService } from "../../usecases/userCourseService"
 import { Request , Response , NextFunction } from "express"
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts"
+import { HttpStatus } from "../../entitties/Enums/statusCode"
 
 interface useCase {
     userCourseService : UserCourseService

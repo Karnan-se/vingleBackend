@@ -1,12 +1,11 @@
 import { ObjectId, Schema } from "mongoose";
-import { ICertificate } from "../../../entitties/interfaces/certificate/ICertificate.ts";
-import { BaseRepository } from "./Base/BaseRepository.ts";
-import { certificateModal } from "../models/certificate/certificateModal.ts";
-import { ICertifiateRepository } from "../../../entitties/interfaces/certificate/ICertificateRepository.ts";
-import { ICourse } from "../../../entitties/interfaces/course/course.ts";
-import Itutor from "../../../entitties/interfaces/tutor.ts/Itutor.ts";
-import { Iuser } from "../../../entitties/interfaces/user/user.ts";
-import AppError from "../../web/utils/appError.ts";
+import { ICertificate } from "../../../entitties/interfaces/certificate/ICertificate";
+import { BaseRepository } from "./Base/BaseRepository";
+import { certificateModal } from "../models/certificate/certificateModal";
+import { ICertifiateRepository } from "../../../entitties/interfaces/certificate/ICertificateRepository";
+import { ICourse } from "../../../entitties/interfaces/course/course";
+import { Iuser } from "../../../entitties/interfaces/user/user";
+import Itutor from "../../../entitties/interfaces/tutor.ts/Itutor";
 
 
 export class CertificateRepository extends BaseRepository<ICertificate> implements ICertifiateRepository {

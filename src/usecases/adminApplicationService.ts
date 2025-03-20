@@ -1,13 +1,15 @@
 import { ObjectId } from "mongoose";
-import EmailService from "../entitties/interfaces/common/emailservice.ts";
-import { IInstructorRepoInterface } from "../entitties/interfaces/tutor.ts/IInstructorRepo.ts";
-import { IuserRepository } from "../entitties/interfaces/user/userrepository.ts";
-import AppError from "../framework/web/utils/appError.ts";
-import { Iuser } from "../entitties/interfaces/user/user.ts";
-import IGenerateTutorPassword from "../entitties/interfaces/tutor.ts/IGenerateTutorPassword.ts";
-import { ItutorRepository } from "../entitties/interfaces/tutor.ts/tutorrepository.ts";
-import IpasswordService from "../entitties/interfaces/service.ts/passwordService.ts";
-import Itutor from "../entitties/interfaces/tutor.ts/Itutor.ts";
+import EmailService from "../entitties/interfaces/common/emailservice";
+
+import { IuserRepository } from "../entitties/interfaces/user/userrepository";
+import AppError from "../framework/web/utils/appError";
+import { Iuser } from "../entitties/interfaces/user/user";
+import { IInstructorRepoInterface } from "../entitties/interfaces/tutor.ts/IInstructorRepo";
+import { ItutorRepository } from "../entitties/interfaces/tutor.ts/tutorrepository";
+import IpasswordService from "../entitties/interfaces/service.ts/passwordService";
+import IGenerateTutorPassword from "../entitties/interfaces/tutor.ts/IGenerateTutorPassword";
+import Itutor from "../entitties/interfaces/tutor.ts/Itutor";
+
 
 
 interface Dependency{

@@ -1,6 +1,6 @@
-import { ICourse } from "../../../entitties/interfaces/course/course.ts";
-import { IuserCourseRepository } from "../../../entitties/interfaces/course/IuserCourseRepository.ts";
-import { CourseModal } from "../models/tutor/CourseModel.ts";
+import { ICourse } from "../../../entitties/interfaces/course/course";
+import { IuserCourseRepository } from "../../../entitties/interfaces/course/IuserCourseRepository";
+import { CourseModal } from "../models/tutor/CourseModel";
 
 
 export class UserCourseRepository implements IuserCourseRepository {

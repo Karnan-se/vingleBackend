@@ -1,9 +1,10 @@
-import { InstructorModel } from "../models/tutor/InstructorModel.ts";
-import { IInstructorRepoInterface } from "../../../entitties/interfaces/tutor.ts/IInstructorRepo.ts";
-import { IInstructor } from "../../../entitties/interfaces/tutor.ts/IInstructor.ts";
+import { InstructorModel } from "../models/tutor/InstructorModel";
+
 import { ObjectId } from "mongoose";
-import AppError from "../../web/utils/appError.ts";
+import AppError from "../../web/utils/appError";
 import { error } from "console";
+import { IInstructorRepoInterface } from "../../../entitties/interfaces/tutor.ts/IInstructorRepo";
+import { IInstructor } from "../../../entitties/interfaces/tutor.ts/IInstructor";
 
 
 export default class InstructorRepository implements IInstructorRepoInterface  {

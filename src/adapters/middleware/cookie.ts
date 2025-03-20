@@ -1,5 +1,5 @@
 import { CookieOptions , Response} from "express"
-import { configKeys } from "../../config.ts"
+import { configKeys } from "../../config"
 
 
 const attachTokenCookie =(cookieName:string, Token:string, res:Response )=>{

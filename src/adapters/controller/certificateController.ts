@@ -1,7 +1,7 @@
 import { NextFunction , Request , Response} from "express";
 import CertificateService from "../../usecases/CertificateService";
-import AppError from "../../framework/web/utils/appError.ts";
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
+import AppError from "../../framework/web/utils/appError";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
 
 
 export default class CertificateController {

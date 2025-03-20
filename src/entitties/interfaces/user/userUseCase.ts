@@ -1,4 +1,4 @@
-import { Iuser } from "./user.ts";
+import { Iuser } from "./user";
 
 
 

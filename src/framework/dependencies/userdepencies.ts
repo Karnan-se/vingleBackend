@@ -1,12 +1,12 @@
 
-import UserUseCase from "../../usecases/userServices.ts"
-import { MongoUserRepository } from "../database/repositories/userRepository.ts"
-import { UserController } from "../../adapters/controller/userController.ts"
-import { PasswordService } from "../web/utils/passwordService.ts"
-import { JwtService } from "../web/utils/JwtService.ts"
-import { GenerteOtp } from "../web/utils/generateOtp.ts"
-import { MongoOtpRepository } from "../database/repositories/otpRepository.ts"
-import { EmailService } from "../web/utils/emailService.ts"
+import UserUseCase from "../../usecases/userServices"
+import { MongoUserRepository } from "../database/repositories/userRepository"
+import { UserController } from "../../adapters/controller/userController"
+import { PasswordService } from "../web/utils/passwordService"
+import { JwtService } from "../web/utils/JwtService"
+import { GenerteOtp } from "../web/utils/generateOtp"
+import { MongoOtpRepository } from "../database/repositories/otpRepository"
+import { EmailService } from "../web/utils/emailService"
 
 
 

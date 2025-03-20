@@ -1,6 +1,6 @@
-import { AdminModel } from "../models/admin/adminModel.ts";
-import { IadminRepository } from "../../../entitties/interfaces/admin/Iadminrepository.ts";
-import { Iadmin } from "../../../entitties/interfaces/admin/Iadmin.ts";
+import { AdminModel } from "../models/admin/adminModel";
+import { IadminRepository } from "../../../entitties/interfaces/admin/Iadminrepository";
+import { Iadmin } from "../../../entitties/interfaces/admin/Iadmin";
 
 
 class adminRepository implements IadminRepository {

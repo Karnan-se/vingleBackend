@@ -1,6 +1,6 @@
 import { ObjectId } from "mongoose"
 import { ICertifiateRepository } from "../entitties/interfaces/certificate/ICertificateRepository"
-import AppError from "../framework/web/utils/appError.ts"
+import AppError from "../framework/web/utils/appError"
 
 
 interface Dependency {

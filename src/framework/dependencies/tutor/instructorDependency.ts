@@ -1,9 +1,9 @@
 
-import InstructorRepository from "../../database/repositories/InstructorRepo.ts";
-import InstructorService from "../../../usecases/InstructorService.ts";
-import { CloudinaryService } from "../../web/utils/cloudinary.ts";
-import { MongoUserRepository } from "../../database/repositories/userRepository.ts";
-import TutorApplicationController from "../../../adapters/controller/tutorApplication.ts";
+import InstructorRepository from "../../database/repositories/InstructorRepo";
+import InstructorService from "../../../usecases/InstructorService";
+import { CloudinaryService } from "../../web/utils/cloudinary";
+import { MongoUserRepository } from "../../database/repositories/userRepository";
+import TutorApplicationController from "../../../adapters/controller/tutorApplication";
 
 
 const repository  = {

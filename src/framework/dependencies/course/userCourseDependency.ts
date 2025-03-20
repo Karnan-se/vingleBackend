@@ -1,11 +1,11 @@
-import { UserCourseService } from "../../../usecases/userCourseService.ts";
-import { UserCourseController } from "../../../adapters/controller/userCourseController.ts";
-import { UserCourseRepository} from "../../database/repositories/userCourseRepository.ts"
-import {PaymentService} from "../../web/utils/stripe.ts";
-import  { OrderRepository } from "../../database/repositories/orderRepository.ts";
-import { PDFcreator } from "../../web/utils/pdfGenerator.ts";
-import { CloudinaryService } from "../../web/utils/cloudinary.ts";
-import { RevenueRepository } from "../../database/repositories/revenueRepository.ts";
+import { UserCourseService } from "../../../usecases/userCourseService";
+import { UserCourseController } from "../../../adapters/controller/userCourseController";
+import { UserCourseRepository} from "../../database/repositories/userCourseRepository"
+import {PaymentService} from "../../web/utils/stripe";
+import  { OrderRepository } from "../../database/repositories/orderRepository";
+import { PDFcreator } from "../../web/utils/pdfGenerator";
+import { CloudinaryService } from "../../web/utils/cloudinary";
+import { RevenueRepository } from "../../database/repositories/revenueRepository";
 
 
 

@@ -1,5 +1,5 @@
-import { IRatings } from "../../../entitties/interfaces/ratings/IRatings.ts";
-import { ICourse } from "../../../entitties/interfaces/course/course.ts";
+import { IRatings } from "../../../entitties/interfaces/ratings/IRatings";
+import { ICourse } from "../../../entitties/interfaces/course/course";
 import { ObjectId } from "mongoose";
 
 export interface IRatingRepository {

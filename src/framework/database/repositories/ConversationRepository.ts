@@ -1,8 +1,8 @@
 import { IcalAttachment } from "nodemailer/lib/mailer/index";
-import { IConversation, IMessage } from "../../../entitties/interfaces/conversation/IMessage.ts";
-import { IConversationRepository } from "../../../entitties/interfaces/conversation/ImessageRepository.ts";
-import { ConversationModal } from "../models/chat/conversationModal.ts";
-import { MessageModal } from "../models/chat/MessageModal.ts";
+import { IConversation, IMessage } from "../../../entitties/interfaces/conversation/IMessage";
+import { IConversationRepository } from "../../../entitties/interfaces/conversation/ImessageRepository";
+import { ConversationModal } from "../models/chat/conversationModal";
+import { MessageModal } from "../models/chat/MessageModal";
 import { ObjectId } from "mongoose";
 
 export class ConversationRepository implements IConversationRepository{

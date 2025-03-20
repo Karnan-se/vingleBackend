@@ -6,7 +6,7 @@ import sharp from "sharp";
 
 import path from "path"
 import { ICertificateData } from "../../../entitties/interfaces/certificate/ICertificate";
-import AppError from "./appError.ts";
+import AppError from "./appError";
 
 export class PDFcreator implements IPDFCreator {
   constructor() {}
@@ -31,8 +31,8 @@ export class PDFcreator implements IPDFCreator {
         doc.fontSize(24).text("INVOICE", { align: "center" })
         doc.moveDown()
 
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = path.dirname(__filename);
+        // const __filename = fileURLToPath(import.meta.url);
+        // const __dirname = path.dirname(__filename);
 
         
         const imagePath = path.resolve(__dirname, "../../../entitties/Assets/vingle.png");
@@ -99,8 +99,8 @@ export class PDFcreator implements IPDFCreator {
     })
   }
   async generateCertificate(certificateData: ICertificateData): Promise<Buffer> {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
+    // const __filename = fileURLToPath(import.meta.url);
+    // const __dirname = path.dirname(__filename);
 
     const vingleLogo = path.resolve(__dirname, "../../../entitties/Assets/vingle.png");
     const backgroundImage = path.resolve(__dirname, "../../../entitties/Assets/certificateTemplate.png");

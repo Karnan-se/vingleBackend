@@ -1,6 +1,6 @@
-import CertificateService from "../../../usecases/CertificateService.ts";
-import { CertificateRepository } from "../../database/repositories/certificateRepository.ts";
-import CertificateController from "../../../adapters/controller/certificateController.ts";
+import CertificateService from "../../../usecases/CertificateService";
+import { CertificateRepository } from "../../database/repositories/certificateRepository";
+import CertificateController from "../../../adapters/controller/certificateController";
 
 
 

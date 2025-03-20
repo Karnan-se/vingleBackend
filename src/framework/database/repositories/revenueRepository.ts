@@ -1,9 +1,9 @@
-import { BaseRepository } from "./Base/BaseRepository.ts";
-import { RevenueModal } from "../models/revenue/revenueModal.ts";
-import { IRevenue } from "../../../entitties/interfaces/revenue/IRevenue.ts";
-import { IRevenueRepository } from "../../../entitties/interfaces/revenue/IRevenueRepository.ts";
-import { OrderRepository } from "./orderRepository.ts";
-import { OrderModal } from "../models/course/OrderModal.ts";
+import { BaseRepository } from "./Base/BaseRepository";
+import { RevenueModal } from "../models/revenue/revenueModal";
+import { IRevenue } from "../../../entitties/interfaces/revenue/IRevenue";
+import { IRevenueRepository } from "../../../entitties/interfaces/revenue/IRevenueRepository";
+import { OrderRepository } from "./orderRepository";
+import { OrderModal } from "../models/course/OrderModal";
 
 
 export class RevenueRepository

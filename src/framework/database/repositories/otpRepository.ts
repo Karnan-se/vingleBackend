@@ -1,7 +1,7 @@
 
-import { IOTP } from "../../../entitties/interfaces/admin/Iotp.ts";
-import OTPRepository from "../../../entitties/interfaces/common/IOTPRepository.ts";
-import { OTPMODEL } from "../models/general/otpModel.ts";
+import { IOTP } from "../../../entitties/interfaces/admin/Iotp";
+import OTPRepository from "../../../entitties/interfaces/common/IOTPRepository";
+import { OTPMODEL } from "../models/general/otpModel";
 import { ObjectId } from "mongoose";
 
 export class MongoOtpRepository implements OTPRepository {

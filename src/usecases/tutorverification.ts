@@ -1,20 +1,18 @@
 
-import { IOTP } from "../entitties/interfaces/admin/Iotp.ts"
-import IOTPRepository from "../entitties/interfaces/common/IOTPRepository.ts"
-import AppError from "../framework/web/utils/appError.ts"
-import IEmailService from "../entitties/interfaces/common/emailservice.ts"
-import IGenerateOtp from "../entitties/interfaces/admin/IGenerateOtp.ts"
-import { Iuser } from "../entitties/interfaces/user/user.ts"
-import Itutor from "../entitties/interfaces/tutor.ts/Itutor.ts"
-import { ItutorRepository } from "../entitties/interfaces/tutor.ts/tutorrepository.ts"
+import { IOTP } from "../entitties/interfaces/admin/Iotp"
+import IOTPRepository from "../entitties/interfaces/common/IOTPRepository"
+import AppError from "../framework/web/utils/appError"
+import IEmailService from "../entitties/interfaces/common/emailservice"
+import IGenerateOtp from "../entitties/interfaces/admin/IGenerateOtp"
+import { ItutorRepository } from "../entitties/interfaces/tutor.ts/tutorrepository"
+import Itutor from "../entitties/interfaces/tutor.ts/Itutor"
+
 
 
 interface Dependency{
     repository :{
         otprepository:IOTPRepository
         tutorRepository:ItutorRepository
-        
-        
     }
     service :{
         generateOtp : IGenerateOtp

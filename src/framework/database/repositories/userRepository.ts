@@ -1,7 +1,7 @@
-import { userModel } from "../models/user/userModels.ts";  //this part is from mongo modal
-import { IuserRepository } from "../../../entitties/interfaces/user/userrepository.ts";
-import { Iuser } from "../../../entitties/interfaces/user/user.ts";
-import AppError from "../../web/utils/appError.ts";
+import { userModel } from "../models/user/userModels";  //this part is from mongo modal
+import { IuserRepository } from "../../../entitties/interfaces/user/userrepository";
+import { Iuser } from "../../../entitties/interfaces/user/user";
+import AppError from "../../web/utils/appError";
 import { ObjectId } from "mongoose";
 
 

@@ -2,16 +2,14 @@ import {
   ICourse,
   IItem,
   InputSection,
-  ISection,
-} from "../entitties/interfaces/course/course.ts";
-import { ICourseRepository } from "../entitties/interfaces/course/IcouseRepository.ts";
-import AppError from "../framework/web/utils/appError.ts";
-import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService.ts";
-import { isValidObjectId } from "mongoose";
+} from "../entitties/interfaces/course/course";
+import { ICourseRepository } from "../entitties/interfaces/course/IcouseRepository";
+import AppError from "../framework/web/utils/appError";
 import { ObjectId } from "mongoose";
 import fs from "fs";
 import path from "path";
-import { IFfmpegService } from "../entitties/interfaces/ffmpeg/IFfmpeg.ts";
+import { IFfmpegService } from "../entitties/interfaces/ffmpeg/IFfmpeg";
+import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService";
 
 interface Dependency {
   Repository: {

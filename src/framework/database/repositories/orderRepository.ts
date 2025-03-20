@@ -1,6 +1,6 @@
-import { IOrder } from "../../../entitties/interfaces/Iorder/Iorder.ts";
-import { OrderModal } from "../models/course/OrderModal.ts";
-import { IOrderRepository } from "../../../entitties/interfaces/Iorder/IOrderRespository.ts";
+import { IOrder } from "../../../entitties/interfaces/Iorder/Iorder";
+import { OrderModal } from "../models/course/OrderModal";
+import { IOrderRepository } from "../../../entitties/interfaces/Iorder/IOrderRespository";
 import { ObjectId } from "mongoose";
 
 export class OrderRepository implements IOrderRepository {

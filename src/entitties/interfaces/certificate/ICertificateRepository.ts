@@ -1,9 +1,10 @@
 import { ICertificate } from "./ICertificate"
 import { Schema } from "mongoose"
 import { ICourse } from "../course/course"
-import Itutor from "../tutor.ts/Itutor"
+
 import { Iuser } from "../user/user"
 import { ObjectId } from "mongoose"
+import Itutor from "../tutor.ts/Itutor"
 
 export interface ICertifiateRepository {
     create(data: Partial<ICertificate>): Promise<ICertificate>

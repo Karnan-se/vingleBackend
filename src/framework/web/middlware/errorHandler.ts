@@ -1,4 +1,4 @@
-import AppError from "../utils/appError.ts"; 
+import AppError from "../utils/appError"; 
 import { StatusCodes , ReasonPhrases } from "http-status-codes";
 import { Request, Response,NextFunction, ErrorRequestHandler } from "express";
 

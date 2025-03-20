@@ -1,14 +1,14 @@
 import express from  "express"
-import { tutorController } from "../../dependencies/tutor/Tutordependency.ts"
-import tutorVerifyController from "../../dependencies/tutor/TutorVerifyDependecy.ts"
-import { tutorApplicationController } from "../../dependencies/tutor/instructorDependency.ts"
-import { uploadFile } from "../../../adapters/middleware/multer.ts"
+import { tutorController } from "../../dependencies/tutor/Tutordependency"
+import tutorVerifyController from "../../dependencies/tutor/TutorVerifyDependecy"
+import { tutorApplicationController } from "../../dependencies/tutor/instructorDependency"
+import { uploadFile } from "../../../adapters/middleware/multer"
 import multer from "multer"
-import jwtAuth from "../../web/middlware/authentication.ts"
-import { courseController } from "../../dependencies/course/course.ts"
-import { uploadVideo_thumbnail } from "../../../adapters/middleware/multervideo.ts"
-import { conversationController } from "../../dependencies/conversation/conversationDependency.ts"
-import { revenueController } from "../../dependencies/revenue/revenueDependency.ts"
+import jwtAuth from "../../web/middlware/authentication"
+import { courseController } from "../../dependencies/course/course"
+import { uploadVideo_thumbnail } from "../../../adapters/middleware/multervideo"
+import { conversationController } from "../../dependencies/conversation/conversationDependency"
+import { revenueController } from "../../dependencies/revenue/revenueDependency"
 
 const router = express.Router()
 

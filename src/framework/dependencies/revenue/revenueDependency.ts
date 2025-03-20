@@ -1,8 +1,8 @@
-import { RevenueService } from "../../../usecases/revenueService.ts";
-import CourseRepository from "../../database/repositories/CourseRepository.ts";
-import { OrderRepository } from "../../database/repositories/orderRepository.ts";
-import { RevenueController } from "../../../adapters/controller/RevenueController.ts";
-import { RevenueRepository } from "../../database/repositories/revenueRepository.ts";
+import { RevenueService } from "../../../usecases/revenueService";
+import CourseRepository from "../../database/repositories/CourseRepository";
+import { OrderRepository } from "../../database/repositories/orderRepository";
+import { RevenueController } from "../../../adapters/controller/RevenueController";
+import { RevenueRepository } from "../../database/repositories/revenueRepository";
 
 
 const repository = {

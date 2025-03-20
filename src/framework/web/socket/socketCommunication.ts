@@ -1,8 +1,8 @@
 import { ObjectId } from "mongoose";
-import NotificationRepository from "../../database/repositories/NotificationRepository.ts";
-import { ConversationRepository } from "../../database/repositories/ConversationRepository.ts";
-import { IMessage } from "../../../entitties/interfaces/conversation/IMessage.ts";
-import {INotification} from "../../../entitties/interfaces/notification/INotification.ts"
+import NotificationRepository from "../../database/repositories/NotificationRepository";
+import { ConversationRepository } from "../../database/repositories/ConversationRepository";
+import { IMessage } from "../../../entitties/interfaces/conversation/IMessage";
+import {INotification} from "../../../entitties/interfaces/notification/INotification"
 import { Socket } from "socket.io";
 
 

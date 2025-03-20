@@ -1,10 +1,9 @@
-import { configKeys } from "../../../config.ts"
+import { configKeys } from "../../../config"
 import Stripe from "stripe"
+import AppError from "./appError"
+import { Iuser } from "../../../entitties/interfaces/user/user"
+import { IPaymentService } from "../../../entitties/interfaces/service.ts/IPaymentService"
 
-import { IPaymentService } from "../../../entitties/interfaces/service.ts/IPaymentService.ts"
-import AppError from "./appError.ts"
-import { Iuser } from "../../../entitties/interfaces/user/user.ts"
-import { use } from "passport"
 
 
 const stripe = new Stripe(configKeys.STRIPE_SECRET_KEY as string)

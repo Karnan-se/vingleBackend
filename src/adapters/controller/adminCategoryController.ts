@@ -1,6 +1,6 @@
-import CategoryService from "../../usecases/CategoryService.ts";
+import CategoryService from "../../usecases/CategoryService";
 import { Request , Response , NextFunction } from "express";
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
 
 export default class CategoryController {
     private category

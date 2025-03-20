@@ -1,6 +1,6 @@
 import { RatingService } from "../../usecases/ratingservice"
 import { Request , Response , NextFunction } from "express"
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts"
+import { HttpStatus } from "../../entitties/Enums/statusCode"
 
 export class RatingsController {
     private RatingsService

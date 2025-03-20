@@ -4,15 +4,14 @@ import {
   IItem,
   ISection,
   InputSection,
-} from "../../../entitties/interfaces/course/course.ts";
+} from "../../../entitties/interfaces/course/course";
 import {
   CourseModal,
   ItemModal,
   SectionModal,
-} from "../models/tutor/CourseModel.ts";
-import { ICourseRepository } from "../../../entitties/interfaces/course/IcouseRepository.ts";
-import { IInstructor } from "../../../entitties/interfaces/tutor.ts/IInstructor.ts";
-import { InputCourse } from "../../../entitties/interfaces/course/course.ts";
+} from "../models/tutor/CourseModel";
+import { ICourseRepository } from "../../../entitties/interfaces/course/IcouseRepository";
+
 
 
 export default class CourseRepository implements ICourseRepository {

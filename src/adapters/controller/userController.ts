@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import UserUseCase from "../../usecases/userServices"
-import { attachTokenCookie } from "../middleware/cookie.ts";
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
+import { attachTokenCookie } from "../middleware/cookie";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
 
 
 

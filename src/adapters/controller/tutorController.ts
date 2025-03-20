@@ -1,8 +1,8 @@
-import TutorUseCase from "../../usecases/tuotorService.ts";
+import TutorUseCase from "../../usecases/tuotorService";
 import { Request , Response, NextFunction } from "express";
-import { attachTokenCookie } from "../middleware/cookie.ts";
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
-import AppError from "../../framework/web/utils/appError.ts";
+import { attachTokenCookie } from "../middleware/cookie";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
+import AppError from "../../framework/web/utils/appError";
 export default class TutorController {
     private tutorUseCase:TutorUseCase
     constructor(tutorUseCase: TutorUseCase){

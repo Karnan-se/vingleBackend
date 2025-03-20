@@ -1,7 +1,7 @@
-import adminUseCase from "../../usecases/adminService.ts";
+import adminUseCase from "../../usecases/adminService";
 import { Request, Response, NextFunction } from "express";
-import { attachTokenCookie } from "../middleware/cookie.ts";
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
+import { attachTokenCookie } from "../middleware/cookie";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
 
 
 

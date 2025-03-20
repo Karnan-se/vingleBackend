@@ -1,6 +1,6 @@
-import { RatingService } from "../../../usecases/ratingservice.ts";
-import { RatingsRepository } from "../../database/repositories/RatingsRepository.ts";
-import { RatingsController } from "../../../adapters/controller/ratingsController.ts";
+import { RatingService } from "../../../usecases/ratingservice";
+import { RatingsRepository } from "../../database/repositories/RatingsRepository";
+import { RatingsController } from "../../../adapters/controller/ratingsController";
 
 
 

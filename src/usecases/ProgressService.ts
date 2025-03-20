@@ -1,14 +1,13 @@
 import mongoose, { ObjectId } from "mongoose";
-import IProgressRepository from "../entitties/interfaces/Progress/IprogressRepository.ts";
-import { IProgress } from "../entitties/interfaces/Progress/IProgress.ts";
-import AppError from "../framework/web/utils/appError.ts";
-import { ICourse } from "../entitties/interfaces/course/course.ts";
-import { ICourseRepository } from "../entitties/interfaces/course/IcouseRepository.ts";
-import { ICertificate, ICertificateData } from "../entitties/interfaces/certificate/ICertificate.ts";
-import { ICertifiateRepository } from "../entitties/interfaces/certificate/ICertificateRepository.ts";
-import { configKeys } from "../config.ts";
-import { IPDFCreator } from "../entitties/interfaces/Invoice/IPDFcreator.ts";
-import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService.ts";
+import IProgressRepository from "../entitties/interfaces/Progress/IprogressRepository";
+import { IProgress } from "../entitties/interfaces/Progress/IProgress";
+import AppError from "../framework/web/utils/appError";
+import { ICourseRepository } from "../entitties/interfaces/course/IcouseRepository";
+import { ICertificate, ICertificateData } from "../entitties/interfaces/certificate/ICertificate";
+import { ICertifiateRepository } from "../entitties/interfaces/certificate/ICertificateRepository";
+import { configKeys } from "../config";
+import { IPDFCreator } from "../entitties/interfaces/Invoice/IPDFcreator";
+import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService";
 
 
 interface Dependency {

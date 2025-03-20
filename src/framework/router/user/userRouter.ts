@@ -1,15 +1,15 @@
 import express from "express"
-import { userController } from "../../dependencies/userdepencies.ts";
-import verificationController from "../../dependencies/verificationDependency.ts";
-import { googleController } from "../../dependencies/user/googledependency.ts";
-import jwtAuth from "../../web/middlware/authentication.ts";
-import { userCourseController } from "../../dependencies/course/userCourseDependency.ts";
-import { progresssController } from "../../dependencies/Progress/progresDependency.ts";
-import ConversationController from "../../../adapters/controller/conversationController.ts";
-import { conversationController } from "../../dependencies/conversation/conversationDependency.ts";
-import { ratingsController } from "../../dependencies/rating/ratingDependency.ts";
-import { certificateController } from "../../dependencies/certificate/certificateDependency.ts";
-import { courseController } from "../../dependencies/course/course.ts";
+import { userController } from "../../dependencies/userdepencies";
+import verificationController from "../../dependencies/verificationDependency";
+import { googleController } from "../../dependencies/user/googledependency";
+import jwtAuth from "../../web/middlware/authentication";
+import { userCourseController } from "../../dependencies/course/userCourseDependency";
+import { progresssController } from "../../dependencies/Progress/progresDependency";
+import ConversationController from "../../../adapters/controller/conversationController";
+import { conversationController } from "../../dependencies/conversation/conversationDependency";
+import { ratingsController } from "../../dependencies/rating/ratingDependency";
+import { certificateController } from "../../dependencies/certificate/certificateDependency";
+import { courseController } from "../../dependencies/course/course";
 
 
 

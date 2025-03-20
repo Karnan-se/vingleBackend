@@ -1,6 +1,5 @@
 import { ObjectId } from "mongoose"
 import { IProgress } from "./IProgress"
-import IpasswordService from "../service.ts/passwordService"
 
 
 export default interface IProgressRepository {

@@ -1,10 +1,10 @@
 import { ObjectId } from "mongoose";
-import { ProgressModal } from "../models/Progress/ProgressModal.ts";
-import { IProgress } from "../../../entitties/interfaces/Progress/IProgress.ts";
-import IProgressRepository from "../../../entitties/interfaces/Progress/IprogressRepository.ts";
-import AppError from "../../web/utils/appError.ts";
-import { CourseModal } from "../models/tutor/CourseModel.ts";
-import { ICourse } from "../../../entitties/interfaces/course/course.ts";
+import { ProgressModal } from "../models/Progress/ProgressModal";
+import { IProgress } from "../../../entitties/interfaces/Progress/IProgress";
+import IProgressRepository from "../../../entitties/interfaces/Progress/IprogressRepository";
+import AppError from "../../web/utils/appError";
+import { CourseModal } from "../models/tutor/CourseModel";
+import { ICourse } from "../../../entitties/interfaces/course/course";
 
 export  default class ProgressRepository implements IProgressRepository {
 

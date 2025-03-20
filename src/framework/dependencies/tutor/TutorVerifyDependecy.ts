@@ -1,12 +1,12 @@
 
-import TutorVerifivationService from "../../../usecases/tutorverification.ts";
+import TutorVerifivationService from "../../../usecases/tutorverification";
 
-import { MongoOtpRepository } from "../../database/repositories/otpRepository.ts";
-import { EmailService } from "../../web/utils/emailService.ts";
-import { GenerteOtp } from "../../web/utils/generateOtp.ts";
+import { MongoOtpRepository } from "../../database/repositories/otpRepository";
+import { EmailService } from "../../web/utils/emailService";
+import { GenerteOtp } from "../../web/utils/generateOtp";
 
-import TutorVerifyController from "../../../adapters/controller/tutorVerifyController.ts";
-import TutorMongoRepository from "../../database/repositories/tutorRepository.ts";
+import TutorVerifyController from "../../../adapters/controller/tutorVerifyController";
+import TutorMongoRepository from "../../database/repositories/tutorRepository";
 
 const repository ={
     otprepository: new MongoOtpRepository(),

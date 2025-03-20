@@ -1,5 +1,6 @@
-import { IBaseRepository } from "../../../../entitties/interfaces/BaseRepository.ts/IBaseRepository.ts";
+
 import { Model } from "mongoose";
+import { IBaseRepository } from "../../../../entitties/interfaces/BaseRepository.ts/IBaseRepository";
 
 export class BaseRepository <T> implements IBaseRepository <T>{
     protected model: Model<T>

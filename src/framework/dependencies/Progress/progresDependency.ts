@@ -1,10 +1,10 @@
-import ProgressServcie from "../../../usecases/ProgressService.ts";
-import ProgressRepository from "../../database/repositories/ProgressRepository.ts";
-import ProgressController from "../../../adapters/controller/progressController.ts";
-import CourseRepository from "../../database/repositories/CourseRepository.ts";
-import { CertificateRepository } from "../../database/repositories/certificateRepository.ts";
-import { PDFcreator } from "../../web/utils/pdfGenerator.ts";
-import { CloudinaryService } from "../../web/utils/cloudinary.ts";
+import ProgressServcie from "../../../usecases/ProgressService";
+import ProgressRepository from "../../database/repositories/ProgressRepository";
+import ProgressController from "../../../adapters/controller/progressController";
+import CourseRepository from "../../database/repositories/CourseRepository";
+import { CertificateRepository } from "../../database/repositories/certificateRepository";
+import { PDFcreator } from "../../web/utils/pdfGenerator";
+import { CloudinaryService } from "../../web/utils/cloudinary";
 
 const Repository ={
     progresRepository : new ProgressRepository(),

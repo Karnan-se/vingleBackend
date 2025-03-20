@@ -2,7 +2,6 @@ import { ICourse, IItem } from "./course";
 import { InputSection } from "./course";
 import { ISection } from "./course";
 import { ObjectId } from "mongoose";
-import { IInstructor } from "../tutor.ts/IInstructor";
 
 export interface ICourseRepository {
   createCourse(course: ICourse): Promise<ICourse>;

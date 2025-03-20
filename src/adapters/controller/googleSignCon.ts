@@ -1,12 +1,11 @@
-import { json } from "node:stream/consumers";
-import IGoogleSignService from "../../usecases/googleSignIn.ts";
+
+import IGoogleSignService from "../../usecases/googleSignIn";
 import { Request, Response, NextFunction } from "express";
-import { Iuser } from "../../entitties/interfaces/user/user.ts";
-import { GooglePayload } from "../../entitties/interfaces/service.ts/googleService.ts";
-import { IuserRepository } from "../../entitties/interfaces/user/userrepository.ts";
-import { IUserUseCase } from "../../entitties/interfaces/user/userUseCase.ts";
-import { MongoUserRepository } from "../../framework/database/repositories/userRepository.ts";
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
+import { Iuser } from "../../entitties/interfaces/user/user";
+import { IUserUseCase } from "../../entitties/interfaces/user/userUseCase";
+import { MongoUserRepository } from "../../framework/database/repositories/userRepository";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
+import { GooglePayload } from "../../entitties/interfaces/service.ts/googleService";
 
 interface usecase {
   googleSignService: IGoogleSignService;

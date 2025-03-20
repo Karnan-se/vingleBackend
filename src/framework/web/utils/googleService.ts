@@ -1,6 +1,6 @@
 import {OAuth2Client} from  "google-auth-library";
-import { configKeys } from "../../../config.ts";
-import { IGoogleService } from "../../../entitties/interfaces/service.ts/googleService.ts";
+import { configKeys } from "../../../config";
+import { IGoogleService } from "../../../entitties/interfaces/service.ts/googleService";
 
 
 export default class googleService implements IGoogleService{

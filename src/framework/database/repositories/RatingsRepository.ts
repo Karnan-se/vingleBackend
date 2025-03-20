@@ -1,7 +1,7 @@
-import { IRatings } from "../../../entitties/interfaces/ratings/IRatings.ts"
-import { RatingModal } from "../models/course/ratingModel.ts"
-import { CourseModal } from "../models/tutor/CourseModel.ts"
-import { ICourse } from "../../../entitties/interfaces/course/course.ts"
+import { IRatings } from "../../../entitties/interfaces/ratings/IRatings"
+import { RatingModal } from "../models/course/ratingModel"
+import { CourseModal } from "../models/tutor/CourseModel"
+import { ICourse } from "../../../entitties/interfaces/course/course"
 import { ObjectId } from "mongoose"
 
 

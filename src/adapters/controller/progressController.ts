@@ -2,7 +2,7 @@ import {Request , Response ,  NextFunction } from "express";
 import ProgressServcie from "../../usecases/ProgressService";
 import { ObjectId } from "mongoose";
 import mongoose from "mongoose";
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
 
 export default class ProgressController {
     private ProgressService

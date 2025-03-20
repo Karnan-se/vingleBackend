@@ -1,9 +1,9 @@
-import { attachTokenCookie } from "../adapters/middleware/cookie.ts"
-import IJwtService from "../entitties/interfaces/service.ts/IJwtService.ts"
+
+import IJwtService from "../entitties/interfaces/service.ts/IJwtService"
 import IpasswordService from "../entitties/interfaces/service.ts/passwordService"
-import Itutor from "../entitties/interfaces/tutor.ts/Itutor.ts"
-import { ItutorRepository } from "../entitties/interfaces/tutor.ts/tutorrepository.ts"
-import AppError from "../framework/web/utils/appError.ts"
+import Itutor from "../entitties/interfaces/tutor.ts/Itutor"
+import { ItutorRepository } from "../entitties/interfaces/tutor.ts/tutorrepository"
+import AppError from "../framework/web/utils/appError"
 
 
 interface Dependency {

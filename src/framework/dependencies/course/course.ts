@@ -1,8 +1,8 @@
-import CourseService from "../../../usecases/CourseService.ts";
-import CourseRepository from "../../database/repositories/CourseRepository.ts";
-import CourseController from "../../../adapters/controller/courseController.ts";
-import { CloudinaryService } from "../../web/utils/cloudinary.ts";
-import { FfmpegService } from "../../web/utils/ffmpeg.ts";
+import CourseService from "../../../usecases/CourseService";
+import CourseRepository from "../../database/repositories/CourseRepository";
+import CourseController from "../../../adapters/controller/courseController";
+import { CloudinaryService } from "../../web/utils/cloudinary";
+import { FfmpegService } from "../../web/utils/ffmpeg";
 
 
 

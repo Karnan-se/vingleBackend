@@ -1,9 +1,9 @@
-import GoogleSignService from "../../../usecases/googleSignIn.ts";
-import { MongoUserRepository } from "../../database/repositories/userRepository.ts";
-import { userUseCaseInstance } from "../userdepencies.ts";
+import GoogleSignService from "../../../usecases/googleSignIn";
+import { MongoUserRepository } from "../../database/repositories/userRepository";
+import { userUseCaseInstance } from "../userdepencies";
 
-import GoogleService from "../../web/utils/googleService.ts";
-import GoogleController from "../../../adapters/controller/googleSignCon.ts";
+import GoogleService from "../../web/utils/googleService";
+import GoogleController from "../../../adapters/controller/googleSignCon";
 
 
 const repository ={

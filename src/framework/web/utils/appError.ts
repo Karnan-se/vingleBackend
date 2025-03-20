@@ -1,5 +1,5 @@
 import { StatusCodes, ReasonPhrases } from "http-status-codes";
-import errorCodes from "../errors/errorCode.ts";
+import errorCodes from "../errors/errorCode";
 
 class AppError extends Error {
   errorCode: number;

@@ -1,7 +1,7 @@
 import { ObjectId } from "mongoose";
-import IJwtService from "../../../entitties/interfaces/service.ts/IJwtService.ts";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { configKeys } from "../../../config.ts";
+import { configKeys } from "../../../config";
+import IJwtService from "../../../entitties/interfaces/service.ts/IJwtService";
 
 const JWT_SECRET = configKeys.JWT_SECRET;
 const REFRESH_TOKEN_SECRET = configKeys.REFRESH_TOKEN_SECRET;

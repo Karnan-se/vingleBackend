@@ -1,7 +1,7 @@
 
-import TutorVerifivationService from "../../usecases/tutorverification.ts";
+import TutorVerifivationService from "../../usecases/tutorverification";
 import { Request, Response, NextFunction } from "express";
-import { HttpStatus } from "../../entitties/Enums/statusCode.ts";
+import { HttpStatus } from "../../entitties/Enums/statusCode";
 
 
 export default class TutorVerifyController{
