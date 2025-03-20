@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node src/app.ts",
     "dev": "node --no-warnings --loader ts-node/esm src/app.ts",
-    "hehe": "nodemon"
+    "hehe": "nodemon",
+    "build":"tsc"
   },
   "author": "",
   "license": "ISC",
