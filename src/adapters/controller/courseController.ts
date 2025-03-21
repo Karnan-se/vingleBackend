@@ -86,12 +86,19 @@ export default class CourseController{
         }
     }
     getCourse = async(req:Request, res:Response, next:NextFunction)=>{
-        const {courseId} = req.body;
-        console.log(courseId , "course._Id ")
-        console.log(req.body)
-        const course = await this.Course.getCourse(courseId);
-       
-        res.status(HttpStatus.OK).json({course})
+        try {
+            const {courseId} = req.body;
+            console.log(courseId , "course._Id ")
+            // console.log(req.body)
+            const course = await this.Course.getCourse(courseId);
+           
+            res.status(HttpStatus.OK).json({course})
+            
+        } catch (error) {
+            next(error)
+            
+        }
+
     }
 
     addSection = async(req:Request, res:Response, next:NextFunction)=>{

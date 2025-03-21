@@ -21,7 +21,7 @@ startSocket(server);
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:5173",
+    origin: ["https://www.vingle.shop", "https://vingle.shop"],
   })
 );
 app.use(morgan("combined", { stream: logStream }));

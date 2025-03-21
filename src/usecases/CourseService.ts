@@ -105,17 +105,19 @@ export default class CourseService {
     }
   }
 
- async deleteVideo(fileUrl:Express.Multer.File[] | null){
+ async deleteVideo(fileUrl:Express.Multer.File[] | null){ 
 
   await Promise.all(
     fileUrl!?.map(async (file)=>{
       const outputPath = path.join("output", `video_${path.basename(file.path)}`);
       const fileTodelete = file.mimetype == "application/pdf" ?path.join(file.destination, file.filename) : path.resolve(outputPath)
+      // const uploadFolder = path.join("")
       if(fs.existsSync(fileTodelete)){
         try {
           await fs.promises.unlink(fileTodelete)
           console.log(`Deleted file : ${fileTodelete}`)
-          
+          await fs.promises.unlink(path.join("uploads", path.basename(file.path)));
+          console.log("deleted from the uploads")
         } catch (error) {
           console.log(error , "error to delete ")
           

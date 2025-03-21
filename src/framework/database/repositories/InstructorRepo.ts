@@ -2,7 +2,7 @@ import { InstructorModel } from "../models/tutor/InstructorModel";
 
 import { ObjectId } from "mongoose";
 import AppError from "../../web/utils/appError";
-import { error } from "console";
+
 import { IInstructorRepoInterface } from "../../../entitties/interfaces/tutor.ts/IInstructorRepo";
 import { IInstructor } from "../../../entitties/interfaces/tutor.ts/IInstructor";
 
@@ -24,10 +24,11 @@ export default class InstructorRepository implements IInstructorRepoInterface  {
         }
         async  findByUserId(userId: ObjectId | undefined): Promise<IInstructor> {
             try {
+                console.log(userId , "userId preset in instructoer details ")
                 const tutorDetail = await InstructorModel.findOne({user_id : userId})
                 console.log(tutorDetail)
                 if(!tutorDetail){
-                    throw AppError.conflict("no application available")
+                    throw AppError.conflict("no-application available")
                 }
                 return tutorDetail as unknown as IInstructor
                 
