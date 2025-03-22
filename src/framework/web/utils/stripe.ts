@@ -21,7 +21,7 @@ export class PaymentService implements IPaymentService {
         try {
 
             const session = await stripe.checkout.sessions.create({
-                success_url: 'http://localhost:5173/success?session_id={CHECKOUT_SESSION_ID}',
+                success_url: 'https://www.vingle.shop//success?session_id={CHECKOUT_SESSION_ID}',
                 cancel_url: 'http://localhost:5173/cancel',
                 payment_method_types: ['card'],
                 line_items: [
