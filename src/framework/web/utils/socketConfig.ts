@@ -2,8 +2,7 @@ import { Server as SocketIOServer } from "socket.io";
 import { Server as HttpServer } from "http";
 import { ReadNotification } from "../socket/socketCommunication";
 import { saveMessage } from "../socket/socketCommunication";
-import { userInfo } from "os";
-import { send } from "process";
+import { configKeys } from "../../../config";
 
 let io: SocketIOServer;
 
@@ -15,7 +14,7 @@ export function startSocket(server: HttpServer) {
 
   io = new SocketIOServer(server, {
     cors: {
-      origin: "http://localhost:5173",
+      origin: `${configKeys.MY_DOMAIN}`,
       methods: ["GET", "POST"],
       credentials: true,
     },

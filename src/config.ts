@@ -18,7 +18,7 @@ const configKeys = {
     ACCESS_TOKEN_EXPIRES_IN :15 * 60 * 1000,
     REFRESH_TOKEN_EXPIRES_IN : 7 * 24 * 60 * 60 * 1000,
     STRIPE_SECRET_KEY:process.env.STRIPE_SECRET_KEY,
-    MY_DOMAIN_NAME:process.env.MY_DOMAIN,
+    MY_DOMAIN : process.env.NODE_ENV  == "development" ? "http://localhost:5173" : "https://vingle.shop",
     VINGLE_LOGO : process.env.VINGLE_LOGO,
     CERTIFICATE_TEMPLATE : process.env.CERTIFICATE_TEMPLATE
 

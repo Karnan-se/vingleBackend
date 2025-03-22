@@ -2,8 +2,7 @@
 .env
 
 node_modules/
-uploads/
-output/
+
 dist/
 
 

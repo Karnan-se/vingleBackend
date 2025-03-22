@@ -10,6 +10,7 @@ import userRouter from "./framework/router/user/userRouter";
 import adminRouter from "./framework/router/admin/adminRouter";
 import tutorRouter from "./framework/router/tutor/tutorRouter";
 import {   startSocket } from "./framework/web/utils/socketConfig"; 
+import { configKeys } from "./config";
 
 const app = express();
 const server = http.createServer(app); 
@@ -21,7 +22,7 @@ startSocket(server);
 app.use(
   cors({
     credentials: true,
-    origin: ["https://www.vingle.shop", "https://vingle.shop"],
+    origin: ["https://www.vingle.shop", configKeys.MY_DOMAIN ],
   })
 );
 app.use(morgan("combined", { stream: logStream }));
@@ -48,5 +49,5 @@ app.get("/", (req, res) => {
 
 const PORT = 3000;
 server.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on ${configKeys.MY_DOMAIN}:${PORT}`);
 });
