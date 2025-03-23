@@ -60,7 +60,7 @@ export default class GoogleController {
           console.log(accessToken ,   "accessToken" ,"\n" ,  refreshToken)
           attachTokenCookie("AccessToken", accessToken, res);
           attachTokenCookie("RefreshToken", refreshToken, res);
-          res .status(HttpStatus.OK).json({ message: "success", data: userDetail });
+          res.status(HttpStatus.OK).json({ message: "success", data: userDetail });
         }
       }
     } catch (error) {
