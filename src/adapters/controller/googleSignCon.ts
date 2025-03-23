@@ -56,9 +56,10 @@ export default class GoogleController {
           const userDetail = await this.useRepository.findUserByEmail(
             userDetails.emailAddress
           );
-          res
-            .status(HttpStatus.OK)
-            .json({ message: "success", data: userDetail });
+          const {accessToken , refreshToken }= await this.userUseCase.generateJwtToken(userDetail._id , "User")
+          attachTokenCookie("AccessToken", accessToken, res);
+          attachTokenCookie("RefreshToken", refreshToken, res);
+          res .status(HttpStatus.OK).json({ message: "success", data: userDetail });
         }
       }
     } catch (error) {

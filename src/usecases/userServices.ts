@@ -166,5 +166,18 @@ async findUserById(userId:ObjectId){
   return userDetails 
 }
 
+async generateJwtToken(userId:ObjectId , role="User"){
+  const accessToken = this.jwtService.generateAccesSToken(userId , role)
+  if(!accessToken){
+    console.log("couldnot generate")
+  }
+  const refreshToken = this.jwtService.generateRefreshToken(userId ,  role)
+  if(!refreshToken){
+    console.log("refresg")
+  }
+  return {accessToken, refreshToken}
+
+}
+
 
 }

@@ -1,4 +1,6 @@
+import { JwtTokens } from "../jwt/jwtservice";
 import { Iuser } from "./user";
+import { ObjectId } from "mongoose";
 
 
 
@@ -19,4 +21,6 @@ export interface IUserUseCase {
       accessToken: string | null;
       refreshToken: string | null;
     }>;
+
+  generateJwtToken(userId:ObjectId , role:string):Promise<JwtTokens>
   }
