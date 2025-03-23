@@ -1,4 +1,3 @@
-
 import IGoogleSignService from "../../usecases/googleSignIn";
 import { Request, Response, NextFunction } from "express";
 import { Iuser } from "../../entitties/interfaces/user/user";
@@ -6,6 +5,7 @@ import { IUserUseCase } from "../../entitties/interfaces/user/userUseCase";
 import { MongoUserRepository } from "../../framework/database/repositories/userRepository";
 import { HttpStatus } from "../../entitties/Enums/statusCode";
 import { GooglePayload } from "../../entitties/interfaces/service.ts/googleService";
+import { attachTokenCookie } from "../middleware/cookie";
 
 interface usecase {
   googleSignService: IGoogleSignService;
@@ -41,9 +41,14 @@ export default class GoogleController {
         password: "",
       };
       try {
-        const userDetail = await this.userUseCase.signup(userDetails as Iuser);
-        if (userDetail) {
-          res.status(HttpStatus.OK).json({ message: "success", data: userDetail });
+        const { createdUser, accessToken, refreshToken } = await this.userUseCase.signup(userDetails as Iuser);
+        attachTokenCookie("AccessToken", accessToken, res);
+        attachTokenCookie("RefreshToken", refreshToken, res);
+
+        if (createdUser) {
+          res
+            .status(HttpStatus.OK)
+            .json({ message: "success", data: createdUser });
         }
       } catch (error) {
         console.log(error);
@@ -51,7 +56,9 @@ export default class GoogleController {
           const userDetail = await this.useRepository.findUserByEmail(
             userDetails.emailAddress
           );
-          res.status(HttpStatus.OK).json({ message: "success", data: userDetail });
+          res
+            .status(HttpStatus.OK)
+            .json({ message: "success", data: userDetail });
         }
       }
     } catch (error) {

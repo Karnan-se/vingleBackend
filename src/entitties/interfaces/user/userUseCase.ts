@@ -6,8 +6,8 @@ import { Iuser } from "./user";
 export interface IUserUseCase {
     signup(user: Iuser): Promise<{
       createdUser:Iuser | null
-      accessToken: string | null
-      refreshToken: string | null
+      accessToken: string 
+      refreshToken: string 
 
     }>;
 
