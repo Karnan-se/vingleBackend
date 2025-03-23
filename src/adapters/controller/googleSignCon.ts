@@ -57,6 +57,7 @@ export default class GoogleController {
             userDetails.emailAddress
           );
           const {accessToken , refreshToken }= await this.userUseCase.generateJwtToken(userDetail._id , "User")
+          console.log(accessToken ,   "accessToken" ,"\n" ,  refreshToken)
           attachTokenCookie("AccessToken", accessToken, res);
           attachTokenCookie("RefreshToken", refreshToken, res);
           res .status(HttpStatus.OK).json({ message: "success", data: userDetail });
