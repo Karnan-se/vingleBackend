@@ -11,6 +11,7 @@ import {
   SectionModal,
 } from "../models/tutor/CourseModel";
 import { ICourseRepository } from "../../../entitties/interfaces/course/IcouseRepository";
+import { OrderModal } from "../models/course/OrderModal";
 
 
 
@@ -166,13 +167,13 @@ export default class CourseRepository implements ICourseRepository {
   }
   async courseUpdate(sectionId: ObjectId , courseId:ObjectId): Promise<any> {
     try {
-      console.log(sectionId, "this is sectionId being added");
-
       const courseUpdated = await CourseModal.findOneAndUpdate(
         { _id: courseId }, 
         { $addToSet: {sections: sectionId } }, 
         { new: true }
       );
+
+      
       return courseUpdated
       
     } catch (error) {
@@ -182,7 +183,26 @@ export default class CourseRepository implements ICourseRepository {
     }
   }
   async tutorsCourse(tutorsId:ObjectId):Promise<ICourse[]>{
-    const tutorsCourse  = await  CourseModal.find({tutorId:tutorsId}).populate("category")
+    const tutorsCourse  = await  CourseModal.find({tutorId:tutorsId}).populate([
+      {
+        path: "tutorId",
+        
+      },
+      {
+        path: "category",
+        
+      },
+      {
+        path: "sections",
+        populate: {
+          path: "items",
+        },
+      },
+      {
+        path: "ratings",
+        select: "_id ratingValue userId review", 
+      },
+    ]);
     return tutorsCourse as unknown as ICourse[]
 
   }

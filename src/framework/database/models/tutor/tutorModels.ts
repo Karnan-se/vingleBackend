@@ -15,6 +15,6 @@ const tutorSchema : Schema =  new Schema ({
     headline:{type:String},
      applicationDetails:{type:String,  ref: "Instructor" }  
 
-})
+},{timestamps:true})
 
 export const Tutor = mongoose.model("Tutor", tutorSchema )
