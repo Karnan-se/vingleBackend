@@ -5,5 +5,7 @@ node_modules/
 
 dist/
 
+accessLog 
+
 
 bfg-repo-cleaner-1.14.0.jar
