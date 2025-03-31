@@ -2,6 +2,7 @@ import { IOrder } from "../../../entitties/interfaces/Iorder/Iorder";
 import { OrderModal } from "../models/course/OrderModal";
 import { IOrderRepository } from "../../../entitties/interfaces/Iorder/IOrderRespository";
 import { ObjectId } from "mongoose";
+import AppError from "../../web/utils/appError";
 
 export class OrderRepository implements IOrderRepository {
   constructor() {}
@@ -13,8 +14,9 @@ export class OrderRepository implements IOrderRepository {
         courseId: orderDetails.courseId,
       });
       if (isOrdered) {
-        console.log("order is already purchased");
-        return isOrdered as unknown as IOrder;
+        const updateExistingOrder  = await OrderModal.findOneAndUpdate({userId:orderDetails.userId , courseId :orderDetails.courseId}, {$set:{... orderDetails}}, {new:true})
+        return updateExistingOrder as unknown as IOrder
+     
       }
 
       const orders = await OrderModal.create(orderDetails);
@@ -30,9 +32,12 @@ export class OrderRepository implements IOrderRepository {
     try {
       const update = await OrderModal.findOneAndUpdate(
         { paymentId: sessionId },
-        { $set: { paymentStatus: "Completed", } },
+        { $set: { paymentStatus: "Completed",} },
         { new: true }
       );
+      if(!update){
+        throw AppError.conflict("Payment update failed")
+      }
       return update as unknown as IOrder;
     } catch (error) {
       console.log(error);

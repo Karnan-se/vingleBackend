@@ -63,6 +63,7 @@ export class UserCourseService {
         userInfo!._id,
         course!._id as ObjectId
       );
+      console.log(isbroughtalready , "isBrouht already")
       if (isbroughtalready) {
         throw AppError.conflict("course already Brought");
       }
@@ -96,7 +97,7 @@ export class UserCourseService {
       const createRevenue = await this.createRevenue(getFullDetails)
   
 
-      return orders;
+      return updateOrder;
     } catch (error) {
       throw error;
     }

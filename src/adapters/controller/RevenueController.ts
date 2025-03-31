@@ -22,6 +22,20 @@ export class RevenueController {
         
        }
     }
+
+    async getadminRevenue(req:Request, res :Response, next:NextFunction){
+        try {
+            const revenue = await this.RevenueService.getadminRevenue();
+            console.log("response ftomm adminrevenue servcie")
+            res.status(HttpStatus.OK).json({revenue})
+            
+        } catch (error) {
+            console.log(error)
+            throw error
+            
+        }
+
+    }
     async chartDetails(req: Request , res:Response , next:NextFunction){
         try {
             const chart = await this.RevenueService.chartDetails()
