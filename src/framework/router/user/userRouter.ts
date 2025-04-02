@@ -41,4 +41,5 @@ userRouter.get("/getProgress", (req, res, next)=> progresssController.getProgres
 userRouter.get("/getUserCertificate", jwtAuth , (req, res, next)=> certificateController.getUserCertificate(req, res, next))
 userRouter.post("/getCourse", jwtAuth ,(req, res, next)=>courseController.getCourse(req, res, next))
 
+
 export default userRouter

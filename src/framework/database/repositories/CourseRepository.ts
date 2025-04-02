@@ -70,9 +70,8 @@ export default class CourseRepository implements ICourseRepository {
           );
         })
       );
-      
-
       const updatedId = updatedItems.filter((item)=> item?._id).map((itemId:any)=> itemId._id)
+      
       // console.log(updatedId , "updatedId")
       return updatedId as unknown as ObjectId[]
     } catch (error) {

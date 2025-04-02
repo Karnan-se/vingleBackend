@@ -36,7 +36,7 @@ export class PaymentService implements IPaymentService {
                     quantity: 1,
                   },
                 ],
-                invoice_creation:{enabled:true},
+                invoice_creation:{enabled:false},
                 
                 mode: 'payment',
               });

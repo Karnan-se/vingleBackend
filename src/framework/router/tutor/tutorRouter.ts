@@ -10,12 +10,14 @@ import { uploadVideo_thumbnail } from "../../../adapters/middleware/multervideo"
 import { conversationController } from "../../dependencies/conversation/conversationDependency"
 import { revenueController } from "../../dependencies/revenue/revenueDependency"
 import { Request , Response , NextFunction } from "express"
+import { videoUploaderController } from "../../dependencies/EfficientVideoUploads/videoUploadDependency"
+import { VideoUploaderController } from "../../../adapters/controller/EfficientVideoUploader"
 
 const router = express.Router()
 
 const checker =(req :Request, res:Response, next:NextFunction)=>{
     try {
-        console.log(req.body , "checks the requeest")
+        console.log(req.body.form , "checks the requeest")
         next()
 
         
@@ -33,7 +35,7 @@ router.post("/resendOTP",   (req, res, next)=>tutorVerifyController.resendOTP(re
 router.post("/verifyUser",   (req, res, next)=> tutorVerifyController.verifyUser(req, res, next))
 router.post("/applicationForm", uploadFile, jwtAuth, (req, res, next)=>tutorApplicationController.TutorApplication(req, res, next))
 router.post("/update", jwtAuth, (req, res, next)=> tutorController.updatedUser(req, res,next))
-router.post("/createCourse",  uploadVideo_thumbnail, checker , (req, res, next)=>courseController.newCourse(req, res, next))
+router.post("/createCourse", jwtAuth, checker , (req, res, next)=>courseController.newCourse(req, res, next))
 router.get("/getallCourse",jwtAuth, (req, res, next)=>courseController.getAllCourse(req, res, next))
 router.put("/updateSection", jwtAuth, uploadVideo_thumbnail , (req, res, next)=> courseController.updateSection(req, res, next))
 router.post("/getCourse", jwtAuth ,(req, res, next)=>courseController.getCourse(req, res, next))
@@ -44,6 +46,8 @@ router.post("/fetchRevenue" , jwtAuth , (req,res,next) =>revenueController.getRe
 router.get("/tutorsChart", jwtAuth , (req ,  res, next)=>revenueController.chartDetails(req, res , next))
 router.get("/getAlltutors", jwtAuth , (req, res, next)=> tutorController.getAllTutors(req, res, next))
 router.get("/fetchTutorByEmail", jwtAuth,(req, res, next)=> tutorController.fetchTutorByEmail(req, res, next))
+router.post("/get-signedUrl", jwtAuth , (req, res, next)=> videoUploaderController.requestSignedUrl(req, res, next) )
+
 
 
 export default router

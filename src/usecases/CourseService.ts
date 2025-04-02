@@ -31,71 +31,10 @@ export default class CourseService {
     this.ffmpegService = dependency.Service.FfmpegService;
   }
 
-  async CreateCourse(
-    course: any,
-    thumbnailFile: Express.Multer.File[],
-    fileUrl: Express.Multer.File[] | null
-  ) {
+  async CreateCourse(course :ICourse ) {
     try {
-      console.log(fileUrl, "fileUrl");
-      let uploadedVideoUrl: string[] = [];
-
-      if (fileUrl) {
-        uploadedVideoUrl = await Promise.all(
-          fileUrl.map(async (file) => {
-            if (file.mimetype == "application/pdf") {
-              const filePath = path.join(file.destination, file.filename);
-              const buffer = await fs.promises.readFile(filePath);
-              return this.cloudinarySevice.uploadPDF(
-                buffer as unknown as Express.Multer.File
-              );
-            } else {
-              const outputDir = "output";
-              if (!fs.existsSync(outputDir)) {
-                fs.mkdirSync(outputDir, { recursive: true });
-              }
-
-              const output = path.join(outputDir, `video_${path.basename(file.path)}`);
-              const outputAbsolutePath = path.resolve(output);
-              console.log(output, outputAbsolutePath, "Path");
-              const compressedVideo = await this.compressVideoUsingFfmpeg(
-                file,
-                output
-              );
-              return await this.cloudinarySevice.uploadVideo(
-                outputAbsolutePath
-              );
-
-            }
-          })
-        );
-      }
-      await this.deleteVideo(fileUrl)
-
-
-      let thumbnailurl;
-      if (thumbnailFile) {
-        thumbnailurl = await this.cloudinarySevice.uploadThumbnail(
-          thumbnailFile[0]
-        );
-      }
-
-      const section = course.sections.map((section: any) => {
-        section.items.forEach((item: IItem, index: number) => {
-          item.fileUrl = uploadedVideoUrl[index];
-        });
-        return section;
-      });
-
-      console.log(section);
-
-      const courseup = {
-        ...course,
-        thumbnail: thumbnailurl || "",
-        tags: course.learningObjectives || [],
-        section: section,
-      };
-      const newCourse = await this.Course.createCourse(courseup);
+     
+      const newCourse = await this.Course.createCourse(course);
       console.log(newCourse, "heello tjis is courseDetail");
 
       return newCourse;
@@ -105,31 +44,7 @@ export default class CourseService {
     }
   }
 
- async deleteVideo(fileUrl:Express.Multer.File[] | null){ 
-
-  await Promise.all(
-    fileUrl!?.map(async (file)=>{
-      const outputPath = path.join("output", `video_${path.basename(file.path)}`);
-      const fileTodelete = file.mimetype == "application/pdf" ?path.join(file.destination, file.filename) : path.resolve(outputPath)
-      // const uploadFolder = path.join("")
-      if(fs.existsSync(fileTodelete)){
-        try {
-          await fs.promises.unlink(fileTodelete)
-          console.log(`Deleted file : ${fileTodelete}`)
-          await fs.promises.unlink(path.join("uploads", path.basename(file.path)));
-          console.log("deleted from the uploads")
-        } catch (error) {
-          console.log(error , "error to delete ")
-          
-        }
-      }
-
-
-    })
-  )
-
-
- }
+ 
 
   async getAllCourse() {
     try {
@@ -139,44 +54,11 @@ export default class CourseService {
       throw AppError.conflict("Error getting the course Details");
     }
   }
-  async updateSection(
-    fileIndex: number[],
-    fileUrlFile: Express.Multer.File[],
-    section: InputSection
-  ) {
+  async updateSection( section: InputSection ) {
     try {
-      if (!fileIndex && !fileUrlFile) {
-        console.log("fileUrl is not available");
-        const updateSection = await this.Course.updateItem(section);
-        console.log(updateSection, "updated but there is no fileUrl");
-        return updateSection;
-      }
-
-      if (fileUrlFile) {
-        const uploadPromises = fileUrlFile.map(async (file, index) => {
-          if (file.mimetype.startsWith("video/")) {
-            console.log("Uploading video... please wait");
-
-            const videoUrl = await this.cloudinarySevice.uploadCompressedVideo(
-              file
-            );
-            console.log(videoUrl, "videoUrl uploaded");
-            section.items[fileIndex[index]].fileUrl =
-              videoUrl as unknown as string;
-          } else {
-            console.log("Uploading PDF... please wait");
-            const pdfUrl = await this.cloudinarySevice.uploadPDF(file);
-            console.log(pdfUrl, "pdfUrl uploaded");
-            section.items[fileIndex[index]].fileUrl =
-              pdfUrl as unknown as string;
-          }
-        });
-
-        await Promise.all(uploadPromises);
-      }
 
       const promises = section.items.map(async (item) => {
-        console.log(item, "items check ");
+        // console.log(item, "items check ");
         if (!item._id) {
           console.log(item, "this is the Item going to save on the database");
           return await this.Course.createNewItem({
@@ -198,6 +80,7 @@ export default class CourseService {
       console.log(results.length);
       const sectionId = section._id;
       const flatResult = results.flat();
+      console.log(flatResult , "flatResult")
 
       await this.filteritems(sectionId, flatResult);
 
@@ -231,6 +114,7 @@ export default class CourseService {
       console.log(filtered);
     } catch (error) {
       console.log(error);
+      throw error
     }
   }
 

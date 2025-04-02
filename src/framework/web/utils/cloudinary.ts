@@ -1,7 +1,9 @@
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
+import { configKeys } from "../../../config";
 import fs from "fs/promises";
 import { ICloudinaryService } from "../../../entitties/interfaces/service.ts/IcloudinaryService";
+import { ICloudinarySignedUrl } from "../../../entitties/interfaces/cloudinary/IsignedUrl";
 dotenv.config();
 
 cloudinary.config({
@@ -184,4 +186,21 @@ export class CloudinaryService implements ICloudinaryService {
       throw new Error(`Failed to upload thumbnail: ${error.message}`);
     }
   }
+
+  async cloudinarySignedUrl(timestamp:number , publicId:string, resourceType:string ):Promise<ICloudinarySignedUrl>{
+
+  const signature = cloudinary.utils.api_sign_request(
+    { timestamp, public_id: publicId } ,(configKeys.CLOUDINARY_API_SECRET) as string );
+
+    console.log(signature , "signature")
+
+    return {
+      signedUrl: `https://api.cloudinary.com/v1_1/${configKeys.CLOUDINARY_CLOUD_NAME}/${resourceType}/upload`,
+      timestamp,
+      publicId,
+      signature,
+      apiKey: process.env.CLOUDINARY_API_KEY,
+    };
+}
+
 }

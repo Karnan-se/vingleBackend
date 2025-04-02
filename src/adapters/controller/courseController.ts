@@ -26,18 +26,10 @@ export default class CourseController{
      newCourse = async(req:Request, res:Response, next:NextFunction)=>{
         try {
 
-            console.log(req.body , "reached at ")
-          
-            const structuredData = transformData(req.body);
-            console.log(structuredData, "structured Data")
-
-          
-            const files = req.files as MulterFile
-            const thumbnailFile: Express.Multer.File[] = files.thumbnail ? [files.thumbnail[0]] : [];
-            const fileUrlFile: Express.Multer.File[] = files.fileUrl ? files.fileUrl : [];
-            console.log(fileUrlFile.length, "fileurls")
-            
-            const create = await this.Course.CreateCourse(structuredData, thumbnailFile, fileUrlFile)
+           
+            const {form}= req.body
+            console.log(form)  
+            const create = await this.Course.CreateCourse(form)
             res.status(HttpStatus.OK).json({create})
 
             
@@ -62,22 +54,10 @@ export default class CourseController{
 
      updateSection = async(req:Request, res:Response, next:NextFunction)=>{
         try {
-            const {section_id , sectionData , fileIndex} = req.body;
- 
-            const files = req.files as MulterFile
-            const fileUrlFile: Express.Multer.File[] = files?.fileUrl ? files?.fileUrl : [];
-            let index: number[] = [];
-            if (Array.isArray(fileIndex)) {
-                index = fileIndex.map(Number);
-            } else {
-                index.push(parseInt(fileIndex, 10)); 
-            }
-
-            console.log(index)
-            
-            const updateSection = await this.Course.updateSection(index, fileUrlFile , JSON.parse(sectionData))
+            const {formData} = req.body;
+            console.log(formData , "formData")  
+            const updateSection = await this.Course.updateSection(formData)
             res.status(HttpStatus.OK).json({updateSection})
-  
 
         } catch (error) {
             console.log(error)
