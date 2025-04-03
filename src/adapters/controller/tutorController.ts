@@ -76,5 +76,17 @@ async fetchTutorByEmail(req:Request, res:Response, next:NextFunction){
         
     }
 }
+async tutorLogout(req:Request , res:Response , next:NextFunction){
+    try {
+        const refreshToken = req.cookies["RefreshToken"];
+        console.log(refreshToken, "\n", "refreshtoken");
+        res.clearCookie("RefreshToken");
+        res.clearCookie("AccessToken");
+        res.status(HttpStatus.OK).json({ message: "REfreshToken Cleard" });
+        
+    } catch (error) {
+        
+    }
+}
 
 }

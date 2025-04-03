@@ -1,105 +1,102 @@
 import { Request, Response, NextFunction } from "express";
-import UserUseCase from "../../usecases/userServices"
+import UserUseCase from "../../usecases/userServices";
 import { attachTokenCookie } from "../middleware/cookie";
 import { HttpStatus } from "../../entitties/Enums/statusCode";
 
-
-
-
-
 export class UserController {
-    private userUseCase: UserUseCase;
-  
-    constructor(userUseCase: UserUseCase) {
-      this.userUseCase = userUseCase;
-    }
-  
-    async signup(req: Request, res: Response, next: NextFunction) {
-      try {
-        const user = req.body.user;
-        console.log(user)
-        const {createdUser , accessToken ,refreshToken}= await this.userUseCase.signup(user)
-        console.log(accessToken, "accessToken \n") 
-        console.log(refreshToken, "RefreshToken") 
-        attachTokenCookie("AccessToken", accessToken, res)
-        attachTokenCookie("RefreshToken", refreshToken, res)
-         res.status(HttpStatus.OK).json({ success: true, data: createdUser });
-      } catch (error: any) {
-        console.log(error)
-        next(error)
-      }
-    }
+  private userUseCase: UserUseCase;
 
-    
-    async signIn(req:Request, res:Response, next:NextFunction){
-      const user = req.body.user;
-      console.log(user)
-      try {
-        const {existingUser, accessToken, refreshToken} = await this.userUseCase.signIn(user);
-        console.log(accessToken, "accessToken \n") 
-        console.log(refreshToken, "RefreshToken") 
-        attachTokenCookie("AccessToken", accessToken, res)
-        attachTokenCookie("RefreshToken", refreshToken, res)
-         res.status(HttpStatus.OK).json({success:true, data:existingUser})
-    
-      } catch (error:any) {
-        next(error)
-        
-      }
+  constructor(userUseCase: UserUseCase) {
+    this.userUseCase = userUseCase;
+  }
 
-    }
-    async updatedUser(req:Request, res:Response, next:NextFunction){
+  async signup(req: Request, res: Response, next: NextFunction) {
+    try {
       const user = req.body.user;
       console.log(user);
-      try {
-        
-        const updatedUser = await  this.userUseCase.UpdateUser(user)
-        console.log(updatedUser, "updated User")
-        res.status(HttpStatus.OK).json({message:"success", data:updatedUser}) 
-      } catch (error) {
-        next(error)
-        
-      }
-    }
-    async SendOTP(req:Request, res:Response, next :NextFunction){
-      const {email} = req.body.user;
-      try {
-        const sendOTP = await this.userUseCase.sendOTP(email);
-        console.log(sendOTP);
-        
-        res.status(HttpStatus.OK).json({message:"success" ,data:sendOTP})
-         
-      } catch (error) {
-        next(error)
-        
-      }
-    }
-    async ChangePassword(req:Request, res:Response, next: NextFunction){
-      const {emailAddress, password} = req.body.user;
-      try {
-        const userDetails = await this.userUseCase.changePassword(emailAddress, password);
-        if(userDetails){
-          return res.status(HttpStatus.OK).json({data:userDetails})
-        }
-        
-      } catch (error) {
-        next(error)
-        
-      }
-
-      
-    }
-
-    async findUserBYId(req:Request , res:Response , next:NextFunction){
-      try {
-        
-        const {userId} = req.body;
-        const userDetails = await this.userUseCase.findUserById(userId)
-        // console.log("from controlller ," ,  userDetails)
-        res.status(HttpStatus.OK).json({userDetails})
-      } catch (error) {
-        
-      }
-
+      const { createdUser, accessToken, refreshToken } =
+        await this.userUseCase.signup(user);
+      console.log(accessToken, "accessToken \n");
+      console.log(refreshToken, "RefreshToken");
+      attachTokenCookie("AccessToken", accessToken, res);
+      attachTokenCookie("RefreshToken", refreshToken, res);
+      res.status(HttpStatus.OK).json({ success: true, data: createdUser });
+    } catch (error: any) {
+      console.log(error);
+      next(error);
     }
   }
+
+  async signIn(req: Request, res: Response, next: NextFunction) {
+    const user = req.body.user;
+    console.log(user);
+    try {
+      const { existingUser, accessToken, refreshToken } =
+        await this.userUseCase.signIn(user);
+      console.log(accessToken, "accessToken \n");
+      console.log(refreshToken, "RefreshToken");
+      attachTokenCookie("AccessToken", accessToken, res);
+      attachTokenCookie("RefreshToken", refreshToken, res);
+      res.status(HttpStatus.OK).json({ success: true, data: existingUser });
+    } catch (error: any) {
+      next(error);
+    }
+  }
+  async updatedUser(req: Request, res: Response, next: NextFunction) {
+    const user = req.body.user;
+    console.log(user);
+    try {
+      const updatedUser = await this.userUseCase.UpdateUser(user);
+      console.log(updatedUser, "updated User");
+      res.status(HttpStatus.OK).json({ message: "success", data: updatedUser });
+    } catch (error) {
+      next(error);
+    }
+  }
+  async SendOTP(req: Request, res: Response, next: NextFunction) {
+    const { email } = req.body.user;
+    try {
+      const sendOTP = await this.userUseCase.sendOTP(email);
+      console.log(sendOTP);
+
+      res.status(HttpStatus.OK).json({ message: "success", data: sendOTP });
+    } catch (error) {
+      next(error);
+    }
+  }
+  async ChangePassword(req: Request, res: Response, next: NextFunction) {
+    const { emailAddress, password } = req.body.user;
+    try {
+      const userDetails = await this.userUseCase.changePassword(
+        emailAddress,
+        password
+      );
+      if (userDetails) {
+        return res.status(HttpStatus.OK).json({ data: userDetails });
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async findUserBYId(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { userId } = req.body;
+      const userDetails = await this.userUseCase.findUserById(userId);
+      // console.log("from controlller ," ,  userDetails)
+      res.status(HttpStatus.OK).json({ userDetails });
+    } catch (error) {}
+  }
+  async userLogout(req: Request, res: Response, next: NextFunction) {
+    try {
+      const refreshToken = req.cookies["RefreshToken"];
+      console.log(refreshToken, "\n", "refreshtoken");
+      res.clearCookie("RefreshToken");
+      res.clearCookie("AccessToken");
+      res.status(HttpStatus.OK).json({ message: "REfreshToken Cleard" });
+    } catch (error) {
+      console.log(error)
+      next(error)
+    }
+  }
+}

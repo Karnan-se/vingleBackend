@@ -2,6 +2,8 @@ import adminUseCase from "../../usecases/adminService";
 import { Request, Response, NextFunction } from "express";
 import { attachTokenCookie } from "../middleware/cookie";
 import { HttpStatus } from "../../entitties/Enums/statusCode";
+import { json } from "stream/consumers";
+
 
 
 
@@ -46,6 +48,22 @@ async getAllusers(req:Request, res:Response, next:NextFunction){
         return res.status(HttpStatus.OK).json({students})
         
     } catch (error) {
+        next(error)
+        
+    }
+}
+
+async adminLogout(req:Request , res:Response , next:NextFunction){
+    try {
+        const refreshToken = req.cookies["RefreshToken"]
+        console.log(refreshToken , "\n" , "refreshtoken")
+        res.clearCookie("RefreshToken")
+        res.clearCookie("AccessToken")
+        res.status(HttpStatus.OK).json({message: "REfreshToken Cleard"})
+
+        
+    } catch (error) {
+        console.log(error)
         next(error)
         
     }

@@ -28,6 +28,7 @@ router.get("/adminRevenue", jwtAuth ,  (req , res, next)=> revenueController.adm
 router.post("/sendCourseRejection", jwtAuth ,  (req, res, next)=> adminApplicationController.courseRejection(req, res, next))
 
 router.get("/fetchadminRevenue", jwtAuth ,  (req , res, next)=> revenueController.getadminRevenue(req, res, next))
+router.get("/logout", (req, res, next)=> adminController.adminLogout(req, res, next))
 
 
 

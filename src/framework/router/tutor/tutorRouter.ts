@@ -47,7 +47,7 @@ router.get("/tutorsChart", jwtAuth , (req ,  res, next)=>revenueController.chart
 router.get("/getAlltutors", jwtAuth , (req, res, next)=> tutorController.getAllTutors(req, res, next))
 router.get("/fetchTutorByEmail", jwtAuth,(req, res, next)=> tutorController.fetchTutorByEmail(req, res, next))
 router.post("/get-signedUrl", jwtAuth , (req, res, next)=> videoUploaderController.requestSignedUrl(req, res, next) )
-
+router.get("/logout", (req, res, next)=> tutorController.tutorLogout(req, res, next))
 
 
 export default router

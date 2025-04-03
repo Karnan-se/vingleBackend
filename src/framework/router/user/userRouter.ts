@@ -40,6 +40,7 @@ userRouter.post("/saveRatings", jwtAuth ,(req, res, next)=> ratingsController.cr
 userRouter.get("/getProgress", (req, res, next)=> progresssController.getProgress(req, res, next))
 userRouter.get("/getUserCertificate", jwtAuth , (req, res, next)=> certificateController.getUserCertificate(req, res, next))
 userRouter.post("/getCourse", jwtAuth ,(req, res, next)=>courseController.getCourse(req, res, next))
+userRouter.get("/logout", (req, res, next)=> userController.userLogout(req, res, next) )
 
 
 export default userRouter
