@@ -83,15 +83,11 @@ export default class CourseController{
 
     addSection = async(req:Request, res:Response, next:NextFunction)=>{
         try {
-            const {sectionData, course_id, fileIndex, } = req.body;
-            const files = req.files as MulterFile;
-            const fileUrlFile: Express.Multer.File[] = files?.fileUrl ? files?.fileUrl : [];
-            const index: number[] = Array.isArray(fileIndex)  ? fileIndex.map(Number)  : [parseInt(fileIndex, 10)];
-            console.log(index);
-            console.log(sectionData)
+            const {course_id ,formData} = req.body;
+            console.log(formData[0] , "session")
             console.log(course_id)
             
-            const addNewsection = await this.Course.addNewSections(course_id, fileIndex, fileUrlFile, JSON.parse(sectionData))
+            const addNewsection = await this.Course.addNewSections(course_id, formData )
             console.log(addNewsection, "addnewSection")
             res.status(HttpStatus.OK).json({addNewsection})
    

@@ -71,7 +71,7 @@ export default class CourseRepository implements ICourseRepository {
         })
       );
       const updatedId = updatedItems.filter((item)=> item?._id).map((itemId:any)=> itemId._id)
-      
+
       // console.log(updatedId , "updatedId")
       return updatedId as unknown as ObjectId[]
     } catch (error) {
@@ -89,12 +89,12 @@ export default class CourseRepository implements ICourseRepository {
         })
       );
   
-      // console.log(createdItems, "This is created items which are saved");
+    
   
     
       const createdItemIds = createdItems.map((item) => item._id).reverse();
 
-      // console.log(createdItemIds  ,  "createddItemss . -id  ");
+     
   
     
       const updatedSection = await SectionModal.findOneAndUpdate(
@@ -138,11 +138,11 @@ export default class CourseRepository implements ICourseRepository {
       throw error;
     }
   }
-  async filterItemsId(sectionID:ObjectId , items_ids: ObjectId[]):Promise<any> {
+  async filterItemsId(sectionID:ObjectId , items_ids: ObjectId[] , sectionTitle:string):Promise<any> {
 
     
     try {
-      const section = await SectionModal.updateOne({_id:sectionID}, {$set:{items: items_ids}})
+      const section = await SectionModal.updateOne({_id:sectionID}, {$set:{items: items_ids , title : sectionTitle}})
       console.log(section);
       return section
       

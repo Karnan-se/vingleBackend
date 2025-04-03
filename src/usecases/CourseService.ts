@@ -58,7 +58,7 @@ export default class CourseService {
     try {
 
       const promises = section.items.map(async (item) => {
-        // console.log(item, "items check ");
+        
         if (!item._id) {
           console.log(item, "this is the Item going to save on the database");
           return await this.Course.createNewItem({
@@ -73,6 +73,7 @@ export default class CourseService {
           });
         }
       });
+      console.log(section.title , "section.title" )
 
       const results = await Promise.all(promises);
 
@@ -82,7 +83,7 @@ export default class CourseService {
       const flatResult = results.flat();
       console.log(flatResult , "flatResult")
 
-      await this.filteritems(sectionId, flatResult);
+      await this.filteritems(sectionId, flatResult, section.title );
 
       return results;
     } catch (error) {
@@ -102,15 +103,13 @@ export default class CourseService {
     }
   }
 
-  async filteritems(
-    section_id: ObjectId | undefined,
-    result: ObjectId[]
+  async filteritems( section_id: ObjectId | undefined, result: ObjectId[] , sectionTitle:string
   ): Promise<void> {
     try {
       let objectID = result.flat(Infinity);
 
       console.log(objectID, "ObjectId");
-      const filtered = await this.Course.filterItemsId(section_id, objectID);
+      const filtered = await this.Course.filterItemsId(section_id, objectID , sectionTitle);
       console.log(filtered);
     } catch (error) {
       console.log(error);
@@ -120,13 +119,11 @@ export default class CourseService {
 
   async addNewSections(
     course_id: ObjectId,
-    fileIndex: number[],
-    fileUrlFile: Express.Multer.File[],
     section: InputSection
   ) {
     try {
-      await this.uploadandAppend(section, fileUrlFile, fileIndex);
-
+     
+        console.log(section , "sectionn")
       const promises = await this.Course.createNewItem({ ...section });
       const itemIdsNested = await Promise.all(promises);
       const itemIds = itemIdsNested.flat();

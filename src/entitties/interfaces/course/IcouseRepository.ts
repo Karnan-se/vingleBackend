@@ -9,7 +9,7 @@ export interface ICourseRepository {
   updateItem(section: InputSection): Promise<ObjectId[]> 
   createNewItem(section: any): Promise<ObjectId[]>;
   getcourse(courseId: ObjectId): Promise<ICourse>;
-  filterItemsId(sectionID:ObjectId | undefined  , items_ids: ObjectId[]):Promise<any>
+  filterItemsId(sectionID:ObjectId | undefined  , items_ids: ObjectId[] , sectionTitle:string):Promise<any>
   addnewSection(section:ISection):Promise<any>
   courseUpdate(sectionId:ObjectId , courseId:ObjectId):Promise<any>
   tutorsCourse(tutorsId:ObjectId):Promise<ICourse[]>
