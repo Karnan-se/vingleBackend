@@ -39,5 +39,23 @@ export class OrderController {
         }
     
     }
+
+    async searchorder(req: Request , res:Response , Next:NextFunction){
+        try {
+            const { search , filterChange} = req.query
+       
+          
+    
+        
+            const orders = await this.orderService.SearchOrder(search as string , filterChange as string )
+            
+            res.status(HttpStatus.OK).json({orders})
+        } catch (error) {
+            console.log(error)
+            Next(error)
+            
+        }
+    
+    }
 }
 

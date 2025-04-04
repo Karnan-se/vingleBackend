@@ -44,4 +44,16 @@ export class OrderService {
     }
     }
 
+    async SearchOrder(search:string, statusFilter :string){
+        try {
+            const orders =  this.orderRepository
+            return orders
+            
+        } catch (error) {
+            console.log(error)
+            throw error
+            
+        }
+    }
+
 }

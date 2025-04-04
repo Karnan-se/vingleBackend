@@ -222,7 +222,7 @@ export class OrderRepository implements IOrderRepository {
             {
               $match: {
                 $or: [
-                  { "user.name": { $regex: search, $options: "i" } },
+                  { "user.firstName": { $regex: search, $options: "i" } },
                   { "course.title": { $regex: search, $options: "i" } },
                 ],
               },
@@ -255,5 +255,17 @@ export class OrderRepository implements IOrderRepository {
     
   }
   }
+
+  // SearchOrder(search: string, statusFilter: string): Promise<IOrder[]> {
+  //   try {
+  //     const name = []
+  //     return  name as unknown as IOrder[]
+      
+  //   } catch (error) {
+  //     throw error
+      
+  //   }
+    
+  // }
   
 }

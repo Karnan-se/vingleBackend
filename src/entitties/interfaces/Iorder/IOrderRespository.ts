@@ -13,5 +13,6 @@ export interface IOrderRepository  {
     updateOrder(order:IOrder):Promise<IOrder>
     getAllOrder():Promise<IOrder>
     PaginatedOrders(skip: number, limit: number , search :string , statusFilter : string): Promise<{ orders: IOrder[]; totalOrders: number }> 
+    // SearchOrder(search:string, statusFilter :string):Promise<IOrder[]>
 
 }

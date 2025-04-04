@@ -30,7 +30,6 @@ router.post("/sendCourseRejection", jwtAuth ,  (req, res, next)=> adminApplicati
 router.get("/fetchadminRevenue", jwtAuth ,  (req , res, next)=> revenueController.getadminRevenue(req, res, next))
 router.get("/logout", (req, res, next)=> adminController.adminLogout(req, res, next))
 router.get("/paginationOrder", (req, res, next)=> orderController.paginatedOrders(req, res, next))
-
-
+// router.get("/searchOrder", (req, res, next)=> orderController)
 
 export default router 
