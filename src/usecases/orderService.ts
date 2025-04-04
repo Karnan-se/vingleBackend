@@ -27,4 +27,21 @@ export class OrderService {
      }
     }
 
+    async PaginatedOrder(pageNumber=1){
+    try {
+        const pageSize = 10
+        console.log(pageNumber , "pageNumber")
+        const skip = ((pageNumber - 1)* pageSize)
+        const limit  = pageSize
+        console.log(skip , "skip")
+        const {orders, totalOrders } = await this.orderRepository.PaginatedOrders(skip , limit)
+        // console.log(totalOrders ,  "totalOrders" , orders)
+        return {orders , totalOrders}  
+    } catch (error) {
+        console.log(error)
+        throw error
+        
+    }
+    }
+
 }

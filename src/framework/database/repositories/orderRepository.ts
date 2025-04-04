@@ -184,5 +184,26 @@ export class OrderRepository implements IOrderRepository {
       
     }
   }
+
+  async PaginatedOrders(skip: number, limit: number): Promise<{ orders: IOrder[]; totalOrders: number }> {
+  try {
+    const totalOrders = await OrderModal.countDocuments(); 
+    const orders = await OrderModal.find().skip(skip).limit(limit).populate([
+      {path: "courseId",
+        populate:[{
+          path: "tutorId"
+        }]
+        
+      },
+      {path: "userId"}
+    ]);
+    return {  orders: orders as unknown as IOrder[], totalOrders }; 
+    
+  } catch (error) {
+    console.log(error)
+    throw error
+    
+  }
+  }
   
 }

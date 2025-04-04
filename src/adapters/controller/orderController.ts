@@ -1,6 +1,7 @@
 import { Request , Response , NextFunction } from "express";
 import { OrderService } from "../../usecases/orderService";
 import { HttpStatus } from "../../entitties/Enums/statusCode";
+import AppError from "../../framework/web/utils/appError";
 
 
 
@@ -20,4 +21,24 @@ export class OrderController {
             
         }
     }
+    async paginatedOrders(req: Request , res:Response , Next:NextFunction){
+        try {
+            const {pageNumber} = req.query
+            console.log(req.query , "req, query")
+            console.log(pageNumber , "pageNumber")
+          
+            console.log("pagiinated order ")
+            const pagenumber = (pageNumber) 
+            const {orders , totalOrders } = await this.orderService.PaginatedOrder(pagenumber as unknown as  number)
+            
+            res.status(HttpStatus.OK).json({orders  , totalOrders})
+
+        } catch (error) {
+            console.log(error)
+            Next(error)
+            
+        }
+    
+    }
 }
+
