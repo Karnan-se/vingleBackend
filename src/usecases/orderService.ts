@@ -27,14 +27,14 @@ export class OrderService {
      }
     }
 
-    async PaginatedOrder(pageNumber=1){
+    async PaginatedOrder(pageNumber=1 , search ="" , filterchage = "all"){
     try {
         const pageSize = 10
         console.log(pageNumber , "pageNumber")
         const skip = ((pageNumber - 1)* pageSize)
         const limit  = pageSize
         console.log(skip , "skip")
-        const {orders, totalOrders } = await this.orderRepository.PaginatedOrders(skip , limit)
+        const {orders, totalOrders } = await this.orderRepository.PaginatedOrders(skip , limit , search , filterchage)
         // console.log(totalOrders ,  "totalOrders" , orders)
         return {orders , totalOrders}  
     } catch (error) {

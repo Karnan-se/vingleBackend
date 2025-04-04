@@ -185,19 +185,69 @@ export class OrderRepository implements IOrderRepository {
     }
   }
 
-  async PaginatedOrders(skip: number, limit: number): Promise<{ orders: IOrder[]; totalOrders: number }> {
+  async PaginatedOrders(skip: number, limit: number , search :string , statusFilter : string): Promise<{ orders: IOrder[]; totalOrders: number }> {
   try {
     const totalOrders = await OrderModal.countDocuments(); 
-    const orders = await OrderModal.find().skip(skip).limit(limit).populate([
-      {path: "courseId",
-        populate:[{
-          path: "tutorId"
-        }]
-        
+    console.log(search , "search ")
+    const pipeline = [
+
+      ...(statusFilter !== "all"
+        ? [{ $match: { paymentStatus: statusFilter } }]
+        : []),
+
+      {
+        $lookup: {
+          from: "users",
+          localField: "userId",
+          foreignField: "_id",
+          as: "user",
+        },
       },
-      {path: "userId"}
-    ]);
-    return {  orders: orders as unknown as IOrder[], totalOrders }; 
+      { $unwind: "$user" },
+    
+
+      {
+        $lookup: {
+          from: "courses",
+          localField: "courseId",
+          foreignField: "_id",
+          as: "course",
+        },
+      },
+      { $unwind: "$course" },
+    
+ 
+      ...(search
+        ? [
+            {
+              $match: {
+                $or: [
+                  { "user.name": { $regex: search, $options: "i" } },
+                  { "course.title": { $regex: search, $options: "i" } },
+                ],
+              },
+            },
+          ]
+        : []),
+    
+      {
+        $facet: {
+          paginatedResults: [
+            { $skip: skip },
+            { $limit: limit },
+          ],
+      
+        },
+      },
+    ];
+    
+
+    const result = await OrderModal.aggregate(pipeline);
+
+    const orders = result[0].paginatedResults;
+   
+    
+    return { orders, totalOrders };
     
   } catch (error) {
     console.log(error)

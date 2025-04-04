@@ -23,13 +23,12 @@ export class OrderController {
     }
     async paginatedOrders(req: Request , res:Response , Next:NextFunction){
         try {
-            const {pageNumber} = req.query
-            console.log(req.query , "req, query")
-            console.log(pageNumber , "pageNumber")
+            const {pageNumber , search , filterChange} = req.query
+       
           
-            console.log("pagiinated order ")
+    
             const pagenumber = (pageNumber) 
-            const {orders , totalOrders } = await this.orderService.PaginatedOrder(pagenumber as unknown as  number)
+            const {orders , totalOrders } = await this.orderService.PaginatedOrder(pagenumber as unknown as  number , search as string , filterChange as string )
             
             res.status(HttpStatus.OK).json({orders  , totalOrders})
 
