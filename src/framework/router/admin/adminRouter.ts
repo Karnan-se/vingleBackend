@@ -7,6 +7,7 @@ import { revenueController } from "../../dependencies/revenue/revenueDependency"
 import jwtAuth from "../../web/middlware/authentication"
 import { courseController } from "../../dependencies/course/course";
 import express from "express"
+import { userController } from "../../dependencies/userdepencies";
 
 
 const router = express.Router();
@@ -30,6 +31,6 @@ router.post("/sendCourseRejection", jwtAuth ,  (req, res, next)=> adminApplicati
 router.get("/fetchadminRevenue", jwtAuth ,  (req , res, next)=> revenueController.getadminRevenue(req, res, next))
 router.get("/logout", (req, res, next)=> adminController.adminLogout(req, res, next))
 router.get("/paginationOrder", (req, res, next)=> orderController.paginatedOrders(req, res, next))
-// router.get("/searchOrder", (req, res, next)=> orderController)
+router.get("/paginationStudent", (req, res, next)=> userController.paginatedStudents(req, res, next))
 
 export default router 

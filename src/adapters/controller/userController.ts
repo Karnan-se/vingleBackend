@@ -99,4 +99,19 @@ export class UserController {
       next(error)
     }
   }
+
+  async paginatedStudents(req:Request , res:Response , next:NextFunction){
+    try {
+    const {pageNumber , search ,  filterChange}  = req.query
+    console.log(pageNumber ,  search ,  ":", "search" , filterChange)
+
+    const {students , totalStudents } = await this.userUseCase.PaginatedService(pageNumber as unknown as  number, search as string , filterChange as string)
+
+      res.status(HttpStatus.OK).json({students , totalStudents})
+    } catch (error) {
+      console.log(error)
+      throw error
+      
+    }
+  }
 }

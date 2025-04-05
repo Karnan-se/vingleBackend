@@ -179,5 +179,13 @@ async generateJwtToken(userId:ObjectId , role="User"){
 
 }
 
+async PaginatedService(pageNumber:number, search:string, filterchange:string){
+  let limit = 5
+  const skip = (pageNumber-1)*limit;
+  const  {students , totalStudents} = await  this.userRepository.findPaginatedUsers(skip , limit , search , filterchange )
+  return {students, totalStudents}
+
+}
+
 
 }
