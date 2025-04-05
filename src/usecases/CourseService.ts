@@ -207,4 +207,17 @@ export default class CourseService {
       throw error;
     }
   }
+
+  async paginatedCourse(pageNumber:number , search:string , filterChange:string , tutorId : string){
+    try {
+      let limit = 5
+      const skip = (pageNumber-1 )* limit;
+      const {course , totalCourse} = await this.Course.paginatedCourse(skip ,limit , search , filterChange , tutorId as string)
+      return {course , totalCourse}
+    } catch (error) {
+      throw error
+      
+    }
+
+  }
 }

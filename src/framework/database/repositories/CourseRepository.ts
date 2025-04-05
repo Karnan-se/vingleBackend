@@ -3,6 +3,7 @@ import {
   ICourse,
   IItem,
   ISection,
+  InputCourse,
   InputSection,
 } from "../../../entitties/interfaces/course/course";
 import {
@@ -230,6 +231,51 @@ export default class CourseRepository implements ICourseRepository {
       console.log(error)
       throw error
       
+    }
+  }
+
+
+  
+  async paginatedCourse(skip: number, limit: number, search: string, filterChange: string, tutorId:string): Promise<{ course: InputCourse[]; totalCourse: number; }> {
+    try {
+      let filter: any = {};
+      
+  
+      if (search) {
+        filter.$or = [
+          { name: { $regex: search, $options: "i" } },
+          { price: { $regex: search, $options: "i" } }
+        ];
+      }
+      
+
+      if (filterChange) {
+        if (filterChange === "true") {
+          filter.isPublished = true;
+        } else if (filterChange === "false") {
+          filter.isPublished = false;
+        }
+      
+      }
+
+      if (tutorId) {
+        filter.tutorId = tutorId;
+      }
+      
+    
+      const course = await CourseModal.find(filter)
+        .sort({ _id: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean() as unknown as InputCourse[];
+      
+  
+      const totalCourse = await CourseModal.countDocuments(filter);
+      
+      return { course, totalCourse };
+    } catch (error) {
+      console.error("Error in paginatedCourse:", error);
+      throw new Error("Failed to fetch paginated courses");
     }
   }
 

@@ -78,7 +78,6 @@ export class MongoUserRepository implements IuserRepository {
         if (search) {
             filter.$or = [
               { firstName: { $regex: search, $options: "i" } },
-              { lastName: { $regex: search, $options: "i" } },
               { emailAddress: { $regex: search, $options: "i" } },
             ];
           }

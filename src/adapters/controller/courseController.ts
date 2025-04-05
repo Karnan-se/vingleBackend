@@ -129,6 +129,22 @@ export default class CourseController{
         }
     }
 
+    async paginatedCourse(req:Request , res:Response , next:NextFunction){
+        try {
+            const {pageNumber , search ,  filterChange , tutorId}  = req.query
+
+
+            const {course , totalCourse} = await this.Course.paginatedCourse(pageNumber as unknown as number , search as string , filterChange as string , tutorId as string)
+            res.status(HttpStatus.OK).json({course , totalCourse})
+
+            
+        } catch (error) {
+            console.log(error)
+            next(error)
+            
+        }
+    }
+
 }
 
 
