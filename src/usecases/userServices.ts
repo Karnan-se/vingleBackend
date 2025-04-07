@@ -8,6 +8,8 @@ import { IOTP } from "../entitties/interfaces/admin/Iotp";
 import { ObjectId } from "mongoose";
 import { JwtService } from "../framework/web/utils/JwtService";
 import IpasswordService from "../entitties/interfaces/service.ts/passwordService";
+import { io  , onlineUser} from "../framework/web/utils/socketConfig";
+
 
 
 interface Dependencies {
@@ -187,5 +189,25 @@ async PaginatedService(pageNumber:number, search:string, filterchange:string){
 
 }
 
+async blockUser(userId:ObjectId){
+ try {
+  const userDetails = await this.userRepository.findUserById(userId)
+  if(!userDetails) throw AppError.conflict("Error finding The User")
+  userDetails.isBlocked = !userDetails.isBlocked
+  const updatedUser = await this.userRepository.UpdateUser(userDetails)
+  if(!updatedUser) throw AppError.conflict("Error updating The UserDetails")
+  console.log(onlineUser[(userDetails._id || "") as string] , "updated user")
+
+  io.to(onlineUser[(userDetails._id || "") as string]).emit("userBlocked" , {message:"user is blocked" , userId:updatedUser}) 
+
+  return updatedUser
+  
+ } catch (error) {
+  console.log(error)
+  throw AppError.conflict("Error blocking the user")  
+  
+ }
+
+}
 
 }

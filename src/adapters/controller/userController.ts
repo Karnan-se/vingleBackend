@@ -114,4 +114,15 @@ export class UserController {
       
     }
   }
+  async blockUser(req:Request, res:Response, next:NextFunction){
+    try {
+      const { user } = req.body
+      // console.log(user , "userId")
+      const blockUser = await this.userUseCase.blockUser(user._id)
+      res.status(HttpStatus.OK).json({blockUser})
+    } catch (error) {
+      console.log(error)
+      next(error)
+    }
+  }
 }

@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import { JwtService } from "../utils/JwtService";
 import { attachTokenCookie } from "../../../adapters/middleware/cookie";
 import { HttpStatus } from "../../../entitties/Enums/statusCode";
+import { isBlocked } from "./isBlocked";
+import { ObjectId } from "mongoose";
 
 const jwtService = new JwtService();
 
@@ -20,6 +22,13 @@ const jwtAuth = async (req: Request, res: Response, next: NextFunction) => {
     if (accessToken) {
       const { userId, role } = jwtService.verifyAccessToken(accessToken);
 
+      if(userId && role == "User"){
+        const userBlocked = await isBlocked(userId as unknown as  ObjectId);
+        if (userBlocked) {
+          return res.status(HttpStatus.FORBIDDEN).json({ err: "User is blocked" });
+        }
+      }
+
       if (userId && role) {
 
         (req as any)[role] = userId;
@@ -36,6 +45,13 @@ const jwtAuth = async (req: Request, res: Response, next: NextFunction) => {
 
     const { userId, role } = refreshTokenResponse;
     console.log(`User ID: ${userId}, Role: ${role}`);
+
+    if(userId  && role == "User"){
+      const userBlocked = await isBlocked(userId as unknown as  ObjectId);
+      if (userBlocked) {
+        return res.status(HttpStatus.FORBIDDEN).json({ err: "User is blocked" });
+      }
+    }
 
     const newAccessToken = jwtService.generateAccesSToken(
       refreshTokenResponse.userId,

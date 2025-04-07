@@ -6,11 +6,10 @@ import { configKeys } from "../../../config";
 
 let io: SocketIOServer;
 
-
-
+let onlineUser: Record<string, string> = {}; 
 export function startSocket(server: HttpServer) {
 
-  let onlineUser: Record<string, string> = {}; 
+
 
   io = new SocketIOServer(server, {
     cors: {
@@ -116,4 +115,4 @@ export function startSocket(server: HttpServer) {
   return io;
 }
 
-export { io };
+export { io , onlineUser };
