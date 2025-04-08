@@ -89,6 +89,8 @@ export class UserController {
   }
   async userLogout(req: Request, res: Response, next: NextFunction) {
     try {
+      console.log("Logout Called");
+      
       const refreshToken = req.cookies["RefreshToken"];
       console.log(refreshToken, "\n", "refreshtoken");
       res.clearCookie("RefreshToken");

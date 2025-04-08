@@ -32,7 +32,7 @@ export default class TutorApplicationController {
 
         const resume = files?.["resume"]?.[0] || null;
         const certificationFiles = files?.certificateUrl || [];
-        // console.log(resume, "resumeBUffer")
+        
 
         let certifications = null
         if(parsedcertifications && parsedcertifications.length>0){

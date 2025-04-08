@@ -44,13 +44,13 @@ export default  class InstructorService {
         if(certifications && certifications.length> 0){
             updatedCertifications = await Promise.all(certifications.map(async (cert)=> {
                 if(cert.certificateUrl) {
-                    const isCertPDF = cert.certificateUrl.mimetype === "application/pdf";
+                    const isCertPDF = cert.certificateUrl.mimetype === "application/pdf"
                     const savedcertficate = isCertPDF ? await this.cloudinaryService.uploadPDF(cert.certificateUrl):
                     await this.cloudinaryService.uploadImage(cert.certificateUrl)
                     return{
                         title : cert.title || null,
                         issuer : cert.issuer || null,
-                        data : cert.date || null,
+                        date : cert.date || null,
                         certificateUrl: savedcertficate
                     }
 

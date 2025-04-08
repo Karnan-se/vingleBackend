@@ -154,4 +154,18 @@ export default class AdminApplicationService{
      }
 
     }
+
+    async paginatedTutors(pageNumber:number, search :string, filterChanged :string ){
+        try {
+            let limit = 10
+            let skip = (pageNumber - 1)*limit
+            const tutors = await this.InstructorRepo.findAll(skip , limit, search , filterChanged)
+            return tutors;
+            
+        } catch (error) {
+            console.log(error)
+            throw error
+            
+        }
+    }
 }

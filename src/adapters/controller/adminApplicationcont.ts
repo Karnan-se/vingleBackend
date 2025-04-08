@@ -82,6 +82,26 @@ export default  class AdminApplicationController{
             
         }
     }
+
+
+    async paginatedTutors(req:Request, res:Response, next:NextFunction){
+        try {
+            const {pageNumber , search , filterChange} = req.query;
+
+            const tutors = await this.applicationService.paginatedTutors(pageNumber as unknown as number, search as string, filterChange as string  )
+            res.status(200).json({tutors})
+
+            
+        } catch (error) {
+            console.log(error)
+            next(error) 
+        }
+
+        
+
     
+
+}
+
 
 }

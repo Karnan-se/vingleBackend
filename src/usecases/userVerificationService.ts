@@ -56,7 +56,7 @@ export default class VerificationService{
         const savedOTP = await this.OTP.findOTPbyEmail(userDetail.emailAddress, otp);
         console.log(savedOTP, "SavedOTP")
         if(!savedOTP){
-            throw AppError.conflict("ERROR OTP NOT FOUND")
+            throw AppError.conflict("Inavalid OTP")
         }
         const userDetails = await this.userRepository.findUserByEmail(userDetail.emailAddress);
         if(!userDetails){

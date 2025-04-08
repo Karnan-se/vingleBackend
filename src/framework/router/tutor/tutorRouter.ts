@@ -33,6 +33,8 @@ router.post("/tutorRegister",  (req, res, next)=>tutorController.Signup(req, res
 router.post("/login",  (req, res, next)=>tutorController.SignIn(req, res, next))
 router.post("/resendOTP",   (req, res, next)=>tutorVerifyController.resendOTP(req, res, next))
 router.post("/verifyUser",   (req, res, next)=> tutorVerifyController.verifyUser(req, res, next))
+
+
 router.post("/applicationForm", uploadFile, jwtAuth, (req, res, next)=>tutorApplicationController.TutorApplication(req, res, next))
 router.post("/update", jwtAuth, (req, res, next)=> tutorController.updatedUser(req, res,next))
 router.post("/createCourse", jwtAuth, checker , (req, res, next)=>courseController.newCourse(req, res, next))
@@ -47,10 +49,14 @@ router.get("/tutorsChart", jwtAuth , (req ,  res, next)=>revenueController.chart
 router.get("/getAlltutors", jwtAuth , (req, res, next)=> tutorController.getAllTutors(req, res, next))
 router.get("/fetchTutorByEmail", jwtAuth,(req, res, next)=> tutorController.fetchTutorByEmail(req, res, next))
 router.post("/get-signedUrl", jwtAuth , (req, res, next)=> videoUploaderController.requestSignedUrl(req, res, next) )
+
+
+
 router.get("/logout", (req, res, next)=> tutorController.tutorLogout(req, res, next))
 router.post("/sendotp",  (req, res, next)=> tutorController.sendOtp(req, res, next));
 router.post("/verifyOtp", (req, res, next)=> tutorController.verifyOtp(req, res, next))
 router.put("/changepassword", (req, res, next)=> tutorController.changePassword(req, res, next))
+
 
 
 export default router
