@@ -48,6 +48,9 @@ router.get("/getAlltutors", jwtAuth , (req, res, next)=> tutorController.getAllT
 router.get("/fetchTutorByEmail", jwtAuth,(req, res, next)=> tutorController.fetchTutorByEmail(req, res, next))
 router.post("/get-signedUrl", jwtAuth , (req, res, next)=> videoUploaderController.requestSignedUrl(req, res, next) )
 router.get("/logout", (req, res, next)=> tutorController.tutorLogout(req, res, next))
+router.post("/sendotp",  (req, res, next)=> tutorController.sendOtp(req, res, next));
+router.post("/verifyOtp", (req, res, next)=> tutorController.verifyOtp(req, res, next))
+router.put("/changepassword", (req, res, next)=> tutorController.changePassword(req, res, next))
 
 
 export default router

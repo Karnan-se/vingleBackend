@@ -3,6 +3,7 @@ import { Request , Response, NextFunction } from "express";
 import { attachTokenCookie } from "../middleware/cookie";
 import { HttpStatus } from "../../entitties/Enums/statusCode";
 import AppError from "../../framework/web/utils/appError";
+
 export default class TutorController {
     private tutorUseCase:TutorUseCase
     constructor(tutorUseCase: TutorUseCase){
@@ -89,4 +90,41 @@ async tutorLogout(req:Request , res:Response , next:NextFunction){
     }
 }
 
+async sendOtp(req:Request, res:Response, next:NextFunction){
+    try {
+        const {email} = req.body.user
+        const sendOTP = await this.tutorUseCase.sendOTP(email)
+        res.status(HttpStatus.OK).json({ message: "success", data: sendOTP });
+        
+    } catch (error) {
+        next(error)
+        
+    }
+
+
+}
+async verifyOtp(req:Request, res:Response, next:NextFunction){
+    try {
+        const {userDetails, otp} = req.body.payload
+
+        const verifyOtp = await this.tutorUseCase.verifyOTP(userDetails.userInfo.emailAddress , otp)
+        res.status(HttpStatus.OK).json({message:"success", data:verifyOtp})
+        
+    } catch (error) {
+        next(error)
+        
+    }   
+
+}
+async changePassword(req:Request, res:Response, next:NextFunction){
+    try {
+        const { emailAddress, password } = req.body.user;
+        const changePassword = await this.tutorUseCase.changePassword(emailAddress, password)
+        res.status(HttpStatus.OK).json({message:"success", data:changePassword})
+        
+    } catch (error) {
+        next(error)
+        
+    }
+}
 }
