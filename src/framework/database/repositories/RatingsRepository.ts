@@ -3,10 +3,11 @@ import { RatingModal } from "../models/course/ratingModel"
 import { CourseModal } from "../models/tutor/CourseModel"
 import { ICourse } from "../../../entitties/interfaces/course/course"
 import { ObjectId } from "mongoose"
+import { IRatingRepository } from "../../../entitties/interfaces/ratings/IRatingRepository"
 
 
 
-export class RatingsRepository {
+export class RatingsRepository implements IRatingRepository {
     constructor(){
     }
 
@@ -47,8 +48,9 @@ export class RatingsRepository {
     }
     updateRatings = async (ratings : IRatings):Promise<IRatings> =>{
         try {
+            console.log(ratings.courseId , ratings.userId , "courseId and userId")
             const updatedRatings = await RatingModal.findOneAndUpdate({courseId:ratings.courseId , userId:ratings.userId}, {$set:{...ratings}},{new:true})
-            const averageRatings = await this.averageCourseRatings(ratings.courseId as unknown as ObjectId)
+            const averageRatings = await this.averageCourseRatings(updatedRatings!.courseId as unknown as ObjectId)
             const updateCourse = await CourseModal.updateOne({_id:ratings.courseId}, {$set:{averageRating:averageRatings}})
             console.log(updatedRatings , "updatedRatings")
             return updatedRatings as unknown as IRatings
@@ -74,8 +76,10 @@ export class RatingsRepository {
     }
     averageCourseRatings = async(courseId:ObjectId):Promise<number>=>{
     try {
+        console.log(courseId , "courseId in  avg ratings")
 
-        const averageRatings = await RatingModal.aggregate([{$match:{courseId:courseId}},{$group:{_id:"$ratingValue", averageRatings:{$avg:"$ratingValue"}},}])
+        const averageRatings = await RatingModal.aggregate([{$match:{courseId:courseId}},{$group:{_id:null, averageRatings:{$avg:"$ratingValue"}},}])
+        console.log(averageRatings , "query of averagee Ratimng")
         console.log(averageRatings[0] , "averageRatings")
         return averageRatings.length > 0 ? averageRatings[0].averageRatings : 0;
         
@@ -85,6 +89,72 @@ export class RatingsRepository {
     }
 
 
+    }
+    individualRatings = async(courseId:ObjectId):Promise<any>=>{
+        try {
+            const individualRating = await RatingModal.aggregate([ {
+                $match: {
+                  courseId: "677d509a2bfeb5c48929001f"
+                }
+              },
+              {
+                $group: {
+                  _id: "$ratingValue",
+                  count: { $sum: 1 }
+                }
+              },
+              {
+                $group: {
+                  _id: null,
+                  totalRatings: { $sum: "$count" },
+                  ratingsBreakdown: {
+                    $push: {
+                      ratingValue: "$_id",
+                      count: "$count"
+                    }
+                  }
+                }
+              },
+              {
+                $unwind: "$ratingsBreakdown"
+              },
+              {
+                $addFields: {
+                  "ratingsBreakdown.percentage": {
+                    $multiply: [
+                      { $divide: ["$ratingsBreakdown.count", "$totalRatings"] },
+                      100
+                    ]
+                  }
+                }
+              },
+              {
+                $group: {
+                  _id: null,
+                  totalRatings: { $first: "$totalRatings" },
+                  ratingsBreakdown: { $push: "$ratingsBreakdown" }
+                }
+              }])
+              console.log(individualRating , "individual CourseRatings")
+                return individualRating 
+            
+            
+        } catch (error) {
+            console.log(error)
+            throw error
+            
+        }
+       
+        
+    }
+    async getRatingsDescription(courseId:ObjectId){
+        try {
+            const ratingsDescription = await RatingModal.aggregate([{$match : {}} , {$lookup:{from:"User" , localField: "userId" , foreignField:"_id" , as:"User"}} , {$unwind : "User"}])
+            
+        } catch (error) {
+              console.log(error)
+            
+        }
     }
     
 

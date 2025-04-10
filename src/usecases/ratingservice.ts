@@ -23,6 +23,18 @@ export class RatingService {
       throw error;
     }
   }
+
+  async individualRatings(courseId:ObjectId){
+    try {
+      const getIndividualRatings = await this.Ratings.individualRatings(courseId)
+      return getIndividualRatings
+      
+    } catch (error) {
+      console.log(error)
+      throw error
+      
+    }
+  }
   
 
 }
