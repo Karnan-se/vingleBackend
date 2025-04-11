@@ -1,5 +1,8 @@
 import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService";
 import AppError from "../framework/web/utils/appError";
+import { v4 as uuidv4 } from 'uuid';
+
+
 
 
 interface Dependency {
@@ -20,11 +23,11 @@ export class EfficientVideoUploads {
       if (fileType == "application/pdf") resourceType = "raw";
       if (fileType == "mp4") resourceType = "video";
 
-      const publicId = `uploads/${crypto.randomUUID()}`;
+      const publicId = `uploads/${uuidv4()}`;
       console.log(publicId);
 
       
-      const timestamp = Math.floor(Date.now() / 1000)
+      const timestamp = Math.floor(Date.now() / 1000) -2
 
       const requestSignedUrl = this.cloudinary.cloudinarySignedUrl(
         timestamp,
