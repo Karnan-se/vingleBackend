@@ -190,13 +190,15 @@ export class CloudinaryService implements ICloudinaryService {
 
   async cloudinarySignedUrl(timestamp:number , publicId:string, resourceType:string ):Promise<ICloudinarySignedUrl>{
 
+    console.log(timestamp , "timeStamp" , publicId  ,  "publicId" )
+
 
     try {
       const signature = cloudinary.utils.api_sign_request(
-        { timestamp, public_id: publicId , secure :true } ,(configKeys.CLOUDINARY_API_SECRET) as string );
+        { timestamp, public_id: publicId } ,(configKeys.CLOUDINARY_API_SECRET) as string );
         
     
-        console.log(signature , "signature")
+        
     
         return {
           signedUrl: `https://api.cloudinary.com/v1_1/${configKeys.CLOUDINARY_CLOUD_NAME}/${resourceType}/upload`,
