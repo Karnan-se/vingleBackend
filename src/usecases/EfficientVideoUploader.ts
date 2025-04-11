@@ -22,7 +22,9 @@ export class EfficientVideoUploads {
       const publicId = `uploads/${crypto.randomUUID()}`;
       console.log(publicId);
 
-      const timestamp = Math.round(new Date().getTime() / 1000);
+      
+      const timestamp = Math.floor(Date.now() / 1000);
+
       const requestSignedUrl = this.cloudinary.cloudinarySignedUrl(
         timestamp,
         publicId,
