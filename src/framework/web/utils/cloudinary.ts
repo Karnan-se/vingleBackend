@@ -195,13 +195,13 @@ export class CloudinaryService implements ICloudinaryService {
 
     try {
       const signature = cloudinary.utils.api_sign_request(
-        { timestamp, public_id: publicId } ,(configKeys.CLOUDINARY_API_SECRET) as string );
+        { timestamp, public_id: publicId } ,("IE49aSJhDHCIyDCCEbMgMCOM5bc") as string );
         
     
         
     
         return {
-          signedUrl: `https://api.cloudinary.com/v1_1/${configKeys.CLOUDINARY_CLOUD_NAME}/${resourceType}/upload`,
+          signedUrl: `https://api.cloudinary.com/v1_1/${"deubjmlf3"}/${resourceType}/upload`,
           timestamp,
           publicId,
           signature,
