@@ -56,7 +56,7 @@ export class UserCourseController {
         try {
             const {courseId, userId} = req.body;
             const order = await this.courseService.isorderCompleated(userId, courseId);
-            console.log("orderDEtail has send")
+            
             res.status(HttpStatus.OK).json(order)
         } catch (error) {
             console.log(error)

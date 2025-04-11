@@ -35,6 +35,18 @@ export class RatingService {
       
     }
   }
+
+  async courseRatings(courseId : ObjectId){
+    try {
+      const ratings = await this.Ratings.courseRatings(courseId)
+      return ratings 
+      
+    } catch (error) {
+      console.log(error)
+      throw error
+      
+    }
+  }
   
 
 }

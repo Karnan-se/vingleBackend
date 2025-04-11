@@ -56,7 +56,7 @@ export class OrderRepository implements IOrderRepository {
         paymentStatus: "Completed",
       }).populate(["courseId", "userId"]);
       if (order) {
-        console.log(order, "Order");
+       
         return order as unknown as IOrder;
       } else {
         return null;

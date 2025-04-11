@@ -9,4 +9,6 @@ export interface IRatingRepository {
     updateRatingsInCourse(courseId: ObjectId, ratingId: ObjectId): Promise<ICourse>;
     averageCourseRatings(courseId: ObjectId): Promise<number>;
     individualRatings(courseId:ObjectId):Promise<any>
+    courseRatings(courseId:ObjectId):Promise<IRatings[]>
+
 }

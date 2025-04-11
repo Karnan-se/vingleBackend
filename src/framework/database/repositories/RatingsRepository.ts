@@ -94,7 +94,7 @@ export class RatingsRepository implements IRatingRepository {
         try {
             const individualRating = await RatingModal.aggregate([ {
                 $match: {
-                  courseId: "677d509a2bfeb5c48929001f"
+                  courseId: courseId
                 }
               },
               {
@@ -147,12 +147,29 @@ export class RatingsRepository implements IRatingRepository {
        
         
     }
-    async getRatingsDescription(courseId:ObjectId){
+    async courseRatings(courseId:ObjectId):Promise<IRatings[]>{
         try {
-            const ratingsDescription = await RatingModal.aggregate([{$match : {}} , {$lookup:{from:"User" , localField: "userId" , foreignField:"_id" , as:"User"}} , {$unwind : "User"}])
+          const courseRatings = await RatingModal.aggregate([
+            { $match: { courseId: courseId } },
+            {
+              $lookup: {
+                from: "users", 
+                localField: "userId",
+                foreignField: "_id",
+                as: "User"
+              }
+            },
+            { $unwind: "$User" }
+          ])
+          console.log(courseRatings , "courseRatings ")
+          
+
+            return courseRatings as  unknown as IRatings[]
+            
             
         } catch (error) {
               console.log(error)
+              throw error
             
         }
     }

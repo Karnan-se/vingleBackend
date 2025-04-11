@@ -43,5 +43,8 @@ userRouter.post("/getCourse", jwtAuth ,(req, res, next)=>courseController.getCou
 userRouter.get("/logout", (req, res, next)=> userController.userLogout(req, res, next) )
 userRouter.post("/block", (req, res, next)=> userController.blockUser(req, res, next) )
 
+userRouter.get("/courseRatings", jwtAuth  , (req, res, next)=> ratingsController.getcourseRatings(req, res, next))
+userRouter.get("/getIndividualRatings", jwtAuth , (req, res, next)=> ratingsController.IndividualRatings(req, res, next))
+
 
 export default userRouter
