@@ -4,6 +4,7 @@ import { configKeys } from "../../../config";
 import fs from "fs/promises";
 import { ICloudinaryService } from "../../../entitties/interfaces/service.ts/IcloudinaryService";
 import { ICloudinarySignedUrl } from "../../../entitties/interfaces/cloudinary/IsignedUrl";
+
 dotenv.config();
 
 cloudinary.config({
@@ -193,6 +194,7 @@ export class CloudinaryService implements ICloudinaryService {
     try {
       const signature = cloudinary.utils.api_sign_request(
         { timestamp, public_id: publicId } ,(configKeys.CLOUDINARY_API_SECRET) as string );
+        console.log(timestamp)
     
         console.log(signature , "signature")
     
