@@ -193,7 +193,7 @@ export class CloudinaryService implements ICloudinaryService {
 
     try {
       const signature = cloudinary.utils.api_sign_request(
-        { timestamp, public_id: publicId , secure :true } ,(configKeys.CLOUDINARY_API_SECRET) as string );
+        { timestamp, public_id: publicId , seure :true } ,(configKeys.CLOUDINARY_API_SECRET) as string );
         
     
         console.log(signature , "signature")

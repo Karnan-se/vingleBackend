@@ -23,7 +23,7 @@ export class EfficientVideoUploads {
       console.log(publicId);
 
       
-      const timestamp = Math.floor(Date.now() / 1000)-2
+      const timestamp = Math.floor(Date.now() / 1000)
 
       const requestSignedUrl = this.cloudinary.cloudinarySignedUrl(
         timestamp,
