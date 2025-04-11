@@ -1,6 +1,7 @@
 import { ICloudinaryService } from "../entitties/interfaces/service.ts/IcloudinaryService";
 import AppError from "../framework/web/utils/appError";
 
+
 interface Dependency {
   service: {
     cloudinary: ICloudinaryService;
