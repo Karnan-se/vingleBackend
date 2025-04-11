@@ -1,6 +1,7 @@
 import { IRatingRepository } from "../entitties/interfaces/ratings/IRatingRepository";
 import { ObjectId } from "mongoose";
 import { IRatings } from "../entitties/interfaces/ratings/IRatings";
+import AppError from "../framework/web/utils/appError";
 
 interface Dependancy {
   repository: {
@@ -44,6 +45,20 @@ export class RatingService {
     } catch (error) {
       console.log(error)
       throw error
+      
+    }
+  }
+
+  async averageRatings(courseId:ObjectId){
+    try {
+      const ratings = await this.Ratings.averageCourseRatings(courseId)
+      console.log(ratings , "averageRatings")
+
+      return ratings
+      
+    } catch (error) {
+      console.log(error)
+      throw AppError.conflict("errir fetchig the Average Ratings")
       
     }
   }

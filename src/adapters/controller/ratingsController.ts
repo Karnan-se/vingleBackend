@@ -53,6 +53,22 @@ export class RatingsController {
         }
     }
 
+    async averageRatings(req:Request, res:Response, next:NextFunction){
+        try {
+            const {courseId} = req.query
+            const id = new mongoose.Types.ObjectId(courseId as string)
+            console.log(courseId , "courseId")
+            const averagRating = await this.RatingsService.averageRatings(id as unknown as  ObjectId)
+            res.status(200).json({averagRating})
+            
+        } catch (error) {
+            console.log(error)
+            next(error)
+            
+        }
+        
+    }
+
     
    
 }

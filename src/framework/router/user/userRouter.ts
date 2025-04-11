@@ -45,6 +45,7 @@ userRouter.post("/block", (req, res, next)=> userController.blockUser(req, res, 
 
 userRouter.get("/courseRatings", jwtAuth  , (req, res, next)=> ratingsController.getcourseRatings(req, res, next))
 userRouter.get("/getIndividualRatings", jwtAuth , (req, res, next)=> ratingsController.IndividualRatings(req, res, next))
+userRouter.get("/averagRating", jwtAuth , (req, res, next)=> ratingsController.averageRatings(req, res, next) )
 
 
 export default userRouter
